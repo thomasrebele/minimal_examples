@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: draw a line with relative coordinates for each segment
+% start
+	\node [circle,draw] (0,0) {};
+	\draw (0,0) 
+		-- ++(0.5,0)
+		-- ++(0,1)
+		-- ++(1,0)
+		-- ++(0,-0.5)
+		-- ++(1,0) ;
+% end
+\end{tikzpicture}
+
+\end{document}
