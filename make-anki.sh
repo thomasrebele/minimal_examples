@@ -3,7 +3,7 @@
 if [ ! "$*" == "" ]; then 
 	files="$*";
 else
-	files=$(find -name '*.tex')
+	files=$(find -name '*.tex' | sed 's:^\./::')
 fi
 
 for i in $files; do
