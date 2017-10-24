@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+% description: simple style
+\begin{tikzpicture}
+% start
+\tikzset{
+	mystyle/.style={
+		red, 
+		dashed
+	}
+}
+\draw[mystyle] (0,0) -- (1,0);
+% end
+\end{tikzpicture}
+
+\end{document}

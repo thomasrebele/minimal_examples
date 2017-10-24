@@ -1,0 +1,18 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+% description: draw a line with options
+% start
+A thick red line
+\begin{tikzpicture}
+\draw [thick, red] (0,0) -- (1,0); 
+% or
+\draw (0,0) [thick, red] -- (1,0); 
+% or
+\draw (0,0) -- (1,0) [thick, red];
+\end{tikzpicture}
+% end
+
+\end{document}

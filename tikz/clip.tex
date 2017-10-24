@@ -1,0 +1,17 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: clipping
+% start
+\begin{scope}
+	\clip[draw] (0,0) circle [radius=0.50];
+	\node [align=center] {clipped \\ node};
+\end{scope}
+\node at (0,-1) [align=center] {not clipped};
+% end
+\end{tikzpicture}
+
+\end{document}

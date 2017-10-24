@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+% description: draw a slice
+\begin{tikzpicture}
+% start
+\draw[blue]
+	(0,0) arc [radius=1, start angle=20, delta angle=50] 
+	% or 
+	(0,0) arc [radius=1, start angle=20, end angle=70] % ignores delta angle
+	% or
+	(0,0) arc (20:70:1) % (start:end:radius)
+
+	-- ++(70:-1) % polar coordinates (angle,distance)
+	-- ++(20:1);
+\draw (0,0) circle[radius=2pt, fill];
+% end
+\end{tikzpicture}
+
+\end{document}
