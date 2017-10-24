@@ -15,7 +15,10 @@ fi
 for i in $files; do
 	dir=$(dirname $i)
 	mkdir -p $texout/$dir $imgout/$dir
-	pdflatex -output-directory $texout/$dir $i
-	convert -density 600 $texout/${i/tex/pdf} -resize 50% $imgout/${i/tex/png}
+	pdf=$texout/${i/tex/pdf}
+	png=$imgout/${i/tex/png}
+
+	[ $i -nt $pdf ] && pdflatex -output-directory $texout/$dir $i
+	[ $pdf -nt $png ] && convert -density 600 $pdf -resize 50% $png
 
 done
