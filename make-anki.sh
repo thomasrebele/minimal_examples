@@ -1,11 +1,8 @@
 #!/bin/bash
 
-if [ ! "$*" == "" ]; then 
-	files="$*";
-else
-	files=$(find -name '*.tex' | sed 's:^\./::')
-fi
+source common.sh
 
 for i in $files; do
-	./anki-row.sh $i
+	source anki-row.sh $i
 done
+

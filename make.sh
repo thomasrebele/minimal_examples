@@ -6,11 +6,7 @@ imgout="output/img/"
 
 mkdir -p $texout $imgout
 
-if [ ! "$*" == "" ]; then 
-	files="$*";
-else
-	files=$(find -name '*.tex')
-fi
+source common.sh
 
 for i in $files; do
 	dir=$(dirname $i)
@@ -37,6 +33,16 @@ for i in $files; do
 		fi
 	else
 		echo "$png is newer than $pdf"
+	fi
+
+	if [ "$no_hierarchy" == "1" ]; then
+		nohDir=${imgout/img/img-nh}
+		noh=${i/tex/png}
+		noh=$nohDir/latex-${noh//\//-}
+		mkdir -p $nohDir
+		if [ ! -e $noh ]; then
+			ln $png $noh
+		fi
 	fi
 
 done
