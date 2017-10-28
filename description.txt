@@ -1,0 +1,7 @@
+This <b>Anki deck for LaTeX</b> is a work-in-progress deck for learning commands from LaTeX and related subpackages. Currently it contains cards for
+
+- beamer
+- tikz
+- pgfplots
+
+<b>Source code available on github: https://github.com/thomasrebele/minimal-latex-examples</b>
