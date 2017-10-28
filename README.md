@@ -5,6 +5,7 @@ A collection of small LaTeX / TikZ examples, which can be used for learning synt
 ## Creating pdfs and images
 
 Prerequisites: `pdflatex` and `imagemagick`
+Optional: `pngquant` for smaller PNGs
 
 You can compile all the examples to pdf and png by executing the following command:
 
