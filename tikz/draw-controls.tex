@@ -5,13 +5,13 @@
 
 \begin{tikzpicture}
 % description: draw a Bézier curve
-% start
 \filldraw [gray]
 	(0,0) circle [radius=2pt]
 	(1,1) circle [radius=2pt]
 	(2,1) circle [radius=2pt]
 	(2,0) circle [radius=2pt]
 	;
+% start
 \draw (0,0) 
 	.. controls (1,1) and (2,1) .. 
 	(2,0);

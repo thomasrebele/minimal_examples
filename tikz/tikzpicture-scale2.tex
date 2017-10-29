@@ -1,0 +1,40 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+	\draw [line width=3pt] (0,0) rectangle (1,1);
+	\node at (0.5,0.5) {abc};
+\end{tikzpicture}
+
+$\rightarrow$
+
+% description: resize tikzpicture
+% start
+\tikz \node [scale=0.5, inner sep=0] {
+	\begin{tikzpicture}
+% end
+		\draw [line width=3pt] (0,0) rectangle (1,1);
+		\node at (0.5,0.5) {abc};
+% start
+	\end{tikzpicture}
+};
+% end
+
+% description: resize tikzpicture
+% start
+\tikz \node [scale=0.5, inner sep=0] {
+	% nesting might cause problems
+	% only use it if really necessary
+	\begin{tikzpicture}
+% end
+		\draw [line width=3pt] (0,0) rectangle (1,1);
+		\node at (0.5,0.5) {abc};
+% start
+	\end{tikzpicture}
+};
+% end
+
+
+\end{document}

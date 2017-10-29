@@ -4,19 +4,15 @@
 \begin{document}
 
 \begin{tikzpicture}
-% description: close a path
-% start
-\draw [line width=10]
-	% left
-	(0,0) -- ++(1,0) -- ++(0,1) -- cycle
-	% right
-	(2,0) -- ++(1,0) -- ++(0,1) -- (2,0);
-% end
+% description: add space around picture
+\draw [line width=10] (0,0) -- ++(1,0) ;
 
+% start
 % make bounding box higher
 	\useasboundingbox (-0.5,1.5); 
 % or
 	\path [use as bounding box] (-0.5, 1.5);
+% end
 \end{tikzpicture}
 
 \end{document}

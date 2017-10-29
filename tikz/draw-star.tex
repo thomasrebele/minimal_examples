@@ -4,20 +4,22 @@
 \begin{document}
 
 % description: draw a star with relative coordinates
-% start
 \begin{tikzpicture}
 \draw (0,0) circle [radius=2pt];
 \draw (0,0) 
-	% relative coordinate, 
-	% without changing current position
-	edge +(0,1) 
-	edge +(1,0)
-	edge +(1,1)
-	edge +(-1,1)
-	edge +(-1,0)
-	%...
-	;
-\end{tikzpicture}
+
+% start
+% relative coordinate, 
+% without changing current position
+edge +(0,1) 
+edge +(1,0)
+edge +(1,1)
+edge +(-1,1)
+edge +(-1,0)
+%...
+;
 % end
+
+\end{tikzpicture}
 
 \end{document}
