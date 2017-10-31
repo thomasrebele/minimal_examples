@@ -2,17 +2,14 @@
 
 % description: pgfplots plot from file
 \usepackage{pgfplots}
-\pgfplotsset{compat=newest}
+\pgfplotsset{compat=newest, width=3cm, height=2.5cm}
 
 \begin{document}
 \begin{tikzpicture}
 % start
 \begin{axis}[
 	ymode=log,
-	log basis y=2,
-% end
-	width=3cm, height=2.5cm,
-% start
+	log basis y=2
 	]
 % end
 	\addplot[blue] coordinates {(0,1) (5,32)};

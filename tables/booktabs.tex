@@ -1,0 +1,30 @@
+\documentclass{standalone}
+
+% description: booktabs table
+% start
+\usepackage{booktabs}
+% end
+
+\begin{document}
+
+% start
+\begin{tabular}{
+		@{} % remove space
+		lrr
+		@{} % remove space
+	} 
+	\toprule
+	\multicolumn{2}{c}{Item} \\ 
+	\cmidrule(r){1-2}
+
+	Material & Unit & Price (\$)\\ 
+	\midrule
+
+	Wood & kg & 0.75 \\
+	Gold &  g & 40.00   \\
+
+	\bottomrule
+\end{tabular}
+% end
+
+\end{document}

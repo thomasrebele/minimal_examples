@@ -1,0 +1,17 @@
+\documentclass{standalone}
+
+% description: display math functions
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest, width=3cm, height=2.5cm}
+
+\begin{document}
+% start
+\begin{tikzpicture}
+\begin{axis}[mark size=1pt, samples=9]
+	\addplot {x^2};
+	\addplot+[mark size=0.3pt] {x};
+	\addplot+[mark=triangle] {-2*x};
+\end{axis}
+\end{tikzpicture}
+% end
+\end{document}

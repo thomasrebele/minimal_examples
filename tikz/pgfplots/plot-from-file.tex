@@ -2,7 +2,7 @@
 
 % description: pgfplots plot from file
 \usepackage{pgfplots}
-\pgfplotsset{compat=newest}
+\pgfplotsset{compat=newest, width=3cm, height=2.5cm}
 
 \usepackage{filecontents}
 
@@ -17,7 +17,7 @@ x y
 
 \begin{document}
 \begin{tikzpicture}
-\begin{axis}[width=3cm, height=2.5cm]
+\begin{axis}
 % start
 \addplot[blue] table {data.txt};
 % end
