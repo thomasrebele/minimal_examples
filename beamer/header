@@ -1,9 +1,9 @@
 
 
-\setlength{\paperwidth}{2cm}
-\setlength{\paperheight}{1cm}
-\setlength{\textwidth}{2cm}
-\setlength{\textheight}{1cm}  
+\setlength{\paperwidth}{4cm}
+\setlength{\paperheight}{3cm}
+\setlength{\textwidth}{4cm}
+\setlength{\textheight}{3cm}  
 
 \makeatletter
 \define@key{pgfpagesuselayoutoption}{a7paper}[]%
