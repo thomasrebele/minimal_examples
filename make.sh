@@ -27,7 +27,8 @@ for i in $files; do
 
 	if [ ! -e $png -o $pdf -nt $png ]; then
 		convert_options="-define png:compression-level=9  -define png:compression-filter=2 -define png:compression-strategy=1"
-		convert -density 600 $pdf -resize 50% $convert_options $png
+		montage -density 600 $pdf -resize 50% -tile 1x -geometry +1+5 -background none $convert_options $png
+		convert $png -trim +repage $png
 		if type pngquant > /dev/null; then
 			pngquant --ext .png --force $png
 		fi
