@@ -1,0 +1,17 @@
+\documentclass{standalone}
+
+\begin{document}
+
+% description: space between columns
+
+% start
+\setlength\tabcolsep{20pt}
+\begin{tabular}{ll 
+	@{\quad} % space between B and C
+	l}
+A & B & C \\
+1 & 2 & 3 \\
+\end{tabular}
+% end
+
+\end{document}
