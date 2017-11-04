@@ -1,0 +1,17 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: node positioning
+	\draw[gray] (0,0) circle (0.1);
+% start
+	\node [
+		anchor=north, 
+		draw=blue!50] 
+		{anchored};
+% end
+\end{tikzpicture}
+
+\end{document}

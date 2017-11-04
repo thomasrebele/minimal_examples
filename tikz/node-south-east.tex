@@ -1,0 +1,14 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: node positioning
+	\node [fill=blue!10, draw=blue!50, inner sep=5] (a) {a};
+% start
+	\filldraw (a.south east) circle (0.1);
+% end
+\end{tikzpicture}
+
+\end{document}

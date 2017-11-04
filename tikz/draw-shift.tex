@@ -1,0 +1,23 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+% description: draw a line
+\begin{tikzpicture}
+	\draw[gray] (0,0) circle (0.1);
+% start
+	\draw (0,0) -- (1,1) 
+		% use (1,0.5) as new origin
+		[shift= {(1,0.5)} ]  % {} are necessary
+		(0,0) -- (1,1);
+
+	% or
+	\draw (0,0) -- (1,1) 
+		[xshift=1cm, yshift=0.5cm]
+		(0,0) -- (1,1);
+% end
+\end{tikzpicture}
+
+
+\end{document}

@@ -1,0 +1,17 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}[line width=2pt]
+% description: nodes along a path
+% start
+\draw [->] (0,0) -- 
+	node [ near start, above ] {a}
+	node [ near end, below ] {b}
+	(2,0) ;
+% end
+\useasboundingbox (0,-0.2);
+\end{tikzpicture}
+
+\end{document}

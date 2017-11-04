@@ -1,0 +1,18 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: foreach and draw
+	\foreach \name/\degree in {a/0, b/60, c/120, d/180, e/240, f/300} {
+		\node[gray] (\name) at (\degree:1) {\name};
+	}
+% start
+	\foreach \from/\to in {a/b, b/c, c/d, d/e, e/f} {
+		\draw[->] (\from) -- (\to);
+	}
+% end
+\end{tikzpicture}
+
+\end{document}
