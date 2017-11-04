@@ -5,8 +5,9 @@
 
 % description: draw a slice
 \begin{tikzpicture}
+	\draw[gray] (0,0) circle[radius=0.1];
 % start
-\draw[blue]
+\draw
 	(0,0) arc [radius=1, start angle=20, delta angle=50] 
 	% or 
 	(0,0) arc [radius=1, start angle=20, end angle=70] % ignores delta angle
@@ -16,7 +17,6 @@
 	-- ++(70:-1) % polar coordinates (angle:distance)
 	-- ++(20:1);
 % end
-\draw (0,0) circle[radius=2pt, fill];
 \end{tikzpicture}
 
 \end{document}
