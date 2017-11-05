@@ -13,7 +13,7 @@ code=$(sed 's/\t/\&#9;/g' $1 | awk '
 	/% end/ {out=0} 
 	out==1 { print $0}' | sed 's/$/<br\/>/g' | tr -d '\n')
 
-img="<img src=\"latex/${1/tex/png}\">"
+img="<img src=\"latex/${1%.tex}.png\">"
 
 if [ "$no_hierarchy" == "1" ]; then
 	img=${img//\//-}

@@ -12,8 +12,8 @@ for i in $files; do
 	dir=$(dirname $i)
 	file=$(basename $i)
 	mkdir -p $texout/$dir $imgout/$dir
-	pdf=$texout/${i/tex/pdf}
-	png=$imgout/${i/tex/png}
+	pdf=$texout/${i%.tex}.pdf
+	png=$imgout/${i%.tex}.png
 
 	[ ! -e $pdf -o $i -nt $pdf ] && (
 		cd $dir
