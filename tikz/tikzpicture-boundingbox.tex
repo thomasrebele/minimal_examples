@@ -1,18 +1,25 @@
 \documentclass{standalone}
 \usepackage{tikz}
+\usepackage{framed}
 
 \begin{document}
 
-\begin{tikzpicture}
+\tikz \node [draw=gray, inner sep=0] {%
+\begin{tikzpicture}[scale=0.5]
 % description: add space around picture
-\draw [line width=10] (0,0) -- ++(1,0) ;
+\draw [line width=10] (0,0) -- ++(2,0) ;
 
 % start
 % make bounding box higher
-	\useasboundingbox (-0.5,1.5); 
+	\useasboundingbox (-1,3); 
 % or
-	\path [use as bounding box] (-0.5, 1.5);
+	\path [use as bounding box] (-1, 3);
+
+% later commands will be clipped
+	\filldraw[gray] (-1, 3) circle (0.2);
 % end
-\end{tikzpicture}
+
+\end{tikzpicture}%
+};
 
 \end{document}
