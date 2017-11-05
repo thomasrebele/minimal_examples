@@ -36,3 +36,6 @@ full_path() {
 	echo $(cd $(dirname "$1") && pwd -P)/$(basename "$1")
 }
 
+html_encode() {
+	sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g'
+}

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # output directory
-imgout="output/"
+imgout="output/img/"
 
 mkdir -p $imgout
 
@@ -16,8 +16,6 @@ for i in $files; do
 
 	if [ ! -e $png -o $i -nt $png ]; then
 		full=$(full_path $i)
-		echo "full path: $full"
-		echo "png path: $png"
 		cutycapt --url=file:$full --out=$png
 		convert $png -trim +repage $png
 		if type pngquant > /dev/null; then
