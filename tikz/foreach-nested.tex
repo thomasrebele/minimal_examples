@@ -6,14 +6,17 @@
 \begin{tikzpicture}
 % description: simple loop
 % start
-	\foreach \x in {1,...,4} 
-		\node at (\x,0) {x=\x};
+	\foreach \x in {1,...,4}
+		\foreach \y in {1,...,4} 
+			\draw (\x,\y) circle (0.5);
 
 % or
-
 	\foreach \x in {1,...,4} {
-		\node at (\x,0) {x=\x};
+		\foreach \y in {1,...,4} {
+			\draw (\x,\y) circle (0.5);
+		}
 	}
+
 % end
 \end{tikzpicture}
 

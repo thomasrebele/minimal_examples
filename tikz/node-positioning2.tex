@@ -1,0 +1,23 @@
+\documentclass{standalone}
+\usepackage{tikz}
+% start
+\usetikzlibrary{positioning}
+% end
+\usetikzlibrary{decorations.pathreplacing}
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: nodes with relative positioning
+% start
+	\node[draw] (a) at (0,0) {1};
+	\node[draw] (b) [right=1.5 of a] {2};
+% end
+
+\draw [decorate, decoration={brace, amplitude=0.15cm}, gray]
+	(a.east) 
+	-- node [above=0.2cm] {1.5}
+	(b.west);
+\end{tikzpicture}
+
+\end{document}

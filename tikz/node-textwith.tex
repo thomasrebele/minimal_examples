@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\usetikzlibrary{decorations.pathreplacing}
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: node with label
+% start
+\node [text width=2cm, draw] 
+	{lorem ipsum doloret};
+% end
+
+	\draw 
+		[decorate, decoration={brace, amplitude=0.15cm}, lightgray] 
+		(current bounding box.south east) 
+		-- node [below] {2cm}
+		(current bounding box.south west);
+\end{tikzpicture}
+
+\end{document}

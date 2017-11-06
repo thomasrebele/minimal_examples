@@ -6,14 +6,8 @@
 \begin{tikzpicture}
 % description: simple loop
 % start
-	\foreach \x in {1,...,4} 
-		\node at (\x,0) {x=\x};
-
-% or
-
-	\foreach \x in {1,...,4} {
-		\node at (\x,0) {x=\x};
-	}
+	\foreach \x in {1,1.5,...,4} 
+		\node [rotate=90] at (\x,0) {x=\x};
 % end
 \end{tikzpicture}
 

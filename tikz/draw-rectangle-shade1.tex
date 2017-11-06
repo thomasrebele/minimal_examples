@@ -1,0 +1,16 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+% description: draw a rectangle
+\tikz {
+\draw[gray] (0,0) circle (0.1);
+% start
+\shade
+	[left color=cyan, right color=magenta] 
+	(0,0) rectangle +(1,1);
+% end
+}
+
+\end{document}

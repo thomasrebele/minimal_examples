@@ -1,0 +1,17 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: node with label
+% start
+	\node[draw] {a};
+	\node[minimum size=1cm, draw] at (1,0) {a};
+
+% can be used to make nodes of same size
+	\node[minimum size=1cm, draw] at (2.5,0) {abc};
+% end
+\end{tikzpicture}
+
+\end{document}
