@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+% start
+\usetikzlibrary{decorations.pathmorphing}
+% end
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: draw a line with a corner using absolute coordinates
+\draw[gray] (0,0) circle[radius=2pt];
+% start
+	\draw 
+		[->, decorate,decoration={
+			snake,
+			amplitude=3mm,
+			segment length=1mm,
+			post length=2mm
+		}]
+		(0,0) -- (1,0);
+% end
+\end{tikzpicture}
+
+\end{document}
