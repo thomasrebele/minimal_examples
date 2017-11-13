@@ -4,10 +4,12 @@ import subprocess
 from jinja2 import Environment
 
 import os
+import sys
 script_dir=os.path.dirname(os.path.realpath(__file__))
+git_dir = sys.argv[1]
 
 def run(cmd):
-    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=git_dir)
     out = []
     for line in p.stdout.readlines():
         out += [line.decode("utf-8")]
@@ -20,9 +22,9 @@ id_to_commit = {}
 commits = []
 
 # parse git log
-for line in run("git log --format=format:%H'\t'%P'\t'%s'\t'%an"):
+for line in run("git log --all --reflog --format=format:%H'\t'%P'\t'%s'\t'%an'\t'%d"):
     c = Commit()
-    c.commit, c.parent_ids, c.message, c.author = line.split('\t')
+    c.commit, c.parent_ids, c.message, c.author, c.branches = line.split('\t')
     if c.parent_ids == '':
         c.parent_ids = []
     else:
@@ -59,15 +61,21 @@ for c in commits:
 
 tikz = ""
 
-i = 0
-for c in commits:
+for i, c in enumerate(commits):
     c.name = chr(64+len(commits)-i)
-    tikz += "\\node[commit] (" + c.name + ") at (" + str(c.col*0.5) + "," + str(i) + ") {" + c.name + "};\n"
-    i+=1
+    tikz += "\\node[commit] (" + c.name + ") at (" + str(c.col*0.35) + "," + str(i) + ") {" + c.name + "};\n"
 
 for c in commits:
     for p in c.parents:
         tikz += "\\draw (" + c.name + ") to (" + p.name + ");\n"
+
+tikz += "\\node[fit="
+for c in commits:
+    tikz += "(" + c.name + ")"
+tikz += "] (tree) {};\n"
+
+for i, c in enumerate(commits):
+    tikz += "\\node[message] at (tree.east |- 0.5," + str(i) + ") {" + c.message + "};"
 
 with open(script_dir + "/template.tex") as f:
     template = f.read()

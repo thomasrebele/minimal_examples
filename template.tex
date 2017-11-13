@@ -1,13 +1,18 @@
 \documentclass{standalone}
 
 \usepackage{tikz}
+\usetikzlibrary{fit}
 
 \begin{document}
-\begin{tikzpicture}[scale=-1]
+\begin{tikzpicture}[yscale=-1]
 \tikzset{
 	commit/.style={
 		draw,
 		rounded corners
+	},
+	message/.style={
+		align=center,
+		anchor=west
 	}
 }
 
