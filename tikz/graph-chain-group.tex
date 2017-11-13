@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+% start
+\usetikzlibrary{graphs}
+% end
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: simple graph
+% start
+\graph { 
+	a -> {
+		b->b1, 
+		c->c1
+	} -> d ,
+	};
+% end
+\end{tikzpicture}
+
+\end{document}

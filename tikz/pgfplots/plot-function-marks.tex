@@ -5,13 +5,25 @@
 \pgfplotsset{compat=newest, width=3cm, height=2.5cm}
 
 \begin{document}
-% start
 \begin{tikzpicture}
-\begin{axis}[mark size=1pt, samples=9]
-	\addplot {x^2};
-	\addplot+[mark size=0.3pt] {x};
-	\addplot+[mark=triangle] {-2*x};
+\begin{axis}[mark size=1.5pt, samples=9]
+% start
+	% addplot+ adds options
+	\addplot+[mark size=0.5pt] {x^2};
+	\addplot+[mark=triangle] {x};
+% end
 \end{axis}
 \end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{axis}[mark size=1.5pt, samples=9]
+% start
+	% using only addplot overwrites them
+	% mark size alone has no effect, as no mark is defined
+	\addplot[mark size=0.5pt] {x^2};
+	\addplot[mark=triangle] {x};
 % end
+\end{axis}
+\end{tikzpicture}
+
 \end{document}
