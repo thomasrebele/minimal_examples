@@ -59,23 +59,25 @@ for c in commits:
     c.col = new_col
     used_cols += [new_col]
 
+num_cols = max(used_cols)
+
 tikz = ""
 
+tikz += "\\matrix[commit table] {\n"
 for i, c in enumerate(commits):
     c.name = chr(64+len(commits)-i)
-    tikz += "\\node[commit] (" + c.name + ") at (" + str(c.col*0.35) + "," + str(i) + ") {" + c.name + "};\n"
+    for j in range(num_cols+1):
+        if j == c.col:
+            tikz += "\\node[commit] (" + c.name + ")  {" + c.name + "};"
+
+        tikz += " & "
+    tikz += "\\node[author]  {" + c.author + "}; &"
+    tikz += "\\node[message] {" + c.message + "}; \\\\\n"
+tikz += "};\n"
 
 for c in commits:
     for p in c.parents:
         tikz += "\\draw (" + c.name + ") to (" + p.name + ");\n"
-
-tikz += "\\node[fit="
-for c in commits:
-    tikz += "(" + c.name + ")"
-tikz += "] (tree) {};\n"
-
-for i, c in enumerate(commits):
-    tikz += "\\node[message] at (tree.east |- 0.5," + str(i) + ") {" + c.message + "};"
 
 with open(script_dir + "/template.tex") as f:
     template = f.read()
