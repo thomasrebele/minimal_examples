@@ -24,11 +24,21 @@ commits = []
 # parse git log
 for line in run("git log --all --reflog --format=format:%H'\t'%P'\t'%s'\t'%an'\t'%d"):
     c = Commit()
-    c.commit, c.parent_ids, c.message, c.author, c.branches = line.split('\t')
+    c.commit, c.parent_ids, c.message, c.author, c.branches = line.replace('\n','').split('\t')
     if c.parent_ids == '':
         c.parent_ids = []
     else:
         c.parent_ids = c.parent_ids.split(' ')
+
+    branches = []
+    if "HEAD" in c.branches:
+        branches += ["HEAD"]
+        c.branches = c.branches.replace("HEAD -> ", "")
+    c.branches = c.branches[2:-1]
+    if c.branches != '':
+        branches += c.branches.split(", ")
+    c.branches = branches
+
     c.children = []
     id_to_commit[c.commit] = c
     commits += [c]
@@ -71,8 +81,12 @@ for i, c in enumerate(commits):
             tikz += "\\node[commit] (" + c.name + ")  {" + c.name + "};"
 
         tikz += " & "
+    tikz += "\\node[message] {"
+    for branch in c.branches:
+        tikz += "\\branch{" + branch + "}"
+    tikz += c.message + "}; &"
     tikz += "\\node[author]  {" + c.author + "}; &"
-    tikz += "\\node[message] {" + c.message + "}; \\\\\n"
+    tikz += "\\\\\n"
 tikz += "};\n"
 
 for c in commits:
