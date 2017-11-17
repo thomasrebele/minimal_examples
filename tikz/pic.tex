@@ -1,0 +1,26 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+% description: reuse parts
+\draw[gray] (0,0) circle (0.1);
+
+% start
+\tikzset {
+	v shape/.pic={
+		\draw (0,0) 
+			-- ++(-60:.5) 
+			-- ++ (60:.5);
+	}
+}
+
+\draw pic {v shape}
+	 (1,0) pic {v shape} 
+	 (2,0) pic {v shape} ;
+% end
+
+\end{tikzpicture}
+
+\end{document}
