@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #x description="create local repository"
-#x before="empty directory"
+#x state="empty directory"
 
 #x code={
 git init
@@ -11,10 +11,7 @@ git commit -m "first commit"
 #x }
 
 # make annotation in output file
-x "after={"
+x "result={"
 vis_git .
 x "}"
-
-
-
 

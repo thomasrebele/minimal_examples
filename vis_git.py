@@ -47,11 +47,11 @@ def vis_git_folder(path, show_authors=False):
         branches = []
         if "HEAD" in c.branches:
             branches += ["HEAD"]
-            c.branches = c.branches.replace("HEAD -> ", "")
+            c.branches = c.branches.replace("HEAD -> ", "").replace("HEAD", "")
         c.branches = c.branches[2:-1]
         if c.branches != '':
             branches += c.branches.split(", ")
-        c.branches = branches
+        c.branches = [i for i in branches if i != ""]
 
         c.children = []
         id_to_commit[c.commit] = c

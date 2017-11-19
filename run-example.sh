@@ -6,15 +6,16 @@ if [ "$1" == "" ]; then
 fi
 
 basedir=$(pwd)
-dst=$(pwd)/$1
-out_prefix=$basedir/output/img/${1%.sh}
-git_dir=tmp/$1
 tex_dir=$basedir/tmp/tex/$1
 log_dir=$basedir/tmp/log/$1
+img_dir=$basedir/output/img
+
+out_prefix=$img_dir/${1%.sh}
+git_dir=tmp/$1
 
 i=0
 
-vis_git() (
+vis_git() {
 	$basedir/vis_git.py "$@" > $tex_dir/$i.tex
 	(
 		cd $tex_dir
@@ -27,10 +28,10 @@ vis_git() (
 		if type pngquant > /dev/null; then
 			pngquant --ext .png --force $png
 		fi
-		echo "$png"
+		echo "<img src=\"${png#$img_dir/}\">"
 	)
-	i=$(( i+1 ))
-)
+	export i=$(( i+1 ))
+}
 
 x() {
 	echo "#x $@"
@@ -40,7 +41,8 @@ x() {
 rm -rf $git_dir
 mkdir -p $git_dir $tex_dir $log_dir
 (
+	echo "generating $1"
 	cd $git_dir
-	source $dst > $log_dir/output
+	source $basedir/$1 > $log_dir/output
 )
 
