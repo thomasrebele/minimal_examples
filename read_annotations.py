@@ -6,11 +6,10 @@ Usage:
   read_annotations.py [options] <file>
 
 Options:
-  -h --help                     Show this screen.
   --single-line=<start>         Single line comment
   --multi-line="<start> <end>"  Multi line comment
+  -h --help                     Show this screen.
   --version                     Show version.
-  --author=<val>                Show commit author [default: false].
 
 """
 from docopt import docopt
@@ -87,7 +86,7 @@ def parse(s):
         return result
 
 
-def read_annotations(path, slc, mlc):
+def read_annotations(path, slc=None, mlc=None):
     """
         path: input file
         slc: single line comment
@@ -138,7 +137,7 @@ def read_annotations(path, slc, mlc):
                     fields[p["name"]] = p
                     result += [p]
 
-    return result
+    return result, fields
 
 
 if __name__ == '__main__':
