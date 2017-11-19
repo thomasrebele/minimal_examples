@@ -29,7 +29,7 @@ done
 if [ ! "$*" == "" ]; then 
 	files="$*";
 else
-	files=$(find -name '*.tex' | sed 's:^\./::')
+	files=$(find examples -name '*.tex' | sed 's:^\./::')
 fi
 
 html_encode() {

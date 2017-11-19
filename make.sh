@@ -10,14 +10,15 @@ source common.sh
 
 for i in $files; do
 	dir=$(dirname $i)
+	dir=${dir#examples/}
 	file=$(basename $i)
 	mkdir -p $texout/$dir $imgout/$dir
-	pdf=$texout/${i%.tex}.pdf
-	png=$imgout/${i%.tex}.png
+	pdf=$texout/$dir/${file%.tex}.pdf
+	png=$imgout/$dir/${file%.tex}.png
 
 	[ ! -e $pdf -o $i -nt $pdf ] && (
-		cd $dir
-		rel=$(echo "$dir" | sed 's:^./::; s:[^/]*:..:g')
+		cd examples/$dir
+		rel=$(echo "../$dir" | sed 's:^./::; s:[^/]*:..:g')
 		cmd="pdflatex -interaction nonstopmode -output-directory $rel/$texout/$dir $file"
 		echo " "
 		echo "dir $dir"
