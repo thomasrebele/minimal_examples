@@ -3,7 +3,7 @@
 """read_annotations
 
 Usage:
-  read_annotations.py [options] <git-folder>
+  read_annotations.py [options] <file>
 
 Options:
   -h --help                     Show this screen.
@@ -71,10 +71,12 @@ def parse(s):
     name = pr.name()
     if name:
         pr.space()
-        if pr.consume(["="]) == "=":
+        op = pr.consume(["="])
+        if op:
             pr.space()
             result["type"] = "field"
             result["name"] = name
+            result["op"] = op
             if pr.peek() == '"':
                 result["value"] = pr.constant()
             elif pr.peek() == '{':
@@ -106,6 +108,7 @@ def read_annotations(path, slc, mlc):
         return p
 
     result = []
+    fields = {}
     with open(path) as f:
         #lines = f.read()
         it = iter(f)
@@ -115,6 +118,7 @@ def read_annotations(path, slc, mlc):
 
             if not p: continue
             if p["type"] == "field":
+                fields[p["name"]] = p
                 result += [p]
             elif p["type"] == "field-start":
                 content = ""
@@ -122,19 +126,25 @@ def read_annotations(path, slc, mlc):
                     line = it.__next__()
                     tmp = parse_comment(line)
                     if tmp and tmp["type"] == "field-end":
-                        p["value"] = content
                         break
                     content += line
-                p["type"] = "field"
-                result += [p]
+                op = p["op"]
+                if p["name"] in fields:
+                    p = fields[p["name"]]
+                    p["value"] += "...\n" + content
+                else:
+                    p["type"] = "field"
+                    p["value"] = content
+                    fields[p["name"]] = p
+                    result += [p]
 
     return result
 
 
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version='vis_git')
+    arguments = docopt(__doc__, version='read_annotations')
     annotations = read_annotations(
-            arguments["<git-folder>"],
+            arguments["<file>"],
             arguments["--single-line"],
             arguments["--multi-line"]
         )
