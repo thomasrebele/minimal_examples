@@ -26,5 +26,6 @@ git branch mybranch
 # make annotation in output file
 x "result={"
 vis_git .
+echo "(triangle marks HEAD)"
 x "}"
 

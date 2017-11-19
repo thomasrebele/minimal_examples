@@ -45,13 +45,18 @@ def vis_git_folder(path, show_authors=False):
             c.parent_ids = c.parent_ids.split(' ')
 
         branches = []
-        if "HEAD" in c.branches:
-            branches += ["HEAD"]
-            c.branches = c.branches.replace("HEAD -> ", "").replace("HEAD", "")
+        #if "HEAD" in c.branches:
+        #    branches += ["HEAD"]
+        #    c.branches = c.branches.replace("HEAD -> ", "").replace("HEAD", "")
+        c.branches = c.branches.replace("HEAD -> ", "\head ")
         c.branches = c.branches[2:-1]
         if c.branches != '':
             branches += c.branches.split(", ")
-        c.branches = [i for i in branches if i != ""]
+        c.branches = [i.strip() for i in branches if i != ""]
+
+        c.is_head = "HEAD" in c.branches
+        if c.is_head:
+            c.branches.remove("HEAD")
 
         c.children = []
         id_to_commit[c.commit] = c
@@ -67,16 +72,14 @@ def vis_git_folder(path, show_authors=False):
         c.parents = parents
 
     used_cols = []
-
     for c in commits:
         if hasattr(c, "col"): continue
-        c.firstChild = True
 
         if len(c.children) > 0:
             child = c.children[0]
-            if child.firstChild:
+            if child.first_child:
                 c.col = child.col
-                child.firstChild = False
+                child.first_child = False
                 continue
 
         new_col = 0 if len(used_cols) == 0 else max(used_cols) + 1
@@ -92,7 +95,10 @@ def vis_git_folder(path, show_authors=False):
         c.name = chr(64+len(commits)-i)
         for j in range(num_cols+1):
             if j == c.col:
-                tikz += "\\node[commit] (" + c.name + ")  {" + c.name + "};"
+                tikz += "\\node[commit] (" + c.name + ")  {"
+                if c.is_head:
+                    tikz += "\\head "
+                tikz += c.name + "};"
 
             tikz += " & "
         tikz += "\\node[message] {"
