@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-"""vis-git
+"""vis_git
 
 Usage:
-  vis-git.py [options] <git-folder>
+  vis_git.py [options] <git-folder>
 
 Options:
   -h --help       Show this screen.
@@ -121,7 +121,7 @@ def str_to_bool(s):
     raise ValueError("no boolean: " + str(s))
 
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version='vis-git')
+    arguments = docopt(__doc__, version='vis_git')
     vis_git_folder(arguments["<git-folder>"],
         show_authors=str_to_bool(arguments["--author"])
     )
