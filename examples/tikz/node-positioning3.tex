@@ -1,18 +1,18 @@
 \documentclass{standalone}
 \usepackage{tikz}
-% start
+%x code={
 \usetikzlibrary{positioning}
-% end
+%x }
 \usetikzlibrary{decorations.pathreplacing}
 
 \begin{document}
 
 \begin{tikzpicture}
-% description: nodes with relative positioning
-% start
+%x description="nodes with relative positioning"
+%x code={
 	\node[draw] (a) at (0,0) {1};
 	\node[draw] (b) [above right=0.5 and 1.5 of a] {2};
-% end
+%x }
 
 \tikzset{brace/.style={decorate, decoration={brace, amplitude=0.1cm}, gray}}
 \draw[brace]

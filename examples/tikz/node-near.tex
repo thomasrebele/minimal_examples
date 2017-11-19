@@ -4,14 +4,14 @@
 \begin{document}
 
 \begin{tikzpicture}[line width=2pt]
-% description: nodes along a path
-% start
+%x description="nodes along a path"
+%x code={
 \draw [->] (0,0) -- 
 	node [ near start, above ] {a}
 	node [ near end, above ] {b}
 	node [ midway, below ] {c}
 	(2,0) ;
-% end
+%x }
 \useasboundingbox (0,-0.2);
 \end{tikzpicture}
 

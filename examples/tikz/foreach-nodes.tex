@@ -4,13 +4,13 @@
 \begin{document}
 
 \begin{tikzpicture}
-% description: many nodes with foreach
-% start
+%x description="many nodes with foreach"
+%x code={
 	\foreach \name/\degree 
 	in {a/0, b/60, c/120, d/180, e/240, f/300} {
 		\node (\name) at (\degree:1) {\name};
 	}
-% end
+%x }
 \end{tikzpicture}
 
 \end{document}

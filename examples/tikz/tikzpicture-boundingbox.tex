@@ -6,10 +6,10 @@
 
 \tikz \node [draw=gray, inner sep=0] {%
 \begin{tikzpicture}[scale=0.5]
-% description: add space around picture
+%x description="add space around picture"
 \draw [line width=10] (0,0) -- ++(2,0) ;
 
-% start
+%x code={
 % make bounding box higher
 	\useasboundingbox (-1,3); 
 % or
@@ -17,7 +17,7 @@
 
 % later commands will be clipped
 	\filldraw[gray] (-1, 3) circle (0.2);
-% end
+%x }
 
 \end{tikzpicture}%
 };

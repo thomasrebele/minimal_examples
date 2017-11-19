@@ -3,16 +3,16 @@
 
 \begin{document}
 
-% description: draw a line with options
+%x description="draw a line with options"
 A thick red line
 \begin{tikzpicture}
-% start
+%x code={
 \draw [thick, red] (0,0) -- (1,0); 
 % or
 \draw (0,0) [thick, red] -- (1,0); 
 % or
 \draw (0,0) -- (1,0) [thick, red];
-% end
+%x }
 \end{tikzpicture}
 
 \end{document}

@@ -4,14 +4,14 @@
 \begin{document}
 
 \begin{tikzpicture}
-% description: close a path
-% start
+%x description="close a path"
+%x code={
 \draw [line width=10]
 	% left
 	(0,0) -- ++(1,0) -- ++(0,1) -- cycle
 	% right
 	(2,0) -- ++(1,0) -- ++(0,1) -- (2,0);
-% end
+%x }
 
 % make bounding box higher
 	\useasboundingbox (-0.5,1.5); 

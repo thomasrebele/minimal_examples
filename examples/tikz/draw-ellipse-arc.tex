@@ -9,9 +9,9 @@
 
 \begin{document}
 
-% description: draw a slice
+%x description="draw a slice"
 \begin{tikzpicture}
-% start
+%x code={
 \draw 
 	(0,0) arc 
 		[x radius=1, y radius=0.5, 
@@ -21,7 +21,7 @@
 		[x radius=1, y radius=0.5,
 		start angle=70, end angle=290] % ignores delta angle
 	;
-% end
+%x }
 
 	\begin{scope}[lightgray]
 		\path (0,0) 

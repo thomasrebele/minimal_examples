@@ -1,15 +1,15 @@
 \documentclass{standalone}
 
-% description: display math functions
+%x description="display math functions"
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest, width=3cm, height=2.5cm}
 
 \begin{document}
-% start
+%x code={
 \begin{tikzpicture}
 \begin{axis}[mark size=1pt, samples=9]
 	\addplot {x^2};
 \end{axis}
 \end{tikzpicture}
-% end
+%x }
 \end{document}

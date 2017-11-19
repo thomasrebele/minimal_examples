@@ -1,26 +1,26 @@
 \documentclass{standalone}
 
-% description: pgfplots: plot from file
+%x description="pgfplots: plot from file"
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest, width=3cm, height=2.5cm}
 
 \usepackage{filecontents}
 
 \begin{filecontents}{data.txt}
-% start
+%x code={
 % data.txt
 x y
 1 3
 2 4
-% end
+%x }
 \end{filecontents}
 
 \begin{document}
 \begin{tikzpicture}
 \begin{axis}
-% start
+%x code={
 \addplot[blue] table {data.txt};
-% end
+%x }
 \end{axis}
 \end{tikzpicture}
 \end{document}

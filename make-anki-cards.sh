@@ -3,6 +3,6 @@
 source common.sh
 
 for i in $files; do
-	source anki-row.sh $i
+	./anki_row.py $i
 done
 

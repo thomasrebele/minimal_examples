@@ -1,17 +1,17 @@
 \documentclass{standalone}
 
-% description: pgfplots: logarithmic axis
+%x description="pgfplots: logarithmic axis"
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest, width=3cm, height=2.5cm}
 
 \begin{document}
 \begin{tikzpicture}
-% start
+%x code={
 \begin{axis}[
 	ymode=log,
 	log basis y=2
 	]
-% end
+%x }
 	\addplot[blue] coordinates {(0,1) (5,32)};
 \end{axis}
 \end{tikzpicture}

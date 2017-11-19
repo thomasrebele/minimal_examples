@@ -1,14 +1,14 @@
 \documentclass{standalone}
 \usepackage{tikz}
-% start
+%x code={
 \usetikzlibrary{intersections}
-% end
+%x }
 
 \begin{document}
 
-% description: intersect vertical and horizontal line
+%x description="intersect vertical and horizontal line"
 \begin{tikzpicture}
-% start
+%x code={
 \draw [name path=a] (0.5,0.5) circle [radius=0.5];
 \draw [name path=b] (0,0) -- (60:1.5);
 
@@ -19,7 +19,7 @@
 	}]
 	(c-1) circle (0.2) node[black] {1}
 	(c-2) circle (0.2) node[black] {2};
-% end
+%x }
 \end{tikzpicture}
 
 \end{document}

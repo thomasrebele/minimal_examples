@@ -4,14 +4,14 @@
 \begin{document}
 
 \begin{tikzpicture}
-% description: draw a grid
+%x description="draw a grid"
 \draw[gray] (0,0) circle (0.1);
-% start
+%x code={
 % very thin only works here
 \draw [very thin] (0,0)
 	grid[step=.1] (1,1);
 % step works in both places
-% end
+%x }
 
 \end{tikzpicture}
 

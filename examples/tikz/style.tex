@@ -3,9 +3,9 @@
 
 \begin{document}
 
-% description: simple style
+%x description="simple style"
 \begin{tikzpicture}
-% start
+%x code={
 \tikzset{
 	mystyle/.style={
 		red, 
@@ -13,7 +13,7 @@
 	}
 }
 \draw[mystyle] (0,0) -- (1,0);
-% end
+%x }
 \end{tikzpicture}
 
 \end{document}

@@ -3,12 +3,12 @@
 
 \begin{document}
 
-% description: draw a rotated rectangle
+%x description="draw a rotated rectangle"
 \tikz 
 { \draw[gray] (0,0) circle (0.1);
-% start
+%x code={
 \draw [rotate around={45: (0.5,0.5)}] (0,0) 
 	rectangle +(1,1) ;
-% end
+%x }
 }
 \end{document}

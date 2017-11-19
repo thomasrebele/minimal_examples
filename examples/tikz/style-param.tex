@@ -3,9 +3,9 @@
 
 \begin{document}
 
-% description: style with one parameter
+%x description="style with one parameter"
 \begin{tikzpicture}
-% start
+%x code={
 \tikzset{
 	mystyle/.style={
 		color=#1, 
@@ -15,7 +15,7 @@
 }
 \draw[mystyle] (0,0) -- (1,0);
 \draw[mystyle=blue] (0,0.1) -- (1,0.1);
-% end
+%x }
 \end{tikzpicture}
 
 \end{document}

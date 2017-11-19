@@ -4,10 +4,10 @@
 \begin{document}
 
 \begin{tikzpicture}
-% description: reuse parts
+%x description="reuse parts"
 \draw[gray] (0,0) circle (0.1);
 
-% start
+%x code={
 \tikzset {
 	v shape/.pic={
 		\draw (0,0) 
@@ -19,7 +19,7 @@
 \draw pic {v shape}
 	 (1,0) pic {v shape} 
 	 (2,0) pic {v shape} ;
-% end
+%x }
 
 \end{tikzpicture}
 

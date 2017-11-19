@@ -1,18 +1,18 @@
 \documentclass{standalone}
 \usepackage{tikz}
-% start
+%x code={
 \usetikzlibrary{positioning}
-% end
+%x }
 
 \begin{document}
 
 \begin{tikzpicture}
-% description: nodes with relative positioning
-% start
+%x description="nodes with relative positioning"
+%x code={
 	\node (a) at (0,0) {1};
 	\node (b) [right=of a] {2};
 	\node (c) [below=of b] {3};
-% end
+%x }
 \end{tikzpicture}
 
 \end{document}

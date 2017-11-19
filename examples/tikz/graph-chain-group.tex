@@ -1,22 +1,22 @@
 \documentclass{standalone}
 \usepackage{tikz}
 
-% start
+%x code={
 \usetikzlibrary{graphs}
-% end
+%x }
 
 \begin{document}
 
 \begin{tikzpicture}
-% description: simple graph
-% start
+%x description="simple graph"
+%x code={
 \graph { 
 	a -> {
 		b->b1, 
 		c->c1
 	} -> d ,
 	};
-% end
+%x }
 \end{tikzpicture}
 
 \end{document}
