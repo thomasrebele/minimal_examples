@@ -1,0 +1,6 @@
+[submodule "minimal-examples-common"]
+	path = minimal_examples_common
+	url = https://github.com/thomasrebele/minimal-examples-common
+[submodule "minimal_examples_common"]
+	path = minimal_examples_common
+	url = git@github.com:thomasrebele/minimal_examples_common.git
