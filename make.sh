@@ -10,7 +10,7 @@ for i in $files; do
 	mkdir -p $imgout/$dir
 	echo $i
 
-	png=$imgout/${i%.sh}.png
+	png=$imgout/${i%.sh}-0.png
 
 	[ ! -e $png -o $i -nt $png ] && (
 		./run-example.sh $i

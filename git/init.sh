@@ -1,12 +1,20 @@
 #!/bin/bash
 
-# description: create local repository
-# 
+#x description="create local repository"
+#x before="empty directory"
 
-# start
+#x code={
 git init
 echo "# Hello world" > readme.md
 git add readme.md
 git commit -m "first commit"
-# end
+#x }
+
+# make annotation in output file
+x "after={"
+vis_git .
+x "}"
+
+
+
 
