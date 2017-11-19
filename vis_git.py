@@ -36,7 +36,7 @@ def vis_git_folder(path, show_authors=False):
     commits = []
 
     # parse git log
-    for line in run("git log --all --reflog --format=format:%H'\t'%P'\t'%s'\t'%an'\t'%d", cwd=path):
+    for line in run("git log --date-order --all --reflog --format=format:%H'\t'%P'\t'%s'\t'%an'\t'%d", cwd=path):
         c = Commit()
         c.commit, c.parent_ids, c.message, c.author, c.branches = line.replace('\n','').split('\t')
         if c.parent_ids == '':
@@ -67,6 +67,8 @@ def vis_git_folder(path, show_authors=False):
         parents = []
         for p in c.parent_ids:
             parent_commit = id_to_commit[p]
+            if len(parent_commit.children) == 0:
+                c.first_child = True
             parent_commit.children += [c]
             parents += [parent_commit]
         c.parents = parents
