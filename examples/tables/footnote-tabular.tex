@@ -1,0 +1,25 @@
+\documentclass{article}
+
+\usepackage[paperheight=2.5cm, paperwidth=5cm]{geometry}
+\usepackage{xcolor}
+
+%x code={
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+%x }
+
+\begin{document}
+
+%x description="space between columns"
+\pagestyle{empty}
+
+\noindent
+%x code={
+\begin{tabular}{ll}
+	A\footnote{
+		\textcolor{red}{footnote in tabular}
+	} & B \\
+	1 & 2 \\
+\end{tabular}
+}
+\end{document}

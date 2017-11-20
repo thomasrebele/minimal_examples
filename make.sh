@@ -23,6 +23,9 @@ for i in $files; do
 		echo " "
 		echo "dir $dir"
 		echo "compiling: $cmd"
+		# TODO: specify compilation in doc
+		$cmd
+		$cmd
 		$cmd
 	)
 
