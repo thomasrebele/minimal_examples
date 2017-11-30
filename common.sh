@@ -29,7 +29,7 @@ done
 if [ ! "$*" == "" ]; then 
 	files="$*";
 else
-	files=$(find -name '*.html' | sed 's:^\./::')
+	files=$(find examples -name '*.html' | sed 's:^\./::')
 fi
 
 full_path() {

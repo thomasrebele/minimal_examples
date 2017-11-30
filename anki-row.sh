@@ -15,7 +15,7 @@ code=$(awk '
 	/<!-- end/ {out=0} 
 	out==1 { print $0}' $1 | html_encode | sed 's/\t/\&#9;/g' | sed 's/$/<br\/>/g' | tr -d '\n')
 
-img="<img src=\"web/${1%.html}.png\">"
+img="<img src=\"${1%.html}.png\">"
 
 if [ "$no_hierarchy" == "1" ]; then
 	img=${img//\//-}
