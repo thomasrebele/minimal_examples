@@ -32,7 +32,7 @@ else
 	# script files not in current folder or subfolders tmp, output
 	#files=$(find -mindepth 2 -! \( -path './tmp/*' -o -path './output/*' -prune \) -name '*.sh'  | sed 's:^\./::')
 	# script files inside git
-	files=$(find git -name '*.sh'  | sed 's:^\./::')
+	files=$(find examples -name '*.sh'  | sed 's:^\./::')
 fi
 
 html_encode() {
