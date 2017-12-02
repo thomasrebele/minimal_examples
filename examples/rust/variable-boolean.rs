@@ -3,12 +3,14 @@ fn main() {
 
 //x description="boolean variable"
 //x code={
+    // prefix '_' prevents compiler warning about unused variable
     // unmodifiable
-    let a : bool = true;
+    let _a : bool = true;
 
     // modifiable
-    let mut b : bool = true;
-    b = false;
+    let mut _b : bool = true;
+    _b = false;
+
 //x }
 
 }
