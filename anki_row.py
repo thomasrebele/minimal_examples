@@ -42,20 +42,20 @@ def anki_row(path, config):
     base_path = path.replace("examples/", "")
     base_path = base_path[0:base_path.rfind("/")]
 
-    l = []
+    card = {"example" : path.replace("examples/", "")}
     for field in ["description", "pre", "step", "post", "explanation"]:
         val = ""
         if field in fields:
             val = fields[field]["value"]
         val = val.replace("\n", "<br/>").replace("\t", "&#9;")
-        l += [val]
+        card[field] = val
 
-    if l[0] == "":
+    if card["description"] == "":
         print_err("error: " + path + " has no description")
         return None
 
-    l[0] = base_path + ": " + l[0]
-    return l
+    card["description"] = base_path + ": " + card["description"]
+    return card
 
 
 def config_for_example(path):
@@ -78,14 +78,13 @@ def config_for_example(path):
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='read_annotations')
 
-    desc_idx = 0
     description_to_card = {}
     description_to_path = {}
     for path in arguments["<file>"]:
         config = config_for_example(path)
-        row = anki_row(path,config)
-        if row:
-            desc = row[desc_idx]
+        card = anki_row(path,config)
+        if card:
+            desc = card["description"]
             if desc in description_to_path:
                 print_err("duplicate description: '" + desc + "'")
                 print_err("   in path " + description_to_path[desc])
@@ -93,10 +92,12 @@ if __name__ == '__main__':
                 del(description_to_card[desc])
                 continue
 
-            description_to_card[desc] = row
+            description_to_card[desc] = card
             description_to_path[desc] = path
 
     for d in description_to_card:
-        print("\t".join([str(f) for f in description_to_card[d]]))
+        card = description_to_card[d]
+        fields = ["example", "description", "pre", "step", "post", "explanation"]
+        print("\t".join([str(card[f]) for f in fields]))
 
 
