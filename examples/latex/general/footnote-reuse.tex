@@ -2,7 +2,7 @@
 
 \usepackage[paperheight=2.5cm, paperwidth=5cm]{geometry}
 
-%x code={
+%x step={
 \usepackage{footmisc}
 %x }
 
@@ -11,12 +11,12 @@
 %x description="reuse footnote"
 
 some text%
-%x code={
+%x step={
 % first time
 \footnote{footnote \label{fn1}} 
 %x }
 more text%
-%x code={
+%x step={
 % reuse
 \footref{fn1}
 %x }

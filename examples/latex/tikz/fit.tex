@@ -1,7 +1,7 @@
 \documentclass{standalone}
 \usepackage{tikz}
 
-%x code={
+%x step={
 \usetikzlibrary{fit}
 %x }
 
@@ -14,7 +14,7 @@
 		\node (b) at (1,1) {b};
 		\node (c) at (0.5, 0) {c};
 	\end{scope}
-%x code={
+%x step={
 	\node [draw=red, rectangle, 
 		fit=(a)(b)(c), inner sep=0
 		] {};

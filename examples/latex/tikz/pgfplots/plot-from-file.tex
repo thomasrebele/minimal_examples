@@ -7,7 +7,7 @@
 \usepackage{filecontents}
 
 \begin{filecontents}{data.txt}
-%x code={
+%x step={
 % data.txt
 x y
 1 3
@@ -18,7 +18,7 @@ x y
 \begin{document}
 \begin{tikzpicture}
 \begin{axis}
-%x code={
+%x step={
 \addplot[blue] table {data.txt};
 %x }
 \end{axis}

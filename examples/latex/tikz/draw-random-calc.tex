@@ -1,7 +1,7 @@
 \documentclass{standalone}
 \usepackage{tikz}
 
-%x code={
+%x step={
 \usetikzlibrary{calc}
 %x }
 
@@ -11,7 +11,7 @@
 \tikz {
 	\draw (0,0) circle [radius=.1];
 	\foreach \x in {0,...,10} {
-%x code={
+%x step={
 \draw [fill] 
 	% random numbers between -1 and 1
 	($(1,0) + 0.5*(rand,rand)$) 

@@ -1,6 +1,6 @@
 \documentclass{standalone}
 \usepackage{tikz}
-%x code={
+%x step={
 \usetikzlibrary{positioning}
 %x }
 \usetikzlibrary{decorations.pathreplacing}
@@ -9,7 +9,7 @@
 
 \begin{tikzpicture}
 %x description="nodes with relative positioning"
-%x code={
+%x step={
 	\node[draw] (a) at (0,0) {1};
 	\node[draw] (b) [above right=0.5 and 1.5 of a] {2};
 %x }

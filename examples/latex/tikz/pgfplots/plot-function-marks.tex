@@ -7,7 +7,7 @@
 \begin{document}
 \begin{tikzpicture}
 \begin{axis}[mark size=1.5pt, samples=9]
-%x code={
+%x step={
 	% addplot+ adds options
 	\addplot+[mark size=0.5pt] {x^2};
 	\addplot+[mark=triangle] {x};
@@ -17,7 +17,7 @@
 
 \begin{tikzpicture}
 \begin{axis}[mark size=1.5pt, samples=9]
-%x code={
+%x step={
 	% using only addplot overwrites them
 	% mark size alone has no effect, as no mark is defined
 	\addplot[mark size=0.5pt] {x^2};
