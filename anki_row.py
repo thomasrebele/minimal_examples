@@ -52,7 +52,7 @@ def anki_row(path, config):
         return None
 
     l[0] = base_path + ": " + l[0]
-    return "\t".join([str(v) for v in l])
+    return l
 
 
 
@@ -72,11 +72,25 @@ def config_for_example(path):
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='read_annotations')
 
-
+    desc_idx = 0
+    description_to_card = {}
+    description_to_path = {}
     for path in arguments["<file>"]:
         config = config_for_example(path)
         row = anki_row(path,config)
         if row:
-            print(row)
+            desc = row[desc_idx]
+            if desc in description_to_path:
+                print_err("duplicate description: '" + desc + "'")
+                print_err("   in path " + description_to_path[desc])
+                print_err("   and     " + path)
+                del(description_to_card[desc])
+                continue
+
+            description_to_card[desc] = row
+            description_to_path[desc] = path
+
+    for d in description_to_card:
+        print("\t".join([str(f) for f in description_to_card[d]]))
 
 
