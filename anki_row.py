@@ -43,20 +43,25 @@ def anki_row(path, config):
     base_path = base_path[0:base_path.rfind("/")]
 
     card = {"example" : path.replace("examples/", "")}
+    for field in ["description", "pre", "step", "post", "explanation"]:
+        val = ""
+        if field in fields:
+            val = fields[field]["value"]
+        val = val.replace("\n", "<br/>").replace("\t", "&#9;")
+        card[field] = val
+
+    if card["description"] == "":
+        print_err("error: " + path + " has no description")
+        return None
 
     img_path = path.replace("examples/", "").replace(".tex", ".png")
     if no_hierarchy:
         img_path = img_path.replace("/", "-")
     img="<img src=\"latex/" + str(img_path) + "\">"
 
-    if not "description" in fields:
-        print_err("description missing in " + path)
-        return None
-
-    card["description"] = str(escape(base_path + ": " + fields["description"]["value"]))
-    card["step"] = str(escape(fields["step"]["value"]).replace("\n", "<br/>").replace("\t", "&#9;"))
     card["post"] = str(img)
 
+    card["description"] = base_path + ": " + card["description"]
     return card
 
 
