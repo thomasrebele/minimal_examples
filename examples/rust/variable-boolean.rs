@@ -2,7 +2,7 @@
 fn main() {
 
 //x description="boolean variable"
-//x code={
+//x step={
     // prefix '_' prevents compiler warning about unused variable
     // unmodifiable
     let _a : bool = true;

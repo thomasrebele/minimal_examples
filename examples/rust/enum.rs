@@ -4,7 +4,7 @@ fn main() {
 
 //x description="enum (with all three types)"
 
-//x code={
+//x step={
 enum Event {
     Start,
     Key(i32),

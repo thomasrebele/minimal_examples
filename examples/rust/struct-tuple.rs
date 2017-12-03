@@ -3,7 +3,7 @@ fn main() {
 
 //x description="struct that behaves like a tuple"
 
-//x code={
+//x step={
 
 // auto generate code for "{:?}"
 #[derive(Debug)]

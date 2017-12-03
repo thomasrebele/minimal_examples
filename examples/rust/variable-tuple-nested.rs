@@ -2,7 +2,7 @@
 fn main() {
 
 //x description="tuple variable"
-//x code={
+//x step={
     let t = ( (1,2), (3,4));
     println!("tuple contains (({}, {}), ({}, {}))", 
              (t.0).0, (t.0).1, (t.1).0, (t.1).1);

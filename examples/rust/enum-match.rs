@@ -16,7 +16,7 @@ enum Event {
 let e2 = Event::Key(1);
 //x }
 
-//x code={
+//x step={
 match e2 {
     Event::Start => println!("start"),
     Event::End => println!("end"),

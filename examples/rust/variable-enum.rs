@@ -15,7 +15,7 @@ enum Event {
 //x }
 
 fn main() {
-//x code={
+//x step={
 let e1 = Event::Start;
 let e2 = Event::Key(1);
 let e3 = Event::Click{x:20, y:80};

@@ -1,6 +1,6 @@
 
 //x description="hello world"
-//x code={
+//x step={
 fn main() {
 
     // call println macro

@@ -24,7 +24,7 @@ match e2 {
 }
 //x }
 
-//x code={
+//x step={
 use Event::{Start, End, Key, Click};
 // or
 use Event::*;

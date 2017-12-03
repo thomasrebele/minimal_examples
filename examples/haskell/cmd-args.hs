@@ -1,5 +1,5 @@
 --x description="hello world"
---x code={
+--x step={
 import System.Environment
 
 main = getArgs >>= print

@@ -1,6 +1,6 @@
 
 
-//x code={
+//x step={
 fn head(slice: &[i32]) {
     println!("first {} len {}", slice[0], slice.len());   
 }
@@ -9,7 +9,7 @@ fn head(slice: &[i32]) {
 fn main() {
 
 //x description="boolean variable"
-//x code={
+//x step={
     let _a = [0,1,2,3,4];
     
     head(&_a);

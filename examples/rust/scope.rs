@@ -17,7 +17,7 @@ fn main() {
 
 //x description="scope"
 
-//x code={
+//x step={
 let a = 1;
 {
     let b = 1;

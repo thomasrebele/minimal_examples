@@ -2,7 +2,7 @@
 fn main() {
 
 //x description="unmodifiable integer variable"
-//x code={
+//x step={
     // signed
     let _a : i32 = -1;
     let _a_impl = 1; // default: i32

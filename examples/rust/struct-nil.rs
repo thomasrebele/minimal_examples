@@ -2,7 +2,7 @@
 fn main() {
 
 //x description="a Unit struct"
-//x code={
+//x step={
 // auto generate code for "{:?}"
 // for the following class
 #[derive(Debug)]

@@ -4,7 +4,7 @@ fn main() {
 
 //x description="enum with indices"
 
-//x code={
+//x step={
 enum Number {
     Zero,
     One,

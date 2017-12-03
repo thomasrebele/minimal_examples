@@ -2,7 +2,7 @@
 fn main() {
 
 //x description="logical operators"
-//x code={
+//x step={
     let a = 0b0011u32;
     let b = 0b0101u32;
 

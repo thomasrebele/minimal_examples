@@ -1,4 +1,4 @@
 --x description="hello world"
---x code={
+--x step={
 main = putStrLn "Hello, world!"
 --x }

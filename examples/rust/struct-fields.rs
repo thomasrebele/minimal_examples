@@ -3,7 +3,7 @@ fn main() {
 
 //x description="struct with fields"
 
-//x code={
+//x step={
 
 // auto generate code for "{:?}"
 #[derive(Debug)]
