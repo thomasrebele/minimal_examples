@@ -1,11 +1,13 @@
 
 fn main() {
 
-//x description="boolean variable"
-//x step={
-    let _a = [0,0,0];
+//x description="length of array"
+//x pre={
+let a = [0,0,0];
+//x }
 
-    println!("array length {}", _a.len());
+//x step={
+println!("array length {}", a.len());
 //x }
 
 }

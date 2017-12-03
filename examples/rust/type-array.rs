@@ -1,7 +1,7 @@
 
 fn main() {
 
-//x description="boolean variable"
+//x description="integer array"
 //x step={
     let _a : [i32; 3] = [0,0,0];
     // or shorter

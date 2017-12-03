@@ -1,7 +1,7 @@
 
 fn main() {
 
-//x description="tuple variable"
+//x description="nested tuple"
 //x step={
     let t = ( (1,2), (3,4));
     println!("tuple contains (({}, {}), ({}, {}))", 

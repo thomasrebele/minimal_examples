@@ -8,8 +8,8 @@ fn head(slice: &[i32]) {
 
 fn main() {
 
-//x description="boolean variable"
-//x step={
+//x description="function on array slices"
+//x pre={
     let _a = [0,1,2,3,4];
     
     head(&_a);

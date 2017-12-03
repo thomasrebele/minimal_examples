@@ -2,7 +2,7 @@
 
 fn main() {
 
-//x description="enum with indices"
+//x description="enum with constants"
 
 //x step={
 enum Color {

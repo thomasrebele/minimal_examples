@@ -1,7 +1,7 @@
 
 fn main() {
 
-//x description="boolean variable"
+//x description="array slice"
 //x step={
     let _a = [0,1,2,3,4];
 
