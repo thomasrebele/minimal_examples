@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="draw a line with relative coordinates for each segment"
+\draw [gray] circle (0.1) ;
+%x step={
+\draw (0,0) 
+	-- ++(0,1)
+	-- ++(0.5,0);
+
+% or
+\draw (0,0)
+	-- ++(up:1)
+	-- ++(right:0.5);
+
+%x }
+\end{tikzpicture}
+
+\end{document}

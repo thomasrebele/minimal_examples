@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}[line width=2pt]
+%x description="nodes along a path (more precise)"
+%x step={
+\draw [->] (0,0) -- 
+	node [ pos=0.1, above ] {.1}
+	node [ pos=0.2, below ] {.2}
+	node [ pos=0.8, above ] {.8}
+	node [ pos=0.9, below ] {.9}
+	(2,0) ;
+%x }
+\useasboundingbox (0,-0.2);
+\end{tikzpicture}
+
+\end{document}

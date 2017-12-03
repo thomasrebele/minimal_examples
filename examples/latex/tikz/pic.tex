@@ -1,0 +1,26 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="reuse parts"
+\draw[gray] (0,0) circle (0.1);
+
+%x step={
+\tikzset {
+	v shape/.pic={
+		\draw (0,0) 
+			-- ++(-60:.5) 
+			-- ++ (60:.5);
+	}
+}
+
+\draw pic {v shape}
+	 (1,0) pic {v shape} 
+	 (2,0) pic {v shape} ;
+%x }
+
+\end{tikzpicture}
+
+\end{document}

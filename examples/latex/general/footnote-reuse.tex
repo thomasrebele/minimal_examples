@@ -1,0 +1,24 @@
+\documentclass{article}
+
+\usepackage[paperheight=2.5cm, paperwidth=5cm]{geometry}
+
+%x step={
+\usepackage{footmisc}
+%x }
+
+\begin{document}
+
+%x description="reuse footnote"
+
+some text%
+%x step={
+% first time
+\footnote{footnote \label{fn1}} 
+%x }
+more text%
+%x step={
+% reuse
+\footref{fn1}
+%x }
+
+\end{document}

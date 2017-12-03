@@ -1,0 +1,18 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="node padding"
+%x step={
+	\node 
+		[draw, inner sep=1pt] 
+		{abc};
+
+% for comparison
+	\node [draw] at (1,0) {abc};
+%x }
+\end{tikzpicture}
+
+\end{document}

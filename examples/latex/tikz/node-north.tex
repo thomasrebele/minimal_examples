@@ -1,0 +1,14 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="node points (1)"
+	\node [fill=gray!50, draw=gray, inner sep=5] (a) {a};
+%x step={
+	\filldraw (a.north) circle (0.1);
+%x }
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,21 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+%x description="style with one parameter"
+\begin{tikzpicture}
+%x step={
+\tikzset{
+	mystyle/.style={
+		color=#1, 
+		dashed
+	}, % put a comma here!
+	mystyle/.default={red}
+}
+\draw[mystyle] (0,0) -- (1,0);
+\draw[mystyle=blue] (0,0.1) -- (1,0.1);
+%x }
+\end{tikzpicture}
+
+\end{document}
