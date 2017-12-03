@@ -47,19 +47,18 @@ def anki_row(path, config):
         val = ""
         if field in fields:
             val = fields[field]["value"]
+        elif "generator" in config and field in config["generator"]:
+            fn = config["generator"][field]
+            val = fn(path=path, annotations=annotations, fields=fields)
+            if val == None:
+                continue
+
         val = val.replace("\n", "<br/>").replace("\t", "&#9;")
         card[field] = val
 
     if card["description"] == "":
         print_err("error: " + path + " has no description")
         return None
-
-    img_path = path.replace("examples/", "").replace(".tex", ".png")
-    if no_hierarchy:
-        img_path = img_path.replace("/", "-")
-    img="<img src=\"latex/" + str(img_path) + "\">"
-
-    card["post"] = str(img)
 
     card["description"] = base_path + ": " + card["description"]
     return card
