@@ -14,7 +14,7 @@ from docopt import docopt
 from html import escape
 from sys import stderr
 
-from minimal_examples_common.read_annotations import *
+from read_annotations import *
 
 # TODO:
 no_hierarchy=False
