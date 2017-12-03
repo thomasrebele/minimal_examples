@@ -23,9 +23,18 @@ no_hierarchy=False
 def print_err(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
 
-def anki_row(path):
+# https://stackoverflow.com/a/8790077/1562506
+def import_from(module, name):
+    """import a function/attribute from a python script"""
+    module = __import__(module, fromlist=[name])
+    return getattr(module, name)
+
+def anki_row(path, config):
+    """create a flashcard for anki in TSV format.
+    path: the example file (e.g. examples/rust/hello_world.rs).
+    config: specifies which markup tag to use """
     try:
-        annotations, fields = read_annotations(path, slc="%x")
+        annotations, fields = read_annotations(path, slc=config["slc"])
     except Exception as err:
         print_err("problem with " + path)
         raise err
@@ -48,6 +57,24 @@ def anki_row(path):
     l = [str(i) for i in [img, desc, step]]
     return l
 
+
+def config_for_example(path):
+    """determines which configuration to use for an example"""
+
+    config = None
+    dirs = ["build_config"] + path.split("/")[1:-1]
+    # look for config in build_config/..., starting with most specific path
+    for j in range(len(dirs),1,-1):
+        # try to load config
+        conf_path = ".".join(dirs[0:j])
+        try:
+            config = import_from(conf_path, "config")
+            break
+        except ModuleNotFoundError:
+            pass
+
+    return config
+
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='read_annotations')
 
@@ -55,7 +82,8 @@ if __name__ == '__main__':
     description_to_card = {}
     description_to_path = {}
     for path in arguments["<file>"]:
-        row = anki_row(path)
+        config = config_for_example(path)
+        row = anki_row(path,config)
         if row:
             desc = row[desc_idx]
             if desc in description_to_path:
