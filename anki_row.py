@@ -47,6 +47,12 @@ def anki_row(path, config):
         val = ""
         if field in fields:
             val = fields[field]["value"]
+        elif "generator" in config and field in config["generator"]:
+            fn = config["generator"][field]
+            val = fn(path=path, annotations=annotations, fields=fields)
+            if val == None:
+                continue
+
         val = val.replace("\n", "<br/>").replace("\t", "&#9;")
         card[field] = val
 
