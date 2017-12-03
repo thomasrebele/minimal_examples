@@ -1,0 +1,14 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="simple loop with step"
+%x step={
+	\foreach \x in {1,1.5,...,4} 
+		\node [rotate=90] at (\x,0) {x=\x};
+%x }
+\end{tikzpicture}
+
+\end{document}

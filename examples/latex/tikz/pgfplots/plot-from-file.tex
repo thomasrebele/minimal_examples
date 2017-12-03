@@ -1,0 +1,26 @@
+\documentclass{standalone}
+
+%x description="pgfplots: plot from file"
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest, width=3cm, height=2.5cm}
+
+\usepackage{filecontents}
+
+\begin{filecontents}{data.txt}
+%x step={
+% data.txt
+x y
+1 3
+2 4
+%x }
+\end{filecontents}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}
+%x step={
+\addplot[blue] table {data.txt};
+%x }
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="close a path"
+%x step={
+\draw [line width=10]
+	% left
+	(0,0) -- ++(1,0) -- ++(0,1) -- cycle
+	% right
+	(2,0) -- ++(1,0) -- ++(0,1) -- (2,0);
+%x }
+
+% make bounding box higher
+	\useasboundingbox (-0.5,1.5); 
+% or
+	\path [use as bounding box] (-0.5, 1.5);
+\end{tikzpicture}
+
+\end{document}

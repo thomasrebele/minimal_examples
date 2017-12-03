@@ -1,0 +1,25 @@
+\documentclass{article}
+
+\usepackage[paperheight=2.5cm, paperwidth=5cm]{geometry}
+\usepackage{xcolor}
+
+%x step={
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+%x }
+
+\begin{document}
+
+%x description="footnote in tabular"
+\pagestyle{empty}
+
+\noindent
+%x step={
+\begin{tabular}{ll}
+	A\footnote{
+		\textcolor{red}{footnote in tabular}
+	} & B \\
+	1 & 2 \\
+\end{tabular}
+%x }
+\end{document}

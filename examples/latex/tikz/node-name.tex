@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="node with name and coordinates"
+%x step={
+	\node (name) at (0,0) 
+		{node with name and cordinates};
+
+	% or 
+	\node at (0,0) (name) 
+		{node with name and cordinates};
+
+	% or
+	\node [name=name] at (0,0)
+		{node with name and cordinates};
+%x }
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="simple loop"
+%x step={
+	\foreach \x in {1,...,4} 
+		\node at (\x,0) {x=\x};
+
+% or
+
+	\foreach \x in {1,...,4} {
+		\node at (\x,0) {x=\x};
+	}
+%x }
+\end{tikzpicture}
+
+\end{document}

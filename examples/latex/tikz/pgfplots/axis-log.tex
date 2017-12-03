@@ -1,0 +1,18 @@
+\documentclass{standalone}
+
+%x description="pgfplots: logarithmic axis"
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest, width=3cm, height=2.5cm}
+
+\begin{document}
+\begin{tikzpicture}
+%x step={
+\begin{axis}[
+	ymode=log,
+	log basis y=2
+	]
+%x }
+	\addplot[blue] coordinates {(0,1) (5,32)};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,23 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+%x step={
+\usetikzlibrary{calc}
+%x }
+
+\begin{document}
+
+%x description="draw a random circle around (1+-.5, 0+-.5)"
+\tikz {
+	\draw (0,0) circle [radius=.1];
+	\foreach \x in {0,...,10} {
+%x step={
+\draw [fill] 
+	% random numbers between -1 and 1
+	($(1,0) + 0.5*(rand,rand)$) 
+	circle [radius=.1];
+%x }
+	}
+}
+
+\end{document}

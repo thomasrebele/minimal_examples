@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="node with an additional label"
+%x step={
+	% scale fonts
+	\tikzset{every label/.style={
+		red, font=\footnotesize}}
+
+	\node 
+		[label=below:$-90^\circ$, 
+		label=60:$60^\circ$]
+		{abc};
+%x }
+\end{tikzpicture}
+
+\end{document}

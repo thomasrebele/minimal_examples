@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+%x step={
+\usetikzlibrary{graphs}
+%x }
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="graph with chain group"
+%x step={
+\graph { 
+	a -> {
+		b->b1, 
+		c->c1
+	} -> d ,
+	};
+%x }
+\end{tikzpicture}
+
+\end{document}
