@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo "make.sh"
-./make.sh
+./build_scripts/latex/make.sh
 echo "make-anki.sh"
-./make-anki-cards.sh > output/out.tsv 
+./build_scripts/latex/make-anki-cards.sh > output/out.tsv 
 echo "rsync"
 rsync -av --delete output/img/ ~/.local/share/Anki2/$1/collection.media/latex/

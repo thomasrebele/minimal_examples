@@ -6,7 +6,7 @@ imgout="output/img/"
 
 mkdir -p $texout $imgout
 
-source common.sh
+source build_scripts/latex/common.sh
 
 for i in $files; do
 	dir=$(dirname $i)

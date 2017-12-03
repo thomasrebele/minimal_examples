@@ -14,7 +14,7 @@ Optional: `pngquant` for smaller PNGs
 You can compile all the examples to pdf and png by executing the following command:
 
 ```
-./make.sh
+./build_script/latex/make.sh
 ```
 
 It creates a folder `output/pdf` for the pdf files and a folder `output/img` for png files.
@@ -24,7 +24,7 @@ It creates a folder `output/pdf` for the pdf files and a folder `output/img` for
 Use the command
 
 ```
-./make-anki.sh > output.tsv
+./build_script/latex/make-anki.sh ANKI_USER > output.tsv
 ```
 
 It writes TSV to output.tsv with the following columns 
