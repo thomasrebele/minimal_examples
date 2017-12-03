@@ -42,6 +42,8 @@ def anki_row(path, config):
     base_path = path.replace("examples/", "")
     base_path = base_path[0:base_path.rfind("/")]
 
+    card = {"example" : path.replace("examples/", "")}
+
     img_path = path.replace("examples/", "").replace(".tex", ".png")
     if no_hierarchy:
         img_path = img_path.replace("/", "-")
@@ -51,11 +53,11 @@ def anki_row(path, config):
         print_err("description missing in " + path)
         return None
 
-    desc=escape(base_path + ": " + fields["description"]["value"])
-    step=escape(fields["step"]["value"]).replace("\n", "<br/>").replace("\t", "&#9;")
+    card["description"] = str(escape(base_path + ": " + fields["description"]["value"]))
+    card["step"] = str(escape(fields["step"]["value"]).replace("\n", "<br/>").replace("\t", "&#9;"))
+    card["post"] = str(img)
 
-    l = [str(i) for i in [img, desc, step]]
-    return l
+    return card
 
 
 def config_for_example(path):
@@ -73,19 +75,21 @@ def config_for_example(path):
         except ModuleNotFoundError:
             pass
 
+    if not config:
+        raise FileNotFoundError("no config found for " + path)
+
     return config
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='read_annotations')
 
-    desc_idx = 1
     description_to_card = {}
     description_to_path = {}
     for path in arguments["<file>"]:
         config = config_for_example(path)
-        row = anki_row(path,config)
-        if row:
-            desc = row[desc_idx]
+        card = anki_row(path,config)
+        if card:
+            desc = card["description"]
             if desc in description_to_path:
                 print_err("duplicate description: '" + desc + "'")
                 print_err("   in path " + description_to_path[desc])
@@ -93,10 +97,12 @@ if __name__ == '__main__':
                 del(description_to_card[desc])
                 continue
 
-            description_to_card[desc] = row
+            description_to_card[desc] = card
             description_to_path[desc] = path
 
     for d in description_to_card:
-        print("\t".join([str(f) for f in description_to_card[d]]))
+        card = description_to_card[d]
+        fields = ["example", "description", "pre", "step", "post", "explanation"]
+        print("\t".join([str(card.get(f, "")) for f in fields]))
 
 
