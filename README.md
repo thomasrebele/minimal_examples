@@ -1,6 +1,10 @@
-# minimal-latex-examples
+# minimal examples
 
-A collection of small LaTeX / TikZ examples, which can be used for learning syntax and idiosyncrasies.
+A collection of small code examples, which can be used for learning syntax and idiosyncrasies.
+
+## latex
+
+Currently contains mainly TikZ examples
 
 ## Creating pdfs and images
 
@@ -35,5 +39,4 @@ It can be imported into Anki as follows (assuming you have already created an ap
 - click on "Fields separated by" and enter "\t"
 - select "Allow HTML in fields"
 - assign the fields as stated above
-
 

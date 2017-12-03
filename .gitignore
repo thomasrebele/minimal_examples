@@ -1,2 +1,2 @@
-output/
-build_config/__pycache__
+/output/
+/build_config/__pycache__
