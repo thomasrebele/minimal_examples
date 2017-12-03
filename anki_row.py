@@ -3,7 +3,7 @@
 """anki_row
 
 Usage:
-  anki_row.py [options] <file>
+  anki_row.py [options] <file>...
 
 Options:
   -h --help                     Show this screen.
@@ -40,15 +40,35 @@ def anki_row(path):
 
     if not "description" in fields:
         print_err("description missing in " + path)
+        return None
 
     desc=escape(base_path + ": " + fields["description"]["value"])
     step=escape(fields["step"]["value"]).replace("\n", "<br/>").replace("\t", "&#9;")
-    return str(img) + "\t" + str(desc) + "\t" + str(step)
+
+    l = [str(i) for i in [img, desc, step]]
+    return l
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='read_annotations')
-    row = anki_row(
-            arguments["<file>"]
-        )
 
-    print(row)
+    desc_idx = 1
+    description_to_card = {}
+    description_to_path = {}
+    for path in arguments["<file>"]:
+        row = anki_row(path)
+        if row:
+            desc = row[desc_idx]
+            if desc in description_to_path:
+                print_err("duplicate description: '" + desc + "'")
+                print_err("   in path " + description_to_path[desc])
+                print_err("   and     " + path)
+                del(description_to_card[desc])
+                continue
+
+            description_to_card[desc] = row
+            description_to_path[desc] = path
+
+    for d in description_to_card:
+        print("\t".join([str(f) for f in description_to_card[d]]))
+
+
