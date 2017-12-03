@@ -6,7 +6,7 @@ A collection of small code examples, which can be used for learning syntax and i
 
 Currently contains mainly TikZ examples
 
-## Creating pdfs and images
+### Creating pdfs and images
 
 Prerequisites: `pdflatex` and `imagemagick`
 Optional: `pngquant` for smaller PNGs
@@ -19,7 +19,7 @@ You can compile all the examples to pdf and png by executing the following comma
 
 It creates a folder `output/pdf` for the pdf files and a folder `output/img` for png files.
 
-## Creating Anki flash cards
+### Creating Anki flash cards
 
 Use the command
 
