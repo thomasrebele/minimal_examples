@@ -1,0 +1,15 @@
+\documentclass{standalone}
+
+%x description="pgfplots: plot points (0,1), ..."
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest, width=3cm, height=2.5cm}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}
+%x step={
+	\addplot[blue] coordinates {(0,1) (1,2) (2,0)};
+%x }
+\end{axis}
+\end{tikzpicture}
+\end{document}

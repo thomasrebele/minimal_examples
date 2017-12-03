@@ -1,0 +1,32 @@
+\documentclass{standalone}
+\usepackage{tikz}
+%x step={
+\usetikzlibrary{positioning}
+%x }
+\usetikzlibrary{decorations.pathreplacing}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="nodes with relative positioning (4)"
+%x step={
+	\node[draw] (a) at (0,0) {1};
+	\node[draw] (b) [on grid, above right=0.5 and 1.5 of a] {2};
+%x }
+
+\tikzset{brace/.style={decorate, decoration={brace, amplitude=0.15cm}, gray}}
+\draw[brace]
+	(b.center |- a.center) ++ (0,-0.25)
+	-- node [below=0.2] {1.5}
+	+(-1.5,0);
+
+\draw[brace]
+	(b.center |- a.center) ++ (0.25,0.5)
+	-- node [right=0.2] {0.5}
+	+(0,-0.5);
+
+\node[gray] at (a.center -| b.center) {+};
+
+\end{tikzpicture}
+
+\end{document}

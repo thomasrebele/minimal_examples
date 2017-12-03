@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+%x description="use a background layer"
+%x step={
+% outsite tikzpicture
+\pgfdeclarelayer{A}
+\pgfsetlayers{A,main}
+%x }
+
+\tikz {
+%x step={
+% main layer
+\fill[red] (0.2,0.2) rectangle +(1,1);
+
+% background layer
+\begin{pgfonlayer}{A}
+	\filldraw[blue] (0,0) rectangle +(1,1);
+\end{pgfonlayer}
+%x }
+}
+
+\end{document}

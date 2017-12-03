@@ -1,0 +1,22 @@
+
+
+\setlength{\paperwidth}{4cm}
+\setlength{\paperheight}{3cm}
+\setlength{\textwidth}{4cm}
+\setlength{\textheight}{3cm}  
+
+\makeatletter
+\define@key{pgfpagesuselayoutoption}{a7paper}[]%
+{\def\pgfpageoptionheight{105mm} \def\pgfpageoptionwidth{74mm}}
+
+\define@key{pgfpagesuselayoutoption}{a8paper}[]%
+{\def\pgfpageoptionheight{74mm} \def\pgfpageoptionwidth{52mm}}
+
+\define@key{pgfpagesuselayoutoption}{a9paper}[]%
+{\def\pgfpageoptionheight{52mm} \def\pgfpageoptionwidth{37mm}}
+
+\define@key{pgfpagesuselayoutoption}{a10paper}[]%
+{\def\pgfpageoptionheight{37mm} \def\pgfpageoptionwidth{26mm}}
+
+\makeatother
+

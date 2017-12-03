@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+%x step={
+\usetikzlibrary{decorations.pathmorphing}
+%x }
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="draw a snake line using options"
+\draw[gray] (0,0) circle[radius=2pt];
+%x step={
+	\draw 
+		[->, decorate,decoration={
+			snake,
+			amplitude=3mm,
+			segment length=1mm,
+			post length=2mm
+		}]
+		(0,0) -- (1,0);
+%x }
+\end{tikzpicture}
+
+\end{document}

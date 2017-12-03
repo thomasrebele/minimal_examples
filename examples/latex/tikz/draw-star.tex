@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+%x description="draw a star with relative coordinates"
+\begin{tikzpicture}
+\draw[gray] (0,0) circle [radius=2pt];
+\draw (0,0) 
+
+%x step={
+% relative coordinate, 
+% without changing current position
+edge +(0,1) 
+edge +(1,0)
+edge +(1,1)
+edge +(-1,1)
+edge +(-1,0)
+%...
+;
+%x }
+
+\end{tikzpicture}
+
+\end{document}

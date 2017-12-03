@@ -1,0 +1,23 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="nested loops"
+%x step={
+	\foreach \x in {1,...,4}
+		\foreach \y in {1,...,4} 
+			\draw (\x,\y) circle (0.5);
+
+% or
+	\foreach \x in {1,...,4} {
+		\foreach \y in {1,...,4} {
+			\draw (\x,\y) circle (0.5);
+		}
+	}
+
+%x }
+\end{tikzpicture}
+
+\end{document}

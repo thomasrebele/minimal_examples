@@ -1,0 +1,45 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{fit}
+
+{% raw %}
+\newcommand{\branch}[1]{%
+	\smash{\tikz[baseline] \node [branch] {#1};}%
+}
+\newcommand{\head}{%
+	\,\smash{\tikz[rounded corners=0,scale=0.25,baseline=0.2mm] \filldraw (0,0) -- (0,1) -- (0.5,0.5) -- cycle;}\,%
+}
+{% endraw %}
+
+\begin{document}
+\begin{tikzpicture}[yscale=-1]
+\tikzset{
+	commit/.style={
+		draw,
+		rounded corners,
+		fill=brown!20
+	},
+	message/.style={
+		align=left,
+		anchor=west
+	},
+	author/.style={
+		gray
+	},
+	commit table/.style={
+		row sep=2mm
+	},
+	branch/.style={
+		draw,
+		rounded corners,
+		fill = blue!15,
+		minimum height=6mm,
+		anchor=base
+	}
+}
+
+{{tikz}}
+\end{tikzpicture}
+
+\end{document}

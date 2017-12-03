@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+%x description="draw a random circle around (0+-1, 0+-1)"
+\tikz {
+\draw (0,0) circle (0.1);
+	\foreach \x in {0,...,10} {
+%x step={
+\draw [fill] 
+	% random numbers between -1 and 1
+	(rand,rand) 
+	circle [radius=.1];
+%x }
+	}
+}
+
+\end{document}

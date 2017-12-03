@@ -1,0 +1,21 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+%x description="draw a Bézier curve"
+\filldraw [gray]
+	(0,0) circle [radius=2pt]
+	(1,1) circle [radius=2pt]
+	(2,1) circle [radius=2pt]
+	(2,0) circle [radius=2pt]
+	;
+%x step={
+\draw (0,0) 
+	.. controls (1,1) and (2,1) .. 
+	(2,0);
+%x }
+\end{tikzpicture}
+
+\end{document}
