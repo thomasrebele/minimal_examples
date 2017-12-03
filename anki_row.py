@@ -73,6 +73,9 @@ def config_for_example(path):
         except ModuleNotFoundError:
             pass
 
+    if not config:
+        raise FileNotFoundError("no config found for " + path)
+
     return config
 
 if __name__ == '__main__':
@@ -98,6 +101,6 @@ if __name__ == '__main__':
     for d in description_to_card:
         card = description_to_card[d]
         fields = ["example", "description", "pre", "step", "post", "explanation"]
-        print("\t".join([str(card[f]) for f in fields]))
+        print("\t".join([str(card.get(f, "")) for f in fields]))
 
 
