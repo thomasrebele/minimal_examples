@@ -98,7 +98,8 @@ if __name__ == '__main__':
                 print_err("duplicate description: '" + desc + "'")
                 print_err("   in path " + description_to_path[desc])
                 print_err("   and     " + path)
-                del(description_to_card[desc])
+                if desc in description_to_card:
+                    del(description_to_card[desc])
                 continue
 
             description_to_card[desc] = card
