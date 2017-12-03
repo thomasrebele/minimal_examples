@@ -2,7 +2,7 @@
 
 imgout="output/img/"
 
-source common.sh
+source build_scripts/git/common.sh
 
 for i in $files; do
 	dir=$(dirname $i)
@@ -12,6 +12,6 @@ for i in $files; do
 	png=$imgout/${i%.sh}-0.png
 
 	[ ! -e $png -o $i -nt $png ] && (
-		./run-example.sh $i
+		./build_scripts/git/run-example.sh $i
 	)
 done

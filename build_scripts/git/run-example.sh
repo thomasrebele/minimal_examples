@@ -16,7 +16,7 @@ git_dir=tmp/$1
 i=0
 
 vis_git() {
-	$basedir/vis_git.py "$@" > $tex_dir/$i.tex
+	$basedir/build_scripts/git/vis_git.py "$@" > $tex_dir/$i.tex
 	(
 		cd $tex_dir
 		pdflatex -interaction nonstopmode $i.tex > $i.output
