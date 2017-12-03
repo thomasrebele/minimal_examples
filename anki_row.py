@@ -33,8 +33,11 @@ def anki_row(path, config):
     """create a flashcard for anki in TSV format.
     path: the example file (e.g. examples/rust/hello_world.rs).
     config: specifies which markup tag to use """
-
-    annotations, fields = read_annotations(path, slc=config["slc"])
+    try:
+        annotations, fields = read_annotations(path, slc=config["slc"])
+    except Exception as err:
+        print_err("problem with " + path)
+        raise err
 
     base_path = path.replace("examples/", "")
     base_path = base_path[0:base_path.rfind("/")]
@@ -55,19 +58,22 @@ def anki_row(path, config):
     return l
 
 
-
-path_to_conf = {}
 def config_for_example(path):
     """determines which configuration to use for an example"""
-    path = path[0:path.rfind("/")]
-    tag = "examples/"
-    start = path.find(tag) + len(tag)
-    path = "build_config." + path[start:]
-    path.replace("/",".")
 
-    if not path in path_to_conf:
-        path_to_conf[path] = import_from(path, "config")
-    return path_to_conf[path]
+    config = None
+    dirs = ["build_config"] + path.split("/")[1:-1]
+    # look for config in build_config/..., starting with most specific path
+    for j in range(len(dirs),1,-1):
+        # try to load config
+        conf_path = ".".join(dirs[0:j])
+        try:
+            config = import_from(conf_path, "config")
+            break
+        except ModuleNotFoundError:
+            pass
+
+    return config
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='read_annotations')
