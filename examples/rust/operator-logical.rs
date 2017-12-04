@@ -2,10 +2,16 @@
 fn main() {
 
 //x description="logical operators"
+
+//x prp={
+let a = true;
+let b = false;
+//x }
+
 //x step={
-    println!("true and false: {}", true && false);
-    println!("true or false: {}", true || false);
-    println!("not true: {}", !true);
+a && b;   // and
+a || b;   // or
+!a;       // not
 //x }
 
 }

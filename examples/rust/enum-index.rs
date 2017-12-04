@@ -10,9 +10,10 @@ enum Number {
     One,
     Two,
 }
+//x }
 
+//x post={
 println!("two is {}", Number::Two as i32);
-
 //x }
 
 }

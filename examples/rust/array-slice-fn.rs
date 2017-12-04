@@ -1,8 +1,8 @@
-
+#[allow(unused_variables)]
 
 //x step={
-fn head(slice: &[i32]) {
-    println!("first {} len {}", slice[0], slice.len());   
+fn f(slice: &[i32]) {
+// ...
 }
 //x }
 
@@ -10,11 +10,11 @@ fn main() {
 
 //x description="function on array slices"
 //x pre={
-    let _a = [0,1,2,3,4];
-    
-    head(&_a);
-    // slice with content [2,3]
-    head(&_a[2..4]); 
+let _a = [0,1,2,3,4];
+
+f(&_a);
+// slice with content [2,3]
+f(&_a[2..4]); 
 //x }
 
 }

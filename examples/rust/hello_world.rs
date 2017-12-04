@@ -2,9 +2,10 @@
 //x description="hello world"
 //x step={
 fn main() {
-
-    // call println macro
     println!("hello world");
-
 }
+//x }
+
+//x explanation={
+// println! is a macro
 //x }

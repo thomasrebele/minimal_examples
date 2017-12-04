@@ -7,9 +7,9 @@ fn main() {
 //x step={
 enum Event {
     Start,
+    End,
     Key(i32),
     Click{x:i32, y:i32},
-    End,
 }
 
 //x }

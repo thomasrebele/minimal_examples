@@ -1,20 +1,14 @@
+#[allow(unused_variables)]
+#[allow(dead_code)]
 
 fn main() {
 
-//x description="a Unit struct"
+//x description="a unit struct"
 //x step={
-// auto generate code for "{:?}"
-// for the following class
-#[derive(Debug)]
-
-// a unit struct
 struct Nil;
 
 // initialize variable
 let v : Nil = Nil;
-
-// prints "v Nil"
-println!("v {:?}", v);
 //x }
 
 }

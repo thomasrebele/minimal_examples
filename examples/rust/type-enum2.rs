@@ -3,7 +3,7 @@
 #[allow(dead_code)]
 
 
-//x description="variable of type enum Start"
+//x description="variable of type enum Key"
 //
 //x pre={
 enum Event {
@@ -19,6 +19,6 @@ enum Event {
 
 fn main() {
 //x step={
-let e1 = Event::Start;
+let e2 = Event::Key(1);
 //x }
 }

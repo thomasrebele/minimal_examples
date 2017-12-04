@@ -7,7 +7,8 @@ let a = [0,0,0];
 //x }
 
 //x step={
-println!("array length {}", a.len());
+a.len()
 //x }
+;
 
 }

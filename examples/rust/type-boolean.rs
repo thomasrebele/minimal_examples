@@ -1,16 +1,16 @@
+#[allow(unused_variables)]
+#[allow(unused_assignments)]
+
 
 fn main() {
 
 //x description="boolean variable"
 //x step={
-    // prefix '_' prevents compiler warning about unused variable
-    // unmodifiable
-    let _a : bool = true;
+// unmodifiable
+let a : bool = true;
 
-    // modifiable
-    let mut _b : bool = true;
-    _b = false;
-
+// rust infers type
+let a = true;
 //x }
 
 }

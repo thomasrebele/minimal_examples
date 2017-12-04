@@ -1,11 +1,15 @@
+#[allow(unused_variables)]
 
 fn main() {
 
-//x description="array slice"
-//x step={
-    let _a = [0,1,2,3,4];
-
-    println!("array length {:?}", &_a[1..3]);
+//x description="array slice with content [2,3]"
+//x pre={
+let a = [0,1,2,3,4];
 //x }
+
+//x step={
+&a[2..4]
+//x }
+;
 
 }

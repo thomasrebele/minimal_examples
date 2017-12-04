@@ -3,12 +3,16 @@
 
 fn main() {
 
-//x description="struct that behaves like a tuple"
+//x description="unwrap a tuple-like struct"
 
-//x step={
+//x pre={
 struct Pair(i32, f32);
 
 let pair = Pair(1,0.1);
+//x }
+
+//x step={
+let Pair(a, b) = pair;
 //x }
 
 }

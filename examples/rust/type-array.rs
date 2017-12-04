@@ -1,13 +1,14 @@
+#[allow(unused_variables)]
+
 
 fn main() {
 
 //x description="integer array"
 //x step={
-    let _a : [i32; 3] = [0,0,0];
-    // or shorter
-    let _a1 = [0; 3];
+let a : [i32; 4] = [0,1,2,3];
 
-    println!("array {:?}", _a);
+// rust infers type
+let a = [0,1,2,3];
 //x }
 
 }
