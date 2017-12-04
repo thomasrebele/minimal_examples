@@ -8,6 +8,7 @@ fn main() {
 struct Nil;
 
 // initialize variable
+let v = Nil;
 let v : Nil = Nil;
 //x }
 
