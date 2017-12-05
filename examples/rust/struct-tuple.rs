@@ -3,12 +3,10 @@
 
 fn main() {
 
-//x description="struct that behaves like a tuple"
+//x description="a tuple-like struct"
 
 //x step={
 struct Pair(i32, f32);
-
-let pair = Pair(1,0.1);
 //x }
 
 }

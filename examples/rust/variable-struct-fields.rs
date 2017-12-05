@@ -3,13 +3,17 @@
 
 fn main() {
 
-//x description="struct with fields"
+//x description="variable of struct with fields"
 
-//x step={
+//x pre={
 struct Point {
     x: f32,
     y: f32,
 };
+//x }
+
+//x step={
+let p = Point{x:1., y:2.};
 //x }
 
 }
