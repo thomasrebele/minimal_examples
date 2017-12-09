@@ -84,18 +84,26 @@ def config_for_example(path):
 
     return config
 
-if __name__ == '__main__':
-    arguments = docopt(__doc__, version='read_annotations')
-
-    # find duplicates
-    description_to_path_to_card = {}
-    for path in arguments["<file>"]:
+def read_cards(paths):
+    """reads cards from the specified example/... paths
+    returns a dictionary from path to card"""
+    path_to_cards = {}
+    for path in paths:
         config = config_for_example(path)
         card = anki_row(path,config)
         if card:
-            desc = card["description"]
-            description_to_path_to_card.setdefault(desc, {})[path] = card
+            path_to_cards[path] = card
+    return path_to_cards
 
+def find_duplicates(path_to_cards):
+    """check for duplicate descriptions
+    returns list of cards"""
+    description_to_path_to_card = {}
+    for path, card in path_to_cards:
+        desc = card["description"]
+        description_to_path_to_card.setdefault(desc, {})[path] = card
+
+    # find duplicates
     cards = []
     for desc, path_to_card in description_to_path_to_card.items():
         if len(path_to_card) == 1:
@@ -105,8 +113,21 @@ if __name__ == '__main__':
             print_err("in paths ")
             for path in path_to_card:
                 print_err("   " + path)
+    return cards
 
-    cards = sorted(cards, key=lambda c: 1.0 if "level" not in c or c["level"] == "" else float(c["level"]))
+if __name__ == '__main__':
+    arguments = docopt(__doc__, version='read_annotations')
+
+    path_to_cards = read_cards(arguments["<file>"]).items()
+    cards = find_duplicates(path_to_cards)
+
+    for c in cards:
+        try:
+            c["level"] = float(c["level"])
+        except:
+            c["level"] = 50
+
+    cards = sorted(cards, key=lambda c: c["level"])
 
     for card in cards:
         fields = ["example", "description", "pre", "step", "post", "explanation"]
