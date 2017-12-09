@@ -7,6 +7,8 @@ fn main() {
 fn dummy() {
 
 //x description="break outer loop and return value"
+//x level=5
+
 //x pre={
 let a = loop {
     loop {

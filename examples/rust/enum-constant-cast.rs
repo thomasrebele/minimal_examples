@@ -3,6 +3,7 @@
 fn main() {
 
 //x description="obtain constant value of blue"
+//x level=4
 
 //x pre={
 enum Color {

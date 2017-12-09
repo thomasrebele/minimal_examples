@@ -6,6 +6,7 @@
 fn main() {
 
 //x description="ownership (2)"
+//x level=10
 
 //x pre={
 let s1 = 5;

@@ -5,6 +5,8 @@
 fn main() {
 
 //x description="modifiable integer variable"
+//x level=2
+
 //x step={
 // modifiable
 let mut a : i32 = 0;

@@ -2,6 +2,8 @@
 
 
 //x description="generic function"
+//x level=7
+
 //x pre={
 // return reference to first element
 fn first_i32(list: &[i32]) -> &i32 {

@@ -3,6 +3,8 @@
 fn main() {
 
 //x description="match for enum (1)"
+//x level=4
+
 //x pre={
 // auto generate code for "{:?}"
 #[derive(Debug)]

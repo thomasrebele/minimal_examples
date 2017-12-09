@@ -4,6 +4,8 @@
 
 fn main() {
 //x description="declare and init variable seperately"
+//x level=4
+
 //x pre={
 let a = 1;
 //x }

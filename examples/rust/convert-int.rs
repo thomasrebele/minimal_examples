@@ -3,6 +3,7 @@
 
 fn main() {
 //x description="cast float to 8 bit integer"
+//x level=2
 //x pre={
 let a = 4.321_f32;
 //x }

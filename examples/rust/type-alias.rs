@@ -1,5 +1,7 @@
 
 //x description="a type alias for u64"
+//x level=5
+
 //x step={
 type Second = u64;
 type Meter = u64;

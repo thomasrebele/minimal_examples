@@ -3,6 +3,8 @@
 fn main() {
 
 //x description="match for enum (2)"
+//x level=4
+
 //x pre={
 enum Event {
     Key(i32),

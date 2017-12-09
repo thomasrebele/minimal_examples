@@ -4,6 +4,7 @@
 fn main() {
 
 //x description="variable of struct with fields"
+//x level=4
 
 //x pre={
 struct Point {

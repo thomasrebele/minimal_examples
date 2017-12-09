@@ -2,7 +2,7 @@
 #![allow(dead_code)]
 
 //x description="conversion with From trait (2)"
-
+//x level=11
 
 //x pre={
 struct Number {

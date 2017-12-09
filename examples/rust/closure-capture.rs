@@ -4,6 +4,7 @@
 fn main() {
 
 //x description="closure capturing integer"
+//x level=11
 //x pre={
 let a = 10;
 let f = |x| x+a; 

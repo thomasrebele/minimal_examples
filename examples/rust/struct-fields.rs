@@ -4,6 +4,7 @@
 fn main() {
 
 //x description="struct with fields"
+//x level=3
 
 //x step={
 struct Point {

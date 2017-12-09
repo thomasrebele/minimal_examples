@@ -1,5 +1,6 @@
 
 //x description="constants"
+//x level=2
 //x code={
 // needs type
 const PI : f32 = 3.14159;

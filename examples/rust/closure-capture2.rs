@@ -4,6 +4,7 @@
 fn main() {
 
 //x description="closure capturing integer (2)"
+//x level=11
 /*
 //x pre={
 let mut a = 10;

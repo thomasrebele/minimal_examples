@@ -4,6 +4,7 @@
 fn main() {
 
 //x description="closure capturing vector (2)"
+//x level=12
 /*
 //x pre={
 let mut a = vec![10];

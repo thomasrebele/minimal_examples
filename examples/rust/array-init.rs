@@ -4,6 +4,7 @@
 fn main() {
 
 //x description="integer array with only one value"
+//x level=1
 
 //x pre={
 let a = [0,0,0,0,0];

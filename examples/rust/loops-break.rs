@@ -7,6 +7,8 @@ fn main() {
 fn dummy() {
 
 //x description="stop looping"
+//x level=3
+
 //x pre={
 loop {
 // how to get out of here?

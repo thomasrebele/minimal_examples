@@ -1,6 +1,7 @@
 
 fn main() {
 //x description="size of datatype"
+//x level=11
 
 //x pre={
 let x = 1u16;

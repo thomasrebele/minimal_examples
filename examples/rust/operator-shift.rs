@@ -2,6 +2,7 @@
 fn main() {
 
 //x description="shift operators"
+//x level=2
 
 //x pre={
 let a = 0b100u32;

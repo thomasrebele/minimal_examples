@@ -3,6 +3,8 @@
 fn main() {
 
 //x description="use a channel"
+//x level=20
+
 //x pre={
 use std::sync::mpsc::*;
 let (s, r) : (Sender<i32>, Receiver<i32>) = channel();

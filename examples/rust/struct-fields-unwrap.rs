@@ -4,6 +4,7 @@
 fn main() {
 
 //x description="unwrap a struct with fields"
+//x level=5
 
 //x pre={
 struct Point {

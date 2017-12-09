@@ -1,5 +1,6 @@
 
 //x description="methods changing the object state"
+//x level=9
 
 //x pre={
 struct Counter {

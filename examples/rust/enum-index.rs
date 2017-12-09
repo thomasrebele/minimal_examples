@@ -3,6 +3,7 @@
 fn main() {
 
 //x description="enum with indices"
+//x level=2
 
 //x step={
 enum Number {

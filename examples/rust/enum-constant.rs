@@ -3,6 +3,7 @@
 fn main() {
 
 //x description="enum with constants"
+//x level=3
 
 //x step={
 enum Color {

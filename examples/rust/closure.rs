@@ -4,6 +4,8 @@
 fn main() {
 
 //x description="closure"
+//x level=11
+
 //x pre={
 fn  inc_v1   (x: i32) -> i32 {x+1};
 //x }

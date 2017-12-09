@@ -4,6 +4,8 @@
 fn main() {
 
 //x description="closure (2)"
+//x level=8
+
 /*
 //x pre={
     let f = |x| x;

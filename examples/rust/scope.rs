@@ -2,6 +2,9 @@
 #![allow(unused_variables)]
 #![allow(unused_assignments)]
 
+//x description="scope"
+//x level=2
+
 fn dummy() {
 //x pre={
 let mut a = 1;
@@ -18,8 +21,6 @@ let mut a = 1;
 
 
 fn main() {
-
-//x description="scope"
 
 //x step={
 let mut a = 1;

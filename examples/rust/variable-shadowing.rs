@@ -4,6 +4,8 @@
 fn main() {
 
 //x description="variable shadowing"
+//x level=4
+
 //x step={
 let a : f32 = 1.0;
 

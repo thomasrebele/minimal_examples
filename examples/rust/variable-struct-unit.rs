@@ -4,6 +4,7 @@
 fn main() {
 
 //x description="a variable of a unit struct"
+//x level=10
 //x pre={
 struct Nil;
 //x }

@@ -1,5 +1,6 @@
 
 //x description="methods without side effects"
+//x level=9
 
 //x pre={
 struct Rectangle {

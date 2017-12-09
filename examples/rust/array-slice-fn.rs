@@ -9,6 +9,7 @@ fn f(slice: &[i32]) {
 fn main() {
 
 //x description="function on array slices"
+//x level=5
 //x pre={
 let _a = [0,1,2,3,4];
 

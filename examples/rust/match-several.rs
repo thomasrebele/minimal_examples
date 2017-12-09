@@ -4,6 +4,7 @@ fn main() {
 let n = 10;
 
 //x description="several match cases combined"
+//x level=8
 
 /*
 

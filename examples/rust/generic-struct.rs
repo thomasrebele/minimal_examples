@@ -3,6 +3,8 @@
 
 
 //x description="generic struct"
+//x level=7
+
 //x pre={
 struct Point_i32 {
     x: i32, y: i32

@@ -5,6 +5,8 @@
 fn main() {
 
 //x description="boolean variable"
+//x level=2
+
 //x step={
 // unmodifiable
 let a : bool = true;

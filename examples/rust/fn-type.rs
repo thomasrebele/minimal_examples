@@ -2,6 +2,7 @@
 #[allow(dead_code)]
 
 //x description="function return type"
+//x level=3
 
 fn pre() {
 //x pre={

@@ -2,6 +2,8 @@
 fn main() {
 
 //x description="define a channel"
+//x level=25
+
 //x step={
 use std::sync::mpsc::*;
 let (s, r) : (Sender<i32>, Receiver<i32>) = channel();

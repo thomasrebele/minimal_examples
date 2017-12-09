@@ -2,6 +2,7 @@
 fn main() {
 
 //x description="print a tuple"
+//x level=4
 
 //x pre={
 let t = (1, 1.0, false);

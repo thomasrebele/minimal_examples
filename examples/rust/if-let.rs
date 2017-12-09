@@ -1,8 +1,9 @@
 
 #![allow(unused_variables)]
 
-
 //x description="unwrap tuple in if statement"
+//x level=4
+
 fn main() {
 //x pre={
 let t = (1,2);
