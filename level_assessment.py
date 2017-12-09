@@ -12,26 +12,15 @@ Options:
 
 from docopt import docopt
 
-import anki_row
-from http_dialog import *
+import datetime
 import random
 
 import signal
 import sys
 
-# for importing/exporting data
-import json
-def to_json(obj):
-    return json.dumps(obj, cls=json.JSONEncoder, indent=2)
-
-def from_json_file(path):
-    with open(path) as f:
-        data = json.load(f)
-        return data
-        for i in data:
-            return i
-    pass
-
+import anki_row
+from http_dialog import *
+from common import *
 
 def card_to_html(card):
     def code(s):
@@ -84,11 +73,11 @@ def signal_handler(signal, frame):
     save()
     sys.exit(0)
 
-def save():
+def save(path="output/level_data.json"):
     if len(data) > 0:
-        with open("output/level_data.json", "w") as f:
+        with open(path, "w") as f:
             f.write(to_json(data))
-            print("saved to output/level_data.json")
+            print("saved to " + path)
 
 
 
@@ -105,6 +94,8 @@ if __name__ == '__main__':
     # card1 to card2 to (card1_easier, equals, card2_easier)
     data = {}
     data = from_json_file("output/level_data.json")
+    i = datetime.datetime.now()
+    save("output/backup/" + i.isoformat())
 
     # index for better sampling
     card_to_count = {}
