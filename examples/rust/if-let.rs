@@ -16,6 +16,6 @@ if let (a,0) = t {
 }
 //x }
 
-//x explanation="compilation fails for "if let (a,b) = t", because nothing to test here"
+//x explanation="compilation fails for 'if let (a,b) = t', because nothing to test here"
 }
 

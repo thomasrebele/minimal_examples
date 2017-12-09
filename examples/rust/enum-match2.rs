@@ -4,8 +4,6 @@ fn main() {
 
 //x description="match for enum (2)"
 //x pre={
-// auto generate code for "{:?}"
-#[derive(Debug)]
 enum Event {
     Key(i32),
     Click{x:i32, y:i32},

@@ -9,7 +9,7 @@ fn main() {
 struct Point {
     x: f32,
     y: f32,
-};
+}
 //x }
 
 }

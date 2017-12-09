@@ -30,7 +30,7 @@ let mut a = 1;
     a = 2; b = 2;
     // a=2, b=2
 }
-// a=2, b is undefined
+// a=2, b is unavailable
 //x }
 
 }
