@@ -14,7 +14,7 @@ from docopt import docopt
 
 import anki_row
 from http_dialog import *
-from random import randrange
+import random
 
 import signal
 import sys
@@ -51,10 +51,28 @@ def card_to_html(card):
     r += card["explanation"]
     return r
 
+def rand_card():
+    """index of random card, prefering cards which have not much data yet"""
+    weights = []
+    for c in cards:
+        weight = 1
+        if c["example"] in card_to_count:
+            weight = 1./card_to_count[c["example"]]
+        weights += [weight]
+
+    total = sum(weights)
+    r = random.uniform(0,total)
+
+    for i, w in enumerate(weights):
+        r -= w
+        if r <= 0: return i
+    return random.randrange(len(cards))
+
+
 def card_pair():
     """select next two cards which should be compared"""
-    aidx = randrange(len(cards))
-    bidx = randrange(len(cards))
+    aidx = rand_card()
+    bidx = rand_card()
     if aidx == bidx:
         return card_pair()
 
@@ -67,9 +85,12 @@ def signal_handler(signal, frame):
     sys.exit(0)
 
 def save():
-    with open("output/level_data.json", "w") as f:
-        f.write(to_json(data))
-        print("saved to output/level_data.json")
+    if len(data) > 0:
+        with open("output/level_data.json", "w") as f:
+            f.write(to_json(data))
+            print("saved to output/level_data.json")
+
+
 
 if __name__ == '__main__':
     # setup: signal handler
@@ -80,17 +101,23 @@ if __name__ == '__main__':
     path_to_cards = anki_row.read_cards(arguments["<file>"])
     cards = list(path_to_cards.values())
 
-    print("len" + str(len(cards)))
-
     ### data that is changed by the dialog
     # card1 to card2 to (card1_easier, equals, card2_easier)
     data = {}
+    data = from_json_file("output/level_data.json")
+
+    # index for better sampling
+    card_to_count = {}
+    for c1,d in data.items():
+        for c2, l in d.items():
+            card_to_count[c1] = card_to_count.setdefault(c1, 0) + sum(l)
+            card_to_count[c2] = card_to_count.setdefault(c2, 0) + sum(l)
 
     req_id = 0
     req_pair = []
     class Handler(RequestHandler):
         def get(self):
-            global req_pair, req_id, data
+            global req_pair, req_id, data, card_to_count
 
             path = self.req_path()
             if path.endswith(".css"):
@@ -98,6 +125,7 @@ if __name__ == '__main__':
                 return
 
             if path == "/quit":
+                #TODO: self.write("<script>window.close();</script>")
                 self.shutdown()
                 return
 
@@ -121,6 +149,10 @@ if __name__ == '__main__':
                         l[1] += 1
 
                     data[keys[0]][keys[1]] = l
+
+                    # update index
+                    card_to_count[keys[0]] = card_to_count.setdefault(keys[0], 0) + 1
+                    card_to_count[keys[1]] = card_to_count.setdefault(keys[1], 0) + 1
                 else:
                     print("request id wrong: " + str(self.args()["id"]) + " and " + req_id)
             else:
@@ -129,7 +161,7 @@ if __name__ == '__main__':
 
             ### next round
             req_pair = card_pair()
-            req_id = str(randrange(0, 9999999999))
+            req_id = str(random.randrange(0, 9999999999))
 
             self.write("<html><head><link rel=\"stylesheet\" href=\"dialog.css\"><meta charset=\"utf-8\" /> </head><body>")
             self.write("<div class=\"row\">")
@@ -148,10 +180,10 @@ if __name__ == '__main__':
 
             self.write("<div class=\"footer\">")
             s = "<a href=\"/?id="  + str(req_id) + "&choice="
-            self.write(s + "left\" id=\"left\">left is easier</a> &nbsp; ")
-            self.write(s + "equal\" id=\"equal\">equally difficult</a> &nbsp; ")
-            self.write(s + "right\" id=\"right\">right is easier</a> &nbsp;")
-            self.write("<a href=\"/quit\">exit</a>")
+            self.write(s + "left\" id=\"left\">left is easier (1)</a> &nbsp; ")
+            self.write(s + "equal\" id=\"equal\">equally difficult (2)</a> &nbsp; ")
+            self.write(s + "right\" id=\"right\">right is easier (3)</a> &nbsp;")
+            self.write("<a href=\"/quit\" id=\"quit\">quit</a>")
             self.write("</div>")
 
             self.write("""<script>
@@ -162,6 +194,7 @@ if __name__ == '__main__':
                       case 49: document.getElementById("left").click(); break;
                       case 50: document.getElementById("equal").click(); break;
                       case 51: document.getElementById("right").click(); break;
+                      case 52: document.getElementById("quit").click(); break;
                    }
                 });
                 </script>""")
