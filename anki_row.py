@@ -43,7 +43,7 @@ def anki_row(path, config):
     base_path = base_path[0:base_path.rfind("/")]
 
     card = {"example" : path.replace("examples/", "")}
-    for field in ["description", "pre", "step", "post", "explanation"]:
+    for field in ["description", "pre", "step", "post", "explanation", "level"]:
         val = ""
         if field in fields:
             val = fields[field]["value"]
@@ -52,7 +52,7 @@ def anki_row(path, config):
             val = fn(path=path, annotations=annotations, fields=fields)
             if val == None:
                 continue
-
+        val = val.replace("<", "&lt;").replace(">", "&gt;")
         val = val.replace("\n", "<br/>").replace("\t", "&#9;")
         card[field] = val
 
@@ -87,26 +87,28 @@ def config_for_example(path):
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='read_annotations')
 
-    description_to_card = {}
-    description_to_path = {}
+    # find duplicates
+    description_to_path_to_card = {}
     for path in arguments["<file>"]:
         config = config_for_example(path)
         card = anki_row(path,config)
         if card:
             desc = card["description"]
-            if desc in description_to_path:
-                print_err("duplicate description: '" + desc + "'")
-                print_err("   in path " + description_to_path[desc])
-                print_err("   and     " + path)
-                if desc in description_to_card:
-                    del(description_to_card[desc])
-                continue
+            description_to_path_to_card.setdefault(desc, {})[path] = card
 
-            description_to_card[desc] = card
-            description_to_path[desc] = path
+    cards = []
+    for desc, path_to_card in description_to_path_to_card.items():
+        if len(path_to_card) == 1:
+            cards += list(path_to_card.values())
+        elif len(path_to_card) > 1:
+            print_err("duplicate description: '" + desc + "', paths ")
+            print_err("in paths ")
+            for path in path_to_card:
+                print_err("   " + path)
 
-    for d in description_to_card:
-        card = description_to_card[d]
+    cards = sorted(cards, key=lambda c: 1.0 if "level" not in c or c["level"] == "" else float(c["level"]))
+
+    for card in cards:
         fields = ["example", "description", "pre", "step", "post", "explanation"]
         print("\t".join([str(card.get(f, "")) for f in fields]))
 

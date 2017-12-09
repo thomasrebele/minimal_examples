@@ -80,6 +80,8 @@ def parse(s):
                 result["value"] = pr.constant()
             elif pr.peek() == '{':
                 result["type"] = "field-start"
+            else:
+                result["value"] = pr.read_while(lambda c,i: c !=" " and c!="\n")
             return result
     elif pr.peek() == '}':
         result["type"] = "field-end"
