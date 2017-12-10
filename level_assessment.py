@@ -17,6 +17,7 @@ import random
 
 import signal
 import sys
+from collections import defaultdict
 
 import anki_row
 from http_dialog import *
@@ -40,28 +41,66 @@ def card_to_html(card):
     r += card["explanation"]
     return r
 
-def rand_card():
+def rand_card(weights):
     """index of random card, prefering cards which have not much data yet"""
-    weights = []
-    for c in cards:
-        weight = 1
-        if c["example"] in card_to_count:
-            weight = 1./card_to_count[c["example"]]
-        weights += [weight]
-
     total = sum(weights)
     r = random.uniform(0,total)
 
     for i, w in enumerate(weights):
         r -= w
         if r <= 0: return i
-    return random.randrange(len(cards))
+    return random.randrange(len(weights))
+
+def inverse_count_weights():
+    weights = []
+    for c in cards:
+        weight = 1
+        if c["example"] in card_to_count:
+            weight = 1./(card_to_count[c["example"]]+1)
+        weights += [weight]
+    return weights
+
+def graph_algo(start, max_dist, visit_fn):
+    node_to_val = {}
+    for node in start:
+        node_to_val[node] = 0
+    queue = list(start)
+    for i in range(1,max_dist):
+        new_queue = [ ]
+        def visit(neighbor, node_to_val=node_to_val, new_queue=new_queue):
+            if visit_fn(neighbor, i, node_to_val):
+                new_queue += [neighbor]
+
+        for card in queue:
+            if card in data:
+                for neighbor in data[card]:
+                    visit(neighbor, node_to_val)
+            for neighbor,d in data.items():
+                if card in d:
+                    visit(neighbor, node_to_val)
+        queue = new_queue
+    return node_to_val
+
+def distance(start, max_dist = 10):
+    def visit(neighbor, dist, node_to_val):
+        if not neighbor in node_to_val:
+            node_to_val[neighbor] = dist
+            return True
+
+    return graph_algo(start, max_dist, visit)
+
+def distance_weights(card_idx):
+    max_dist = 10
+    start = cards[card_idx]["example"]
+    dist = distance([start], max_dist=max_dist)
+    weights = [dist.get(c["example"], max_dist) for c in cards]
+    return weights
 
 
 def card_pair():
     """select next two cards which should be compared"""
-    aidx = rand_card()
-    bidx = rand_card()
+    aidx = rand_card(inverse_count_weights())
+    bidx = rand_card(inverse_count_weights())
     if aidx == bidx:
         return card_pair()
 
@@ -95,6 +134,11 @@ if __name__ == '__main__':
     data = {}
     data = from_json_file("output/level_data.json")
     i = datetime.datetime.now()
+
+    for i in range(2):
+        print(distance_weights(i))
+    xyz()
+
     save("output/backup/" + i.isoformat())
 
     # index for better sampling
@@ -104,11 +148,12 @@ if __name__ == '__main__':
             card_to_count[c1] = card_to_count.setdefault(c1, 0) + sum(l)
             card_to_count[c2] = card_to_count.setdefault(c2, 0) + sum(l)
 
+    req_count = 0
     req_id = 0
     req_pair = []
     class Handler(RequestHandler):
         def get(self):
-            global req_pair, req_id, data, card_to_count
+            global req_pair, req_id, req_count, data, card_to_count
 
             path = self.req_path()
             if path.endswith(".css"):
@@ -144,10 +189,12 @@ if __name__ == '__main__':
                     # update index
                     card_to_count[keys[0]] = card_to_count.setdefault(keys[0], 0) + 1
                     card_to_count[keys[1]] = card_to_count.setdefault(keys[1], 0) + 1
+
+                    req_count += 1
+                    if req_count % 10 == 0:
+                        save()
                 else:
                     print("request id wrong: " + str(self.args()["id"]) + " and " + req_id)
-            else:
-                print("no id in http args")
 
 
             ### next round

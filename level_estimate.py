@@ -15,10 +15,15 @@ from collections import defaultdict
 
 from common import *
 
-def get_level(l):
-    s = sum(l)
-    x = [i / s for i in l]
-    return -x[0] + x[2]
+def get_level(comp, c1l, c2l):
+    s = sum(comp)
+    x = [i / s for i in comp]
+    diff = abs(c1l - c2l)
+    mid = (c1l+c2l)/2
+    new_l = [mid-1-diff, mid, mid+1+diff]
+
+
+    return sum([x[i] * new_l[i] for i in range(3)])
 
 
 def normalize(card_to_level, min_level, max_level):
@@ -37,29 +42,38 @@ if __name__ == '__main__':
 
     min_level = 1
     max_level = 100
-    card_to_level = defaultdict(lambda: 0)
+    card_to_level = defaultdict(lambda: 1)
 
     # initialize
     pair_count = 0
     for c1, d in data.items():
         for c2, l in d.items():
             pair_count += 1
-            card_to_level[c1] += get_level(l)
-            card_to_level[c2] += get_level(list(reversed(l)))
-
-
-    normalize(card_to_level, min_level, max_level)
 
     for it in range(100):
         # initialize
+        card_count = defaultdict(lambda: 1)
         for c1, d in data.items():
-            for c2, l in d.items():
-                card_to_level[c1] += card_to_level[c2] * get_level(l)
-                card_to_level[c2] += card_to_level[c1] * get_level(list(reversed(l)))
+            for c2, comp in d.items():
+                c1l = card_to_level[c1]
+                c2l = card_to_level[c2]
+                if "ownership-move2" in c1: print("comp " + str(comp) + " c1l/c2l " + str([c1l, c2l]) + " level " + str(get_level(comp, c1l, c2l)))
+                card_to_level[c1] += get_level(comp, c1l, c2l)
+                card_to_level[c2] += get_level(list(reversed(comp)), c2l, c1l)
+
+                card_count[c1] += 1
+                card_count[c2] += 1
+        for card, count in card_count.items():
+            card_to_level[card] /= count
 
         normalize(card_to_level, min_level, max_level)
 
-    normalize(card_to_level, min_level, max_level)
+    lst = sorted(list(card_to_level.items()), key = lambda t: t[1])
+
+    #print([c for c,l in lst])
+    for cl in lst:
+        print(str(cl))
+
     n = len(card_to_level)
     print("level for " + str(n) + " cards")
     print("assessments " + str(int(pair_count / (0.5*(n-1)**2 + 0.5*(n-1))*1000)/10) + "%")
