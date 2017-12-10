@@ -10,7 +10,7 @@ source build_scripts/latex/common.sh
 
 for i in $files; do
 	dir=$(dirname $i)
-	dir=${dir#examples/}
+	dir=${dir}
 	file=$(basename $i)
 	mkdir -p $texout/$dir $imgout/$dir
 	pdf=$texout/$dir/${file%.tex}.pdf
