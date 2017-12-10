@@ -9,9 +9,12 @@
 
 \begin{tikzpicture}
 %x description="nodes with relative positioning (2)"
+
+%x pre={
+	\node[draw, gray] (a) at (0,0) {a};
+%x }
 %x step={
-	\node[draw] (a) at (0,0) {1};
-	\node[draw] (b) [right=1.5 of a] {2};
+	\node[draw] (b) [right=1.5 of a] {b};
 %x }
 
 \draw [decorate, decoration={brace, amplitude=0.15cm}, gray]

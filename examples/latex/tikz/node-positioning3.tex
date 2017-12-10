@@ -8,10 +8,14 @@
 \begin{document}
 
 \begin{tikzpicture}
-	%x description="nodes with relative positioning (3)"
+%x description="nodes with relative positioning (3)"
+
+%x pre={
+\node[draw, gray] (a) at (0,0) {a};
+%x }
+
 %x step={
-	\node[draw] (a) at (0,0) {1};
-	\node[draw] (b) [above right=0.5 and 1.5 of a] {2};
+\node[draw] (b) [above right=0.5 and 1.5 of a] {b};
 %x }
 
 \tikzset{brace/.style={decorate, decoration={brace, amplitude=0.1cm}, gray}}

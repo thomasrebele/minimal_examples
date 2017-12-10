@@ -5,13 +5,16 @@
 
 %x description="intersect vertical and horizontal line"
 \begin{tikzpicture}
-	\draw (0:1) arc (0:90:1);
-	\node (a) at (60:1) {a};
-	\node[red] (b) at (30:1) {b};
-%x step={
-	\draw (a) -- (a |- 0,0) -- (0,0);
+	\draw[gray] (0:1) arc (0:90:1);
+%x pre={
+\node (a) at (60:1) {a};
+\node[red] (b) at (30:1) {b};
+%x }
 
-	\draw[red] (b) -- (b -| 0,0) -- (0,0);
+%x step={
+\draw (a) -- (a |- 0,0) -- (0,0);
+
+\draw[red] (b) -- (b -| 0,0) -- (0,0);
 %x }
 \end{tikzpicture}
 

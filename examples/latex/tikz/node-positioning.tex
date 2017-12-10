@@ -8,10 +8,13 @@
 
 \begin{tikzpicture}
 %x description="nodes with relative positioning (1)"
+%x pre={
+\node[draw, gray] (a) at (0,0) {a};
+%x }
+
 %x step={
-	\node (a) at (0,0) {1};
-	\node (b) [right=of a] {2};
-	\node (c) [below=of b] {3};
+\node[draw] (b) [right=of a] {b};
+\node[draw] (c) [below=of b] {c};
 %x }
 \end{tikzpicture}
 
