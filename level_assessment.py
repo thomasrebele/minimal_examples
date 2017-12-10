@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
-"""anki_row
+"""level_assessment
+Browser-based tool to assign difficulty/easiness/level to cards by comparing them.
+The actual level can calculated with level_estimate.py
 
 Usage:
   anki_row.py [options] <file>...
@@ -200,7 +202,6 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, signal_handler)
 
     arguments = docopt(__doc__, version='read_annotations')
-
     path_to_cards = anki_row.read_cards(arguments["<file>"])
     cards = list(path_to_cards.values())
 
