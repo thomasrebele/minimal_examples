@@ -15,6 +15,7 @@ from html import escape
 from sys import stderr
 
 from read_annotations import *
+from level_estimate import *
 
 # TODO:
 no_hierarchy=False
@@ -43,7 +44,7 @@ def anki_row(path, config):
     base_path = base_path[0:base_path.rfind("/")]
 
     card = {"example" : path.replace("examples/", "")}
-    for field in ["description", "pre", "step", "post", "explanation", "level"]:
+    for field in ["description", "pre", "step", "post", "explanation"]:
         val = ""
         if field in fields:
             val = fields[field]["value"]
@@ -116,19 +117,18 @@ def find_duplicates(path_to_cards):
                 print_err("   " + path)
     return cards
 
+def index_cards(cards):
+    return dict([(c["example"], i) for i,c in enumerate(cards)])
+
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='read_annotations')
 
     path_to_cards = read_cards(arguments["<file>"]).items()
     cards = find_duplicates(path_to_cards)
 
-    for c in cards:
-        try:
-            c["level"] = float(c["level"])
-        except:
-            c["level"] = 50
-
-    cards = sorted(cards, key=lambda c: c["level"])
+    example_to_index = index_cards(cards)
+    example_to_level = calculate_levels(cards)
+    cards = [cards[example_to_index[c]] for c,i in sorted(list(example_to_level.items()), key = lambda t: t[1])]
 
     for card in cards:
         fields = ["example", "description", "pre", "step", "post", "explanation"]

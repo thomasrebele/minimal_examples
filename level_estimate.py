@@ -46,17 +46,11 @@ def normalize(card_to_level, min_level, max_level):
         new_l = (l - lower) / (upper - lower) * (max_level - min_level) + min_level
         card_to_level[c] = float(int(new_l))
 
-
-if __name__ == '__main__':
+def calculate_levels(cards):
     data = from_json_file("output/level_data.json")
 
-    arguments = docopt(__doc__, version='read_annotations')
-    path_to_cards = anki_row.read_cards(arguments["<file>"])
-    cards = list(path_to_cards.values())
-    card_to_index = dict([(c["example"], i) for i,c in enumerate(cards)])
-
     card_to_level = defaultdict(lambda: (min_level + max_level)/2.)
-
+    card_to_index = dict([(c["example"], i) for i,c in enumerate(cards)])
     for it in range(100):
         # initialize
         card_count = defaultdict(lambda: 1.)
@@ -81,15 +75,20 @@ if __name__ == '__main__':
         normalize(card_to_level, min_level, max_level)
         new_levels = [card_to_level[card["example"]] for card in cards]
         if new_levels == old_levels:
-            print("converged after " + str(it) + " iterations")
+            #print_err("converged after " + str(it) + " iterations")
             break
-        elif it == 99:
-            print("diverged")
-            print(old_levels)
-            print(new_levels)
+
+    return card_to_level
 
 
+if __name__ == '__main__':
 
+    arguments = docopt(__doc__, version='read_annotations')
+    path_to_cards = anki_row.read_cards(arguments["<file>"])
+    cards = list(path_to_cards.values())
+
+
+    card_to_level = calculate_levels(cards)
     lst = sorted(list(card_to_level.items()), key = lambda t: t[1])
 
     #print([c for c,l in lst])
