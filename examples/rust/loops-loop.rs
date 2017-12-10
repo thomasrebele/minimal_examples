@@ -7,7 +7,6 @@ fn main() {
 fn dummy() {
 
 //x description="endless loop"
-//x level=3
 
 //x step={
 loop {

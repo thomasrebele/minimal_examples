@@ -5,7 +5,6 @@
 fn main() {
 
 //x description="unmodifiable integer variable"
-//x level=1
 
 //x step={
 // signed

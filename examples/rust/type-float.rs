@@ -4,7 +4,6 @@
 fn main() {
 
 //x description="float variable"
-//x level=1
 
 //x step={
 let a : f32 = 1.0;

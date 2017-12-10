@@ -2,7 +2,6 @@
 
 
 //x description="generic function"
-//x level=7
 
 //x pre={
 // return reference to first element

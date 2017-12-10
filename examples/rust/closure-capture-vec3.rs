@@ -4,7 +4,6 @@
 fn main() {
 
 //x description="closure capturing vector (3)"
-//x level=12
 //x pre={
 let a = vec![10];
 let f = move |x| x+a[0]; 

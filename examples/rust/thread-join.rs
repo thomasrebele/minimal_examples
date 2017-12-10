@@ -2,7 +2,6 @@
 fn main() {
 
 //x description="wait for thread"
-//x level=15
 
 //x pre={
 let t = std::thread::spawn(

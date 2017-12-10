@@ -5,7 +5,6 @@
 fn main() {
 
 //x description="modifiable float variable"
-//x level=2
 
 //x step={
 let mut a : f32 = 1.0;

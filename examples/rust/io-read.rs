@@ -6,7 +6,6 @@ fn main() {
 let _ = std::fs::File::create("/tmp/file.txt");
 
 //x description="read content of file into string"
-//x level=15
 
 //x pre={
 let mut f = std::fs::File::open("/tmp/file.txt").unwrap();

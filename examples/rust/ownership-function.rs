@@ -6,7 +6,6 @@
 fn main() {
 
 //x description="ownership and functions (1)"
-//x level=50
 
 //x pre={
 fn f(arg: String) {

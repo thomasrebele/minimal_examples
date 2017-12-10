@@ -1,6 +1,5 @@
 
 //x description="if statement"
-//x level=2
 fn main() {
 //x pre={
 let n;

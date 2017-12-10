@@ -1,6 +1,5 @@
 
 //x description="inline if expression with statements"
-//x level=4
 
 fn main() {
 //x pre={

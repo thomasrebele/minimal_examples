@@ -1,6 +1,5 @@
 
 //x description="declare static constant"
-//x level=9
 //x step={
 // global constant
 static VERSION: &'static str = "0.1";

@@ -4,7 +4,6 @@
 fn main() {
 
 //x description="unwrap a tuple-like struct"
-//x level=4
 
 //x pre={
 struct Pair(i32, f32);

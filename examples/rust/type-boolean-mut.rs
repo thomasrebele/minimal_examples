@@ -5,7 +5,6 @@
 fn main() {
 
 //x description="modifiable boolean variable"
-//x level=2
 
 //x step={
 // modifiable

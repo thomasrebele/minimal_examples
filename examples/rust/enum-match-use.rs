@@ -13,7 +13,6 @@ fn main() {
 
 let e2 = Event::Key(1);
 //x description="remove redundancy"
-//x level=9
 
 //x pre={
 // auto generate code for "{:?}"

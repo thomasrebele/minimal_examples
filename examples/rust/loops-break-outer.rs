@@ -6,7 +6,6 @@ fn main() {
 fn dummy() {
 
 //x description="break outer loop"
-//x level=4
 
 //x pre={
 loop {

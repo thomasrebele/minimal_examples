@@ -3,7 +3,6 @@
 #![allow(unused_assignments)]
 
 //x description="scope"
-//x level=2
 
 fn dummy() {
 //x pre={

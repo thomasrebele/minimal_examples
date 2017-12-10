@@ -2,7 +2,6 @@
 fn main() {
 
 //x description="define a channel"
-//x level=25
 
 //x step={
 use std::sync::mpsc::*;

@@ -4,7 +4,6 @@
 fn main() {
 
 //x description="variable of a tuple-like struct"
-//x level=10
 
 //x pre={
 struct Pair(i32, f32);

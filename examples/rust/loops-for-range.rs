@@ -6,7 +6,6 @@ fn main() {
 
 
 //x description="print numbers from 1 to n (exclusive)"
-//x level=3
 
 let n = 10;
 

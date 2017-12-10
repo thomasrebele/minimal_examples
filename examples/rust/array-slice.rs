@@ -3,7 +3,6 @@
 fn main() {
 
 //x description="array slice with content [2,3]"
-//x level=3
 
 //x pre={
 let a = [0,1,2,3,4];

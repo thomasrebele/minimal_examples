@@ -7,7 +7,6 @@ fn main() {
 fn dummy() {
 
 //x description="value of a loop"
-//x level=4
 
 //x pre={
 let a = loop {

@@ -2,7 +2,6 @@
 fn main() {
 
 //x description="execute code in thread"
-//x level=14
 
 //x step={
 std::thread::spawn(

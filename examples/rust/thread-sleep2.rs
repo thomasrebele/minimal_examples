@@ -2,7 +2,6 @@
 fn main() {
 
 //x description="thread sleep duration"
-//x level=16
 
 //x step={
 let ten_ms = std::time::Duration::from_millis(10);

@@ -4,7 +4,6 @@
 
 
 //x description="variable of type enum Key"
-//x level=7
 
 //x pre={
 enum Event {

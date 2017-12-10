@@ -3,7 +3,6 @@
 fn main() {
 
 //x description="enum (with all three types)"
-//x level=3
 
 //x step={
 enum Event {

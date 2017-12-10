@@ -2,7 +2,6 @@
 fn main() {
 
 //x description="bitwise operators"
-//x level=2
 
 //x pre={
 let a = 0b0011u32;

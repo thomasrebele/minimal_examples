@@ -3,7 +3,6 @@
 
 
 //x description="generic struct with two type parameters"
-//x level=8
 
 //x pre={
 struct Entry_i32_f64 {

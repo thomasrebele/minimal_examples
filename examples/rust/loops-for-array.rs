@@ -6,7 +6,6 @@ fn main() {
 
 
 //x description="print elements of array"
-//x level=5
 
 //x pre={
 let a = [10, 20, 30];

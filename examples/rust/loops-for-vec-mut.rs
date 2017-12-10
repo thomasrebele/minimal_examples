@@ -6,7 +6,6 @@ fn main() {
 
 
 //x description="change elements of vector"
-//x level=6
 //x pre={
 let mut a = vec![10, 20, 30];
 

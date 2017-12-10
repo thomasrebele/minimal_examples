@@ -3,7 +3,6 @@
 fn main() {
 
 //x description="use a channel"
-//x level=20
 
 //x pre={
 use std::sync::mpsc::*;

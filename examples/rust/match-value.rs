@@ -4,7 +4,6 @@
 fn main() {
 
 //x description="value of a match expression"
-//x level=4
 
 let boolean = true;
 

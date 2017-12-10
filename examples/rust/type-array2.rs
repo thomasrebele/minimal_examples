@@ -4,7 +4,6 @@
 fn main() {
 
 //x description="array access"
-//x level=2
 
 //x pre={
 let a = [0,1,2,3];

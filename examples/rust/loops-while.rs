@@ -6,7 +6,6 @@ fn main() {
 
 
 //x description="loop until condition is fulfilled"
-//x level=4
 
 //x pre={
 let n = 64;

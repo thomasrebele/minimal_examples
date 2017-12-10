@@ -2,7 +2,6 @@
 fn main() {
 
 //x description="unwrap tuple"
-//x level=6
 
 //x pre={
 let t = (1, 1.0, false);
