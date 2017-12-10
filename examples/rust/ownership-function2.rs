@@ -16,7 +16,7 @@ fn f(arg: String) -> String {
 let s1 = String::from("abc");
 let s2 = f(s1);
 
-// s1?
+// s1? s2?
 //x }
 
 //x step={

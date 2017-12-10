@@ -11,8 +11,10 @@ let a = vec![0,1,2,3];
 //x }
 
 //x step={
-let b = &a[2]; // b : &i32
-let c = a.get(2); // c : Option<&i32>
+let b = &a[2]; 
+let c = a.get(2);
 //x }
 
+
+//x explanation="b : &i32, c : Option<&i32>"
 }
