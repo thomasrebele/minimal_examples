@@ -44,12 +44,6 @@ if __name__ == '__main__':
     max_level = 100
     card_to_level = defaultdict(lambda: 1)
 
-    # initialize
-    pair_count = 0
-    for c1, d in data.items():
-        for c2, l in d.items():
-            pair_count += 1
-
     for it in range(100):
         # initialize
         card_count = defaultdict(lambda: 1)
@@ -74,8 +68,5 @@ if __name__ == '__main__':
     for cl in lst:
         print(str(cl))
 
-    n = len(card_to_level)
-    print("level for " + str(n) + " cards")
-    print("assessments " + str(int(pair_count / (0.5*(n-1)**2 + 0.5*(n-1))*1000)/10) + "%")
 
 

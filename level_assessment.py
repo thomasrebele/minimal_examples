@@ -45,11 +45,17 @@ def rand_card(weights):
     """index of random card, prefering cards which have not much data yet"""
     total = sum(weights)
     r = random.uniform(0,total)
+    orig_r = r
 
     for i, w in enumerate(weights):
         r -= w
-        if r <= 0: return i
-    return random.randrange(len(weights))
+        if r <= 0:
+            print("total " + str(total) + " rand " + str(orig_r) + " chose " + str(i))
+            return i
+
+    r = random.randrange(len(weights))
+    print("fallback " + " rand " + str(r))
+    return r
 
 def inverse_count_weights():
     weights = []
@@ -60,51 +66,96 @@ def inverse_count_weights():
         weights += [weight]
     return weights
 
-def graph_algo(start, max_dist, visit_fn):
+def breadth_first_search(start, max_dist, init, visit_fn):
+    """Walks over data graph starting with nodes specified in start.
+    visit_fn is a function for updating a dictionary of nodes to values"""
     node_to_val = {}
     for node in start:
-        node_to_val[node] = 0
+        if callable(init):
+            node_to_val[node] = init(node)
+        else:
+            node_to_val[node] = init
     queue = list(start)
     for i in range(1,max_dist):
         new_queue = [ ]
-        def visit(neighbor, node_to_val=node_to_val, new_queue=new_queue):
-            if visit_fn(neighbor, i, node_to_val):
+        def visit(card, neighbor, node_to_val=node_to_val, new_queue=new_queue):
+            if visit_fn(card, neighbor, i, node_to_val):
                 new_queue += [neighbor]
 
         for card in queue:
             if card in data:
                 for neighbor in data[card]:
-                    visit(neighbor, node_to_val)
+                    visit(card, neighbor)
             for neighbor,d in data.items():
                 if card in d:
-                    visit(neighbor, node_to_val)
+                    visit(card, neighbor)
         queue = new_queue
     return node_to_val
 
 def distance(start, max_dist = 10):
-    def visit(neighbor, dist, node_to_val):
+    def visit(card, neighbor, dist, node_to_val):
         if not neighbor in node_to_val:
             node_to_val[neighbor] = dist
             return True
 
-    return graph_algo(start, max_dist, visit)
+    return breadth_first_search(start, max_dist, 0, visit)
 
-def distance_weights(card_idx):
-    max_dist = 10
-    start = cards[card_idx]["example"]
-    dist = distance([start], max_dist=max_dist)
-    weights = [dist.get(c["example"], max_dist) for c in cards]
+def reachability(start, max_dist):
+    def visit(c1, c2, dist, node_to_val):
+        rel1 = node_to_val.setdefault(c1, set())
+        rel2 = node_to_val.setdefault(c2, set())
+        rel1.add(c2)
+        rel2.add(c1)
+        rel1.update(rel2)
+        rel2.update(rel1)
+
+    node_to_val = breadth_first_search(start, max_dist, lambda x: set(), visit)
+    return node_to_val
+
+def reachability_coefficient(start, max_dist=10):
+    reach = reachability(start, max_dist)
+    def calc(node):
+        if not node in reach:
+            return 0
+        else:
+            return len(reach[node])/float(len(cards))
+    coefficient = [calc(card["example"]) for card in cards]
+    return coefficient
+
+def distance_weights(dist, max_dist):
+    weights = [dist.get(c["example"], max_dist)**4 for c in cards]
     return weights
 
 
+use_reachability = True
 def card_pair():
     """select next two cards which should be compared"""
-    aidx = rand_card(inverse_count_weights())
-    bidx = rand_card(inverse_count_weights())
+    global use_reachability
+    if use_reachability:
+        weights = [(1-i)**2 for i in reachability_coefficient(card_to_count)]
+        use_reachability = sum(weights) >= 1
+
+    if not use_reachability:
+        weights = inverse_count_weights()
+
+    aidx = rand_card(weights)
+
+    max_dist = 10
+    start = cards[aidx]["example"]
+    dist = distance([start], max_dist)
+    dist_weights = distance_weights(dist, 100)
+
+    bidx = rand_card(dist_weights)
     if aidx == bidx:
         return card_pair()
 
-    return (cards[aidx], cards[bidx])
+    print()
+    print("chose left  " + str(aidx) + " weight " + str(weights[aidx]) + " sum weights " + str(sum(weights)))
+    print("card " + str(cards[aidx]))
+    print("chose right " + str(bidx) + " weight " + str(dist_weights[bidx]) )
+
+    key = cards[bidx]["example"]
+    return (cards[aidx], cards[bidx], str(dist.get(key, "inf")))
 
 
     ### installing signal handler
@@ -118,6 +169,30 @@ def save(path="output/level_data.json"):
             f.write(to_json(data))
             print("saved to " + path)
 
+def stat():
+    global card_to_count
+    # initialize
+    pair_count = 0
+    covered = set()
+    for c1, d in data.items():
+        if not c1 in card_to_count: continue
+        covered.add(c1)
+        for c2, l in d.items():
+            if not c2 in card_to_count: continue
+            covered.add(c2)
+            pair_count += 1
+
+    stat = ""
+    n = len(cards)
+    stat += " " + str(n) + " cards\n"
+    stat += " " + str(pair_count) + " pairs\n"
+    stat += "card coverage " + str(int(len(covered) / float(len(cards))*1000)/10) + "%\n"
+    stat += "pair coverage " + str(int(pair_count / (0.5*(n-1)**2 + 0.5*(n-1))*1000)/10) + "%\n"
+    coefficient = reachability_coefficient(card_to_count, max_dist=2)
+    reachability = sum(coefficient) / len(cards)
+    stat += "reachability: " + str(int(reachability*1000)/10) + "%\n"
+    stat += "not reachable: " + str(len([i for i in coefficient if i == 0])) + "\n"
+    return stat
 
 
 if __name__ == '__main__':
@@ -135,18 +210,18 @@ if __name__ == '__main__':
     data = from_json_file("output/level_data.json")
     i = datetime.datetime.now()
 
-    for i in range(2):
-        print(distance_weights(i))
-    xyz()
-
     save("output/backup/" + i.isoformat())
 
     # index for better sampling
-    card_to_count = {}
+    card_to_count = dict([(c["example"], 0) for c in cards])
     for c1,d in data.items():
+        if not c1 in card_to_count: continue
         for c2, l in d.items():
+            if not c2 in card_to_count: continue
             card_to_count[c1] = card_to_count.setdefault(c1, 0) + sum(l)
             card_to_count[c2] = card_to_count.setdefault(c2, 0) + sum(l)
+
+    print(stat())
 
     req_count = 0
     req_id = 0
@@ -174,28 +249,32 @@ if __name__ == '__main__':
                     elif choice == "right":
                         choice = req_pair[1]["example"]
 
-                    keys = [i["example"] for i in req_pair]
+                    keys = [i["example"] for i in req_pair[0:2]]
                     keys = sorted(keys)
                     l = data.setdefault(keys[0], {}).setdefault(keys[1], [0,0,0])
+                    change = True
                     if keys[0] == choice:
                         l[0] += 1
                     elif keys[1] == choice:
                         l[2] += 1
                     elif choice == "equal":
                         l[1] += 1
+                    else:
+                        change = False
+                        print("unknown choice " + choice)
 
-                    data[keys[0]][keys[1]] = l
+                    if change:
+                        data[keys[0]][keys[1]] = l
 
-                    # update index
-                    card_to_count[keys[0]] = card_to_count.setdefault(keys[0], 0) + 1
-                    card_to_count[keys[1]] = card_to_count.setdefault(keys[1], 0) + 1
+                        # update index
+                        card_to_count[keys[0]] = card_to_count.setdefault(keys[0], 0) + 1
+                        card_to_count[keys[1]] = card_to_count.setdefault(keys[1], 0) + 1
 
-                    req_count += 1
-                    if req_count % 10 == 0:
-                        save()
+                        req_count += 1
+                        if req_count % 10 == 0:
+                            save()
                 else:
                     print("request id wrong: " + str(self.args()["id"]) + " and " + req_id)
-
 
             ### next round
             req_pair = card_pair()
@@ -216,12 +295,24 @@ if __name__ == '__main__':
 
             self.write("</div>")
 
+
             self.write("<div class=\"footer\">")
+            self.write(stat().replace("\n", "; "))
+            keys = [i["example"] for i in req_pair[0:2]]
+            self.write(" left seen? " + str(card_to_count.get(keys[0], 0)) + "x")
+            self.write(" right seen? " + str(card_to_count.get(keys[1], 0)) + "x")
+
+            keys = sorted(keys)
+            pair_seen = sum(data.get(keys[0], {}).get(keys[1], [0]))
+            self.write(" pair seen? " + str(pair_seen) + "x")
+            self.write(" dist? " + str(req_pair[2]))
+            self.write("<br>")
             s = "<a href=\"/?id="  + str(req_id) + "&choice="
             self.write(s + "left\" id=\"left\">left is easier (1)</a> &nbsp; ")
             self.write(s + "equal\" id=\"equal\">equally difficult (2)</a> &nbsp; ")
             self.write(s + "right\" id=\"right\">right is easier (3)</a> &nbsp;")
-            self.write("<a href=\"/quit\" id=\"quit\">quit</a>")
+            self.write(s + "skip\" id=\"skip\">skip (4)</a> &nbsp;")
+            self.write("<a href=\"/quit\" id=\"quit\">quit (5)</a>")
             self.write("</div>")
 
             self.write("""<script>
@@ -232,7 +323,8 @@ if __name__ == '__main__':
                       case 49: document.getElementById("left").click(); break;
                       case 50: document.getElementById("equal").click(); break;
                       case 51: document.getElementById("right").click(); break;
-                      case 52: document.getElementById("quit").click(); break;
+                      case 52: document.getElementById("skip").click(); break;
+                      case 53: document.getElementById("quit").click(); break;
                    }
                 });
                 </script>""")
