@@ -9,6 +9,8 @@ fn main() {
 
 //x pre={
 let a = [10, 20, 30];
+
+// for ...
 //x }
 
 //x step={

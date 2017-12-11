@@ -23,4 +23,6 @@ let r = Rectangle{w:10.,h:5.};
 r.area();
 //x }
 
+//x explanation="&self is syntactic sugar for self: &Self\nonly works with 'self', not with other identifiers"
+
 }

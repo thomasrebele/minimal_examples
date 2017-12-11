@@ -6,7 +6,7 @@ fn main() {
 
 fn dummy() {
 
-//x description="value of a loop"
+//x description="value of a loop loop"
 
 //x pre={
 let a = loop {
@@ -19,6 +19,8 @@ let a = loop {
     break 1;
 };
 //x }
+
+//x explanation="only supported by 'loop', not by 'for' or 'while'"
 
 }
 
