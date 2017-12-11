@@ -4,9 +4,9 @@ fn main() {
 
 //x description="match for enum (1)"
 
-//x pre={
 // auto generate code for "{:?}"
 #[derive(Debug)]
+//x pre={
 enum Event {
     Start,
     End,
