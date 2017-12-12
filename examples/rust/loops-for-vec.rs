@@ -14,9 +14,11 @@ let a = vec![10, 20, 30];
 //x }
 
 //x step={
-for i in a {
+for i in &a {
     println!("{}", i);
 }
 //x }
+
+//x explanation="'&a' if a is needed after for loop; 'a' otherwise"
 
 }
