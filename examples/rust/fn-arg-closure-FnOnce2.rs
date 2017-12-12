@@ -1,7 +1,7 @@
 #![allow(unused_variables)]
 #![allow(dead_code)]
 
-//x description="function with closure parameter (6)"
+//x description="function with closure parameter; closure restriction (6)"
 
 fn main() {
 
