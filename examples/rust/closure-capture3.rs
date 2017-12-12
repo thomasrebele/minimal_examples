@@ -5,6 +5,7 @@ fn main() {
 
 //x description="closure capturing integer (3)"
 //x pre={
+// copy-type
 let a = 10;
 let f = move |x| x+a; 
 

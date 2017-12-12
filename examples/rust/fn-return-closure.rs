@@ -1,7 +1,7 @@
 #[allow(unused_variables)]
 #[allow(dead_code)]
 
-//x description="function return type"
+//x description="function returning closure"
 
 fn main() {
 

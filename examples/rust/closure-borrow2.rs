@@ -6,7 +6,7 @@ fn main() {
 //x description="closure and borrowing (2)"
 
 //x pre={
-// non-copy type
+// copy type
 let a = 1;
 
 let c = || {
