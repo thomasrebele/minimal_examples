@@ -1,7 +1,7 @@
 #![allow(unused_variables)]
 #![allow(dead_code)]
 
-//x description="function with function parameter argument (3)"
+//x description="function with function parameter (3)"
 
 //x pre={
 fn print(n: i32) {
