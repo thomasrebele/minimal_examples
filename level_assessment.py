@@ -8,6 +8,8 @@ Usage:
   anki_row.py [options] <file>...
 
 Options:
+  --search-orphans=<prefix>     Looks for orphans in comparison-json
+                                (considering only files in <prefix>)
   -h --help                     Show this screen.
 
 """
@@ -211,129 +213,147 @@ if __name__ == '__main__':
     data = from_json_file("output/level_data.json")
     i = datetime.datetime.now()
 
-    save("output/backup/" + i.isoformat())
+    if arguments["--search-orphans"]:
+        prefix = arguments["--search-orphans"]
+        if prefix.startswith("examples/"):
+            prefix = prefix[9:]
+        data_examples = set()
+        for c1, d in data.items():
+            if c1.startswith(prefix):
+                data_examples.add(c1)
+            for c2 in data:
+                if c2.startswith(prefix):
+                    data_examples.add(c2)
+        missing = data_examples.difference([c["example"] for c in cards])
+        if len(missing) > 0:
+            print("missing: ")
+            for ex in missing:
+                print("  " + ex)
 
-    # index for better sampling
-    card_to_count = dict([(c["example"], 0) for c in cards])
-    for c1,d in data.items():
-        if not c1 in card_to_count: continue
-        for c2, l in d.items():
-            if not c2 in card_to_count: continue
-            card_to_count[c1] = card_to_count.setdefault(c1, 0) + sum(l)
-            card_to_count[c2] = card_to_count.setdefault(c2, 0) + sum(l)
+    else:
+        save("output/backup/" + i.isoformat())
 
-    print(stat())
+        # index for better sampling
+        card_to_count = dict([(c["example"], 0) for c in cards])
+        for c1,d in data.items():
+            if not c1 in card_to_count: continue
+            for c2, l in d.items():
+                if not c2 in card_to_count: continue
+                card_to_count[c1] = card_to_count.setdefault(c1, 0) + sum(l)
+                card_to_count[c2] = card_to_count.setdefault(c2, 0) + sum(l)
 
-    req_count = 0
-    req_id = 0
-    req_pair = []
-    class Handler(RequestHandler):
-        def get(self):
-            global req_pair, req_id, req_count, data, card_to_count
+        print(stat())
 
-            path = self.req_path()
-            if path.endswith(".css"):
-                self.file(path[1:])
-                return
+        req_count = 0
+        req_id = 0
+        req_pair = []
+        class Handler(RequestHandler):
+            def get(self):
+                global req_pair, req_id, req_count, data, card_to_count
 
-            if path == "/quit":
-                #TODO: self.write("<script>window.close();</script>")
-                self.shutdown()
-                return
+                path = self.req_path()
+                if path.endswith(".css"):
+                    self.file(path[1:])
+                    return
 
-            # self.write(str(self.args()))
-            if "id" in self.args():
-                if self.args()["id"][0] == req_id:
-                    choice = self.args()["choice"][0]
-                    if choice == "left":
-                        choice = req_pair[0]["example"]
-                    elif choice == "right":
-                        choice = req_pair[1]["example"]
+                if path == "/quit":
+                    #TODO: self.write("<script>window.close();</script>")
+                    self.shutdown()
+                    return
 
-                    keys = [i["example"] for i in req_pair[0:2]]
-                    keys = sorted(keys)
-                    l = data.setdefault(keys[0], {}).setdefault(keys[1], [0,0,0])
-                    change = True
-                    if keys[0] == choice:
-                        l[0] += 1
-                    elif keys[1] == choice:
-                        l[2] += 1
-                    elif choice == "equal":
-                        l[1] += 1
+                # self.write(str(self.args()))
+                if "id" in self.args():
+                    if self.args()["id"][0] == req_id:
+                        choice = self.args()["choice"][0]
+                        if choice == "left":
+                            choice = req_pair[0]["example"]
+                        elif choice == "right":
+                            choice = req_pair[1]["example"]
+
+                        keys = [i["example"] for i in req_pair[0:2]]
+                        keys = sorted(keys)
+                        l = data.setdefault(keys[0], {}).setdefault(keys[1], [0,0,0])
+                        change = True
+                        if keys[0] == choice:
+                            l[0] += 1
+                        elif keys[1] == choice:
+                            l[2] += 1
+                        elif choice == "equal":
+                            l[1] += 1
+                        else:
+                            change = False
+                            print("unknown choice " + choice)
+
+                        if change:
+                            data[keys[0]][keys[1]] = l
+
+                            # update index
+                            card_to_count[keys[0]] = card_to_count.setdefault(keys[0], 0) + 1
+                            card_to_count[keys[1]] = card_to_count.setdefault(keys[1], 0) + 1
+
+                            req_count += 1
+                            if req_count % 10 == 0:
+                                save()
                     else:
-                        change = False
-                        print("unknown choice " + choice)
+                        print("request id wrong: " + str(self.args()["id"]) + " and " + req_id)
 
-                    if change:
-                        data[keys[0]][keys[1]] = l
+                ### next round
+                req_pair = card_pair()
+                req_id = str(random.randrange(0, 9999999999))
 
-                        # update index
-                        card_to_count[keys[0]] = card_to_count.setdefault(keys[0], 0) + 1
-                        card_to_count[keys[1]] = card_to_count.setdefault(keys[1], 0) + 1
+                self.write("<html><head><link rel=\"stylesheet\" href=\"dialog.css\"><meta charset=\"utf-8\" /> </head><body>")
+                self.write("<div class=\"row\">")
 
-                        req_count += 1
-                        if req_count % 10 == 0:
-                            save()
-                else:
-                    print("request id wrong: " + str(self.args()["id"]) + " and " + req_id)
+                # left col
+                self.write("<div class=\"column\"><div class=\"cell\">")
+                self.write(card_to_html(req_pair[0]))
+                self.write("</div></div>")
 
-            ### next round
-            req_pair = card_pair()
-            req_id = str(random.randrange(0, 9999999999))
+                # right col
+                self.write("<div class=\"column\"><div class=\"cell\">")
+                self.write(card_to_html(req_pair[1]))
+                self.write("</div></div>")
 
-            self.write("<html><head><link rel=\"stylesheet\" href=\"dialog.css\"><meta charset=\"utf-8\" /> </head><body>")
-            self.write("<div class=\"row\">")
-
-            # left col
-            self.write("<div class=\"column\"><div class=\"cell\">")
-            self.write(card_to_html(req_pair[0]))
-            self.write("</div></div>")
-
-            # right col
-            self.write("<div class=\"column\"><div class=\"cell\">")
-            self.write(card_to_html(req_pair[1]))
-            self.write("</div></div>")
-
-            self.write("</div>")
+                self.write("</div>")
 
 
-            self.write("<div class=\"footer\">")
-            self.write(stat().replace("\n", "; "))
-            keys = [i["example"] for i in req_pair[0:2]]
-            self.write(" left seen? " + str(card_to_count.get(keys[0], 0)) + "x")
-            self.write(" right seen? " + str(card_to_count.get(keys[1], 0)) + "x")
+                self.write("<div class=\"footer\">")
+                self.write(stat().replace("\n", "; "))
+                keys = [i["example"] for i in req_pair[0:2]]
+                self.write(" left seen? " + str(card_to_count.get(keys[0], 0)) + "x")
+                self.write(" right seen? " + str(card_to_count.get(keys[1], 0)) + "x")
 
-            keys = sorted(keys)
-            pair_seen = sum(data.get(keys[0], {}).get(keys[1], [0]))
-            self.write(" pair seen? " + str(pair_seen) + "x")
-            self.write(" dist? " + str(req_pair[2]))
-            self.write("<br>")
-            s = "<a href=\"/?id="  + str(req_id) + "&choice="
-            self.write(s + "left\" id=\"left\">left is easier (1)</a> &nbsp; ")
-            self.write(s + "equal\" id=\"equal\">equally difficult (2)</a> &nbsp; ")
-            self.write(s + "right\" id=\"right\">right is easier (3)</a> &nbsp;")
-            self.write(s + "skip\" id=\"skip\">skip (4)</a> &nbsp;")
-            self.write("<a href=\"/quit\" id=\"quit\">quit (5)</a>")
-            self.write("</div>")
+                keys = sorted(keys)
+                pair_seen = sum(data.get(keys[0], {}).get(keys[1], [0]))
+                self.write(" pair seen? " + str(pair_seen) + "x")
+                self.write(" dist? " + str(req_pair[2]))
+                self.write("<br>")
+                s = "<a href=\"/?id="  + str(req_id) + "&choice="
+                self.write(s + "left\" id=\"left\">left is easier (1)</a> &nbsp; ")
+                self.write(s + "equal\" id=\"equal\">equally difficult (2)</a> &nbsp; ")
+                self.write(s + "right\" id=\"right\">right is easier (3)</a> &nbsp;")
+                self.write(s + "skip\" id=\"skip\">skip (4)</a> &nbsp;")
+                self.write("<a href=\"/quit\" id=\"quit\">quit (5)</a>")
+                self.write("</div>")
 
-            self.write("""<script>
-                document.addEventListener("keyup",function(e){
-                   var key = e.which||e.keyCode;
-                   console.log(key);
-                   switch(key){
-                      case 49: document.getElementById("left").click(); break;
-                      case 50: document.getElementById("equal").click(); break;
-                      case 51: document.getElementById("right").click(); break;
-                      case 52: document.getElementById("skip").click(); break;
-                      case 53: document.getElementById("quit").click(); break;
-                   }
-                });
-                </script>""")
+                self.write("""<script>
+                    document.addEventListener("keyup",function(e){
+                       var key = e.which||e.keyCode;
+                       console.log(key);
+                       switch(key){
+                          case 49: document.getElementById("left").click(); break;
+                          case 50: document.getElementById("equal").click(); break;
+                          case 51: document.getElementById("right").click(); break;
+                          case 52: document.getElementById("skip").click(); break;
+                          case 53: document.getElementById("quit").click(); break;
+                       }
+                    });
+                    </script>""")
 
-            self.write("</body>")
+                self.write("</body>")
 
 
-    http_dialog(port=8000, handler=Handler)
+        http_dialog(port=8000, handler=Handler)
 
-    save()
+        save()
 

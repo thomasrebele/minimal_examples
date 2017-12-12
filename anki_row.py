@@ -128,7 +128,13 @@ if __name__ == '__main__':
 
     example_to_index = index_cards(cards)
     example_to_level = calculate_levels(cards)
-    cards = [cards[example_to_index[c]] for c,i in sorted(list(example_to_level.items()), key = lambda t: t[1])]
+    for ex in example_to_level:
+        if not ex in example_to_index:
+            print_err("not found " + str(ex))
+
+    cards_levels = [(c, example_to_level.get(c["example"], 100)) for c in cards]
+    sorted_cards_levels =  sorted(cards_levels, key = lambda t: t[1])
+    cards = [c for (c,l) in sorted_cards_levels]
 
     for card in cards:
         fields = ["example", "description", "pre", "step", "post", "explanation"]

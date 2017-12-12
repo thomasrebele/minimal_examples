@@ -49,6 +49,7 @@ pre {
 	border-style: solid;
 	text-align:left;
 	padding: 1em;
+	white-space: pre-wrap;
 }
 
 
