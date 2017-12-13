@@ -5,7 +5,7 @@ imgout="output/img/"
 
 mkdir -p $imgout
 
-source common.sh
+source build_scripts/web/common.sh
 
 
 for i in $files; do
