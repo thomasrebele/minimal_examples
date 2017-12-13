@@ -97,7 +97,6 @@ def read_annotations(path, slc=None, mlc=None):
     # multi line comment start and end
     mlc1, mlc2 = None, None
     if mlc:
-        print("MULTILINE COMMENTS NOT YET IMPLEMENTED")
         mlc1, mlc2 = mlc.split(' ')
 
     # helper function
@@ -105,7 +104,14 @@ def read_annotations(path, slc=None, mlc=None):
         p = None
         if slc and slc in line:
             comment = line[line.find(slc)+len(slc):]
-            p = parse(comment)
+            return parse(comment)
+        if mlc1 and mlc1 in line:
+            start = line.find(mlc1) + len(mlc1)
+            end = line.find(mlc2)
+            if end < 0:
+                raise RuntimeError('multiline comments spanning multiple lines currently not supported')
+            comment = line[start:end]
+            return parse(comment)
         return p
 
     result = []
