@@ -3,7 +3,7 @@
 #x description="create local repository"
 #x state="empty directory"
 
-#x code={
+#x step={
 git init
 echo "# Hello world" > readme.md
 git add readme.md

@@ -19,7 +19,7 @@ x "pre={"
 vis_git .
 x "}"
 
-#x code={
+#x step={
 git branch mybranch
 #x }
 

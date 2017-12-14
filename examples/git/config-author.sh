@@ -8,7 +8,7 @@ git add readme.md
 git config user.name "user1"
 git commit -m "first commit"
 
-#x code={
+#x step={
 git config user.name "user2"
 git config user.email "user2@mail.com"
 #x }

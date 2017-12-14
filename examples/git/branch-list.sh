@@ -25,7 +25,7 @@ x "}"
 
 # track code and output
 x "post={"
-#x code={
+#x step={
 git branch --list
 #x }
 x "}"

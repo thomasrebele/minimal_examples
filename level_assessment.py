@@ -255,6 +255,9 @@ if __name__ == '__main__':
                 if path.endswith(".css"):
                     self.file(path[1:])
                     return
+                if path.endswith(".png"):
+                    self.file("output/img/" + path[1:])
+                    return
 
                 if path == "/quit":
                     #TODO: self.write("<script>window.close();</script>")

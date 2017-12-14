@@ -25,7 +25,7 @@ x "pre={"
 vis_git .
 x "}"
 
-#x code={
+#x step={
 git merge other
 #x }
 
