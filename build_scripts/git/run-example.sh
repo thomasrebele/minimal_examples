@@ -37,6 +37,16 @@ x() {
 	echo "#x $@"
 }
 
+cid=0
+# usage: add_commit <message>
+# adds a new file (different filename to avoid conflicts)
+add_commit() {
+	echo "#$cid" > $cid.txt
+	git add $cid.txt
+	git commit -m "$1"
+	export cid=$(( cid+1 ))
+}
+
 
 rm -rf $git_dir
 mkdir -p $git_dir $tex_dir $log_dir
