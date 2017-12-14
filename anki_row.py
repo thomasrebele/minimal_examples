@@ -35,7 +35,9 @@ def anki_row(path, config):
     path: the example file (e.g. examples/rust/hello_world.rs).
     config: specifies which markup tag to use """
     try:
-        annotations, fields = read_annotations(path, slc=config.get("slc", None), mlc=config.get("mlc", None))
+        with open(path) as f:
+            it = iter(f)
+            annotations, fields = read_annotations(it, slc=config.get("slc", None), mlc=config.get("mlc", None))
     except Exception as err:
         print_err("problem with " + path)
         raise err

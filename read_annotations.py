@@ -6,10 +6,10 @@ Usage:
   read_annotations.py [options] <file>
 
 Options:
-  --single-line=<start>         Single line comment
-  --multi-line="<start> <end>"  Multi line comment
-  -h --help                     Show this screen.
-  --version                     Show version.
+  --single-line-comment=<start>           Single line comment
+  --multi-line-comment="<start> <end>"    Multi line comment
+  -h --help                               Show this screen.
+  --version                               Show version.
 
 """
 from docopt import docopt
@@ -88,9 +88,9 @@ def parse(s):
         return result
 
 
-def read_annotations(path, slc=None, mlc=None):
+def read_annotations(it, slc=None, mlc=None):
     """
-        path: input file
+        it: line iterator
         slc: single line comment
         mlc: multi line comment
     """
@@ -116,45 +116,46 @@ def read_annotations(path, slc=None, mlc=None):
 
     result = []
     fields = {}
-    with open(path) as f:
-        #lines = f.read()
-        it = iter(f)
-        for line in it:
-            line = line.replace('\n','')
-            p = parse_comment(line)
+    for line in it:
+        line = line.replace('\n','')
+        p = parse_comment(line)
 
-            if not p: continue
-            if p["type"] == "field":
+        if not p: continue
+        if p["type"] == "field":
+            fields[p["name"]] = p
+            result += [p]
+        elif p["type"] == "field-start":
+            content = ""
+            while True:
+                line = it.__next__()
+                tmp = parse_comment(line)
+                if tmp and tmp["type"] == "field-end":
+                    break
+                content += line
+            op = p["op"]
+            if p["name"] in fields:
+                p = fields[p["name"]]
+                p["value"] += "...\n" + content
+            else:
+                p["type"] = "field"
+                p["value"] = content
                 fields[p["name"]] = p
                 result += [p]
-            elif p["type"] == "field-start":
-                content = ""
-                while True:
-                    line = it.__next__()
-                    tmp = parse_comment(line)
-                    if tmp and tmp["type"] == "field-end":
-                        break
-                    content += line
-                op = p["op"]
-                if p["name"] in fields:
-                    p = fields[p["name"]]
-                    p["value"] += "...\n" + content
-                else:
-                    p["type"] = "field"
-                    p["value"] = content
-                    fields[p["name"]] = p
-                    result += [p]
 
     return result, fields
 
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='read_annotations')
-    annotations = read_annotations(
-            arguments["<file>"],
-            arguments["--single-line"],
-            arguments["--multi-line"]
-        )
-    for i in annotations:
-        print(i)
+
+    with open(arguments["<file>"]) as f:
+        it = iter(f)
+
+        annotations = read_annotations(
+                it,
+                arguments["--single-line-comment"],
+                arguments["--multi-line-comment"]
+            )
+        for i in annotations:
+            print(i)
 
