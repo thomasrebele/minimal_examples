@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def make_post(path, annotations, fields, **keywords):
+def generate_post_field(path, annotations, fields, **keywords):
     ### TODO: screenshot
     img_path = path.replace(".html", ".png")
     if keywords.get("no_hierarchy", False):
@@ -13,7 +13,7 @@ def make_post(path, annotations, fields, **keywords):
 config = {
     "mlc" : "<!--x -->",
     "generator": {
-        "post": make_post
+        "post": generate_post_field
     }
 }
 

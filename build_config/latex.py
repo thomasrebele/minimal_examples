@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def make_goal(path, annotations, fields, **keywords):
+def generate_post_field(path, annotations, fields, **keywords):
     ### TODO: latex compilation
     img_path = path.replace(".tex", ".png")
     if keywords.get("no_hierarchy", False):
@@ -13,7 +13,7 @@ def make_goal(path, annotations, fields, **keywords):
 config = {
     "slc" : "%x",
     "generator": {
-        "post": make_goal
+        "post": generate_post_field
     }
 }
 
