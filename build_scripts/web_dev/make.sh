@@ -5,7 +5,7 @@ imgout="output/img/"
 
 mkdir -p $imgout
 
-source build_scripts/web/common.sh
+source build_scripts/web_dev/common.sh
 
 
 for i in $files; do
@@ -26,7 +26,7 @@ for i in $files; do
 	if [ "$no_hierarchy" == "1" ]; then
 		nohDir=${imgout/img/img-nh}
 		noh=${i/html/png}
-		noh=$nohDir/web-${noh//\//-}
+		noh=$nohDir/web_dev-${noh//\//-}
 		mkdir -p $nohDir
 		if [ ! -e $noh ]; then
 			ln $png $noh
