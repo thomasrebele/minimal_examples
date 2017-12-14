@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#x description="create local repository"
+#x description="delete a branch"
 #x state="empty directory"
 
 git init

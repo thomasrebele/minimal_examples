@@ -10,9 +10,11 @@ Options:
 
 """
 
+
 from docopt import docopt
 from html import escape
 from sys import stderr
+import contextlib
 
 from read_annotations import *
 from level_estimate import *
@@ -30,13 +32,20 @@ def import_from(module, name):
     module = __import__(module, fromlist=[name])
     return getattr(module, name)
 
+@contextlib.contextmanager
+def file_iterator(path):
+    with open(path) as f:
+        it = iter(f)
+        yield it
+
 def anki_row(path, config):
     """create a flashcard for anki in TSV format.
     path: the example file (e.g. examples/rust/hello_world.rs).
     config: specifies which markup tag to use """
     try:
-        with open(path) as f:
-            it = iter(f)
+        fn = config.get("generator", {}).get("iterator") or file_iterator
+
+        with fn(path) as it:
             annotations, fields = read_annotations(it, slc=config.get("slc", None), mlc=config.get("mlc", None))
     except Exception as err:
         print_err("problem with " + path)
@@ -50,7 +59,8 @@ def anki_row(path, config):
         val = ""
         if field in fields:
             val = fields[field]["value"]
-            val = val.replace("<", "&lt;").replace(">", "&gt;")
+            if config.get("escape_html", {}).get(field, True):
+                val = val.replace("<", "&lt;").replace(">", "&gt;")
         elif "generator" in config and field in config["generator"]:
             fn = config["generator"][field]
             val = fn(path=path, annotations=annotations, fields=fields)
