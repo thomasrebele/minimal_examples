@@ -11,7 +11,7 @@ git commit -m "first commit"
 #x }
 
 # make annotation in output file
-x "result={"
+x "post={"
 vis_git .
 echo "(triangle marks HEAD)"
 x "}"

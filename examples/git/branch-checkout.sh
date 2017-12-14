@@ -15,7 +15,7 @@ git checkout $(git log --format=format:%H | head -n 1)
 git branch -d master
 
 # make annotation in output file
-x "state={"
+x "pre={"
 vis_git .
 x "}"
 
@@ -24,7 +24,7 @@ git checkout -b mybranch
 #x }
 
 # make annotation in output file
-x "result={"
+x "post={"
 vis_git .
 echo "(triangle marks HEAD)"
 x "}"

@@ -19,12 +19,12 @@ echo "# Hello world 3" > readme.md
 git commit -am "second commit"
 
 # make annotation in output file
-x "state={"
+x "pre={"
 vis_git .
 x "}"
 
 # track code and output
-x "result={"
+x "post={"
 #x code={
 git branch --list
 #x }

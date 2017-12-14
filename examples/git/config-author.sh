@@ -14,7 +14,7 @@ git config user.email "user2@mail.com"
 #x }
 
 # make annotation in output file
-x "state={"
+x "pre={"
 vis_git --author=true .
 x "}"
 
@@ -23,7 +23,7 @@ git add readme.md
 git commit -am "my commit"
 
 # make annotation in output file
-x "result={"
+x "post={"
 vis_git --author=true .
 x "}"
 
