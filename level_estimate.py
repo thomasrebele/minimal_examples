@@ -37,9 +37,13 @@ def get_level(comp, c1l, c2l):
 
 
 def normalize(card_to_level, min_level, max_level):
+    if len(card_to_level) == 0: return
+
     lower = min(card_to_level.values())
     upper = max(card_to_level.values())
-    if upper == max_level and lower == 0:
+    if upper == max_level and lower == min_level:
+        return
+    if upper == lower:
         return
 
     for c, l in card_to_level.items():
