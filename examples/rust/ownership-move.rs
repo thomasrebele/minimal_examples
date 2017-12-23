@@ -18,4 +18,6 @@ let s2 = s1;
 // s1 is unavailable, s2 is String "abc"
 //x }
 
+//x explanation="String does not implement the Copy trait, so the ownership is moved in assigments"
+
 }

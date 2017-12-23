@@ -18,4 +18,6 @@ let s2 = s1;
 // s1=5, s2=5
 //x }
 
+//x explanation="i32 implements the Copy trait, so its value is copied in assignments"
+
 }

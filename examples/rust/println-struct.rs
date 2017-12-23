@@ -3,7 +3,7 @@
 
 fn main() {
 
-//x description="print struct"
+//x description="print struct (2)"
 
 {
 //x pre={
