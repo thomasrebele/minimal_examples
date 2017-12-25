@@ -2,11 +2,13 @@
 //x description="modules (2)"
 
 /*
+//x pre={
 mod example {
-    pub fn hello_world() {
+    pub hello_world() {
         println!("hello world");
     }
 }
+//x }
 */
 
 mod example {

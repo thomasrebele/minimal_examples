@@ -2,10 +2,13 @@
 
 fn main() {
 
-//x description="define a channel"
+//x description="define a channel (1)"
+
+//x pre={
+use std::sync::mpsc::*;
+//x }
 
 //x step={
-use std::sync::mpsc::*;
 let (s, r) : (Sender<i32>, Receiver<i32>) = channel();
 //x }
 

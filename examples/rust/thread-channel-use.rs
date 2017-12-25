@@ -2,15 +2,14 @@
 
 fn main() {
 
-//x description="define a channel (2)"
+//x description="use a channel"
 
-//x step={
+//x pre={
 use std::sync::mpsc::*;
+let (s, r) : (Sender<i32>, Receiver<i32>) = channel();
 //x }
 
-//x post={
-let (s, r) : (Sender<i32>, Receiver<i32>) = channel();
-
+//x step={
 std::thread::spawn(
     move || s.send(1)
     // send does not block
