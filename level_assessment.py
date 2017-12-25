@@ -54,11 +54,9 @@ def rand_card(weights):
     for i, w in enumerate(weights):
         r -= w
         if r <= 0:
-            print("total " + str(total) + " rand " + str(orig_r) + " chose " + str(i))
             return i
 
     r = random.randrange(len(weights))
-    print("fallback " + " rand " + str(r))
     return r
 
 def inverse_count_weights():
@@ -152,11 +150,6 @@ def card_pair():
     bidx = rand_card(dist_weights)
     if aidx == bidx:
         return card_pair()
-
-    print()
-    print("chose left  " + str(aidx) + " weight " + str(weights[aidx]) + " sum weights " + str(sum(weights)))
-    print("card " + str(cards[aidx]))
-    print("chose right " + str(bidx) + " weight " + str(dist_weights[bidx]) )
 
     key = cards[bidx]["example"]
     return (cards[aidx], cards[bidx], str(dist.get(key, "inf")))
@@ -258,6 +251,8 @@ if __name__ == '__main__':
                 if path.endswith(".png"):
                     self.file("output/img/" + path[1:])
                     return
+                if path.endswith(".ico"):
+                    return
 
                 if path == "/quit":
                     #TODO: self.write("<script>window.close();</script>")
@@ -303,6 +298,7 @@ if __name__ == '__main__':
                 ### next round
                 req_pair = card_pair()
                 req_id = str(random.randrange(0, 9999999999))
+                print("next request id: " + str(req_id))
 
                 self.write("<html><head><link rel=\"stylesheet\" href=\"dialog.css\"><meta charset=\"utf-8\" /> </head><body>")
                 self.write("<div class=\"row\">")
