@@ -22,6 +22,6 @@ let mut cnt = Counter{c:0};
 cnt.inc();
 //x }
 
-//x explanation="&mut self is syntactic sugar for self: &mut Self\nonly works with 'self', not with other identifiers"
+//x explanation="&mut self is syntactic sugar for self: &mut Self; only works with 'self', not with other identifiers"
 
 }

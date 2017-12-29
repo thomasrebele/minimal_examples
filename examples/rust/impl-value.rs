@@ -25,6 +25,6 @@ a.destroy();
 // now a is unavailable
 //x }
 
-//x explanation="self is syntactic sugar for self: Self\nonly works with 'self', not with other identifiers"
+//x explanation="self is syntactic sugar for self: Self; only works with 'self', not with other identifiers"
 
 }
