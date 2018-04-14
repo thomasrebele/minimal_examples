@@ -1,0 +1,44 @@
+\documentclass{standalone}
+
+\usepackage{verbatim}
+
+%x description="booktabs table (2)"
+%x step={
+\usepackage{booktabs}
+%x }
+
+\begin{document}
+
+\begin{comment}
+%x pre={
+\begin{tabular}{
+		@{} % remove space
+		lr
+		@{} % remove space
+	} 
+	Item & Price \\ 
+	...
+
+	Wood & 0.75 \\
+	Gold & 40.00   \\
+\end{tabular}
+%x }
+\end{comment}
+
+\begin{tabular}{
+		@{} % remove space
+		lr
+		@{} % remove space
+	} 
+%x step={
+	Item & Price \\ 
+	\cmidrule(r){1-1}
+	% r: trim right
+	% other possibilities: l, lr
+%x }
+
+	Wood & 0.75 \\
+	Gold & 40.00   \\
+\end{tabular}
+
+\end{document}

@@ -1,0 +1,29 @@
+\documentclass{article}
+
+\usepackage[paperheight=2.5cm, paperwidth=7cm]{geometry}
+\usepackage{xcolor}
+\usepackage{verbatim}
+
+\begin{comment}
+%x pre={
+\begin{minipage}{2cm}
+%x }
+\end{comment}
+
+\begin{document}
+
+%x description="minipage"
+
+\noindent
+\textcolor{gray}{foo}%
+%x step={
+\begin{minipage}[t]{2cm}
+%x }
+
+a minipage \\
+another line
+
+\end{minipage}
+\textcolor{gray}{bar}%
+
+\end{document}
