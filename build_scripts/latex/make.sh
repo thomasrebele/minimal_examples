@@ -17,8 +17,8 @@ for i in $files; do
 	png=$imgout/$dir/${file%.tex}.png
 
 	[ ! -e $pdf -o $i -nt $pdf ] && (
-		cd examples/$dir
-		rel=$(echo "../$dir" | sed 's:^./::; s:[^/]*:..:g')
+		cd $dir
+		rel=$(echo "$dir" | sed 's:^./::; s:[^/]*:..:g')
 		cmd="pdflatex -interaction nonstopmode -output-directory $rel/$texout/$dir $file"
 		echo " "
 		echo "dir $dir"

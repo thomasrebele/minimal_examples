@@ -10,20 +10,15 @@
 %x step={
 \begin{tabular}{
 		@{} % remove space
-		lrr
+		lr
 		@{} % remove space
 	} 
 	\toprule
-	\multicolumn{2}{c}{Item} \\ 
-	\cmidrule(r){1-2}
-	% r: trim right
-	% other possibilities: l, lr
-
-	Material & Unit & Price (\$)\\ 
+	Material & Price (\$)\\ 
 	\midrule
 
-	Wood & kg & 0.75 \\
-	Gold &  g & 40.00   \\
+	Wood & 0.75 \\
+	Gold & 40.00   \\
 
 	\bottomrule
 \end{tabular}

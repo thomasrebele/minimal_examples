@@ -30,7 +30,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         return parse.parse_qs(parse.urlparse(self.path).query)
 
     def do_GET(self):
-        logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
+        #logging.debug("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         self.set_response()
         self.fields = {}
         self.get()

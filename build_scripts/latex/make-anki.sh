@@ -5,4 +5,4 @@ echo "make.sh"
 echo "make-anki.sh"
 ./build_scripts/latex/make-anki-cards.sh > output/out.tsv 
 echo "rsync"
-rsync -av --delete output/img/ ~/.local/share/Anki2/$1/collection.media/latex/
+rsync -av --delete output/img/examples/ ~/.local/share/Anki2/$1/collection.media/examples/
