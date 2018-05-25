@@ -13,7 +13,7 @@ let b = map.get("a");
 // type of b?
 //x }
 
-//x description="hash map"
+//x description="hash map, type of get(...)"
 //x step={
 // b is Some(&i32)
 //x }

@@ -8,7 +8,7 @@ fn main() {
 //use ...
 //x }
 
-//x description="hash map"
+//x description="hash map (import)"
 //x step={
 use std::collections::HashMap;
 //x }

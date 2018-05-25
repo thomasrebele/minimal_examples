@@ -8,7 +8,7 @@ fn main() {
 use std::collections::HashMap;
 //x }
 
-//x description="hash map"
+//x description="hash map (declaration)"
 //x step={
 let mut map : HashMap<String, i32> = HashMap::new();
 //x }
