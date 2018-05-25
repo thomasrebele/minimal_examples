@@ -21,4 +21,4 @@ it_both = itertools.chain(it1, it2)
 # iterate over it1, then it2
 for i in it_both:
     print(i)
-#
+#x }

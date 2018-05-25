@@ -1,5 +1,5 @@
 
-#x description="read content of a file"
+#x description="parse a JSON string"
 #x pre={
 fname = "readme.txt"
 data = '["foo", {"bar":["baz", null, 1.0, 2]}]'
