@@ -3,7 +3,7 @@
 #x pre={
 l = [1, 2, 3, 4]
 
-# dictionary of items in l to their square?
+# dictionary that maps items in l to their square?
 #x }
 
 #x step={

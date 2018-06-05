@@ -2,52 +2,57 @@
 # minimal examples
 
 A collection of small code examples, which can be used for learning syntax and idiosyncrasies.
+You can use the examples to memorize features of programming languages.
+A *spaced repetition software* (SRS) such as [Anki](https://apps.ankiweb.net/) might help with that task.
 
-## latex
+Currently there are examples for
+* python3
+* latex
+* rust
+* web development (web_dev)
 
-Currently contains mainly TikZ examples
+## Generating the cards
 
-### Creating pdfs and images
+To generate the cards, use the command
 
-Prerequisites: `pdflatex` and `imagemagick`
-Optional: `pngquant` for smaller PNGs
+    python3 generate_cards.py  <example-files>  >  <output-file>
 
-You can compile all the examples to pdf and png by executing the following command:
+Problems are reported to standard error. 
+The output is a file in the TSV (tab separated value) format.
+The columns are
 
-```
-./build_script/latex/make.sh
-```
+* example: a unique identifier
+* description
+* pre: code that precedes the code that the user has to remember
+* step: this is the code that the user needs to know
+* post: code that shows how to apply the result
+* explanation: give more detail for for non-obvious/counter-intuitive answers
 
-It creates a folder `output/pdf` for the pdf files and a folder `output/img` for png files.
+### Importing into Anki
 
-### Creating Anki flash cards
+1. Choose File -> Import 
+2. Select the right type and deck (this project might provide a template at a later stage)
+3. "Fields separated by: Tab"
+4. "Update existing notes when first field matches"
+5. Activate "Allow HTML in fields"
+6. Map the columns
+7. Click on "Import"
 
-Use the command
+## Level assessment
 
-```
-./build_script/latex/make-anki.sh ANKI_USER > output.tsv
-```
+Some examples are more difficult to understand.
+Therefore this project also aims to provide a method to sort them according to their level (difficulty).
+To assign a level to examples interactively, you can use the following command:
 
-It writes TSV to output.tsv with the following columns 
-1. result picture
-2. description
-3. code
+    python3 level_assessment.py  <example-files>
 
-It can be imported into Anki as follows (assuming you have already created an appropriate note type):
+The command will start a browser. You are presented with two cards. You select which of them is easier. 
+All decisions are stored in `output/level_data.json`.
+The script `level_estimate.py` calculates a level based on these decisions.
 
-- "File -> Import...". 
-- choose "Text separated by tabs or semicolons" and select output.tsv
-- click on "Fields separated by" and enter "\t"
-- select "Allow HTML in fields"
-- assign the fields as stated above
+## License
 
-## web examples (HTML, CSS, SVG)
+This project is licensed under the AGPL, version 3 ([LICENSE](LICENSE) or https://www.gnu.org/licenses/agpl-3.0.en.html).
 
-A collection of small HTML / CSS examples, which can be used for learning syntax and idiosyncrasies.
-
-### Creating pdfs and images
-
-Prerequisites: `cutycapt` and `imagemagick`
-Optional: `pngquant` for smaller PNGs
 
 

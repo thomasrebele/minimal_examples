@@ -3,7 +3,7 @@
 #x pre={
 l = [1, 2, 3, 4]
 
-# generator that squares l?
+# generator that squares items in l?
 #x }
 
 #x step={

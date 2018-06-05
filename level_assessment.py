@@ -1,11 +1,26 @@
 #!/usr/bin/env python3
 
+# Copyright (C) 2017-2018  Thomas Rebele
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """level_assessment
 Browser-based tool to assign difficulty/easiness/level to cards by comparing them.
 The actual level can calculated with level_estimate.py
 
 Usage:
-  anki_row.py [options] <file>...
+  level_assessment.py [options] <file>...
 
 Options:
   --search-orphans=<prefix>     Looks for orphans in comparison-json
@@ -23,7 +38,7 @@ import signal
 import sys
 from collections import defaultdict
 
-import anki_row
+import generate_cards
 from http_dialog import *
 from common import *
 
@@ -197,7 +212,7 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, signal_handler)
 
     arguments = docopt(__doc__, version='read_annotations')
-    path_to_cards = anki_row.read_cards(arguments["<file>"])
+    path_to_cards = generate_cards.read_cards(arguments["<file>"])
     cards = list(path_to_cards.values())
 
     ### data that is changed by the dialog

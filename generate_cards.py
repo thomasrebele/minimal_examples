@@ -1,9 +1,24 @@
 #!/usr/bin/env python3
 
-"""anki_row
+# Copyright (C) 2017-2018  Thomas Rebele
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+"""generate_cards
 
 Usage:
-  anki_row.py [options] <file>...
+  generate_cards.py [options] <file>...
 
 Options:
   -h --help                     Show this screen.
@@ -38,8 +53,8 @@ def file_iterator(path):
         it = iter(f)
         yield it
 
-def anki_row(path, config):
-    """create a flashcard for anki in TSV format.
+def generate_cards(path, config):
+    """create a flashcard for a spaced repetition tool (e.g., Anki) in TSV format.
     path: the example file (e.g. examples/rust/hello_world.rs).
     config: specifies which markup tag to use """
     try:
@@ -104,7 +119,7 @@ def read_cards(paths):
     path_to_cards = {}
     for path in paths:
         config = config_for_example(path)
-        card = anki_row(path,config)
+        card = generate_cards(path,config)
         if card:
             path_to_cards[path] = card
     return path_to_cards

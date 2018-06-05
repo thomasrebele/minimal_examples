@@ -3,7 +3,7 @@
 #x pre={
 l = [1, 2, 3, 4]
 
-# list of squares of l?
+# set of squares of l?
 #x }
 
 #x step={
