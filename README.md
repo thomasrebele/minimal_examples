@@ -11,6 +11,9 @@ Currently there are examples for
 * rust
 * web development (web_dev)
 
+![Screenshot](https://raw.githubusercontent.com/thomasrebele/minimal_examples/master/doc/screenshot0.png)
+![Screenshot](https://raw.githubusercontent.com/thomasrebele/minimal_examples/master/doc/screenshot1.png)
+
 ## Generating the cards
 
 To generate the cards, use the command
