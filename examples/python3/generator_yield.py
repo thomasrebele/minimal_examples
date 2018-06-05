@@ -1,5 +1,5 @@
 
-#x description="simple generator"
+#x description="a function as a generator"
 
 #x step={
 def cube(n):

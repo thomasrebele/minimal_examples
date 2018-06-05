@@ -1,5 +1,5 @@
 
-#x description="walk over two iterators at the same time"
+#x description="walk over two iterators at the same time exhaustively"
 
 
 #x pre={
@@ -10,7 +10,8 @@ it2 = iter(["a", "b", "c"])
 
 
 #x step={
-it_both = zip(it1, it2)
+from itertools import zip_longest
+it_both = zip_longest(it1, it2)
 #x }
 
 #x post={
@@ -22,6 +23,7 @@ for i in it_both:
 # (1, 'a')
 # (2, 'b')
 # (3, 'c')
+# (4, None)
 #x }
 
 
