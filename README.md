@@ -60,6 +60,20 @@ Its columns are
 6. Map the columns
 7. Click on "Import"
 
+Note that the order of already imported cards does not change.
+This could be achieved by an Anki add-on. Any help is appreciated.
+
+## Contributions
+
+You can contribute in several ways:
+
+* give feedback on usability
+* provide examples for existing programming languages
+* add new programming languages
+* write addons for better integration with SRS (especially Anki)
+* ...
+
+Any contribution shall be licensed by the same license as the project, see the [license](#license) section below.
 
 ## License
 
