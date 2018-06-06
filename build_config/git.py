@@ -17,6 +17,7 @@ def generate_iterator(path, **keywords):
 
 config = {
     "slc" : "#x",
+    "logo": "examples/logos/git.svg",
     "generator": {
         "iterator": generate_iterator
     },

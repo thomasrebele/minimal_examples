@@ -85,11 +85,18 @@ def generate_cards(path, config):
         val = val.replace("\n", "<br/>").replace("\t", "&#9;")
         card[field] = val
 
+
     if card["description"] == "":
         print_err("error: " + path + " has no description")
         return None
 
-    card["description"] = base_path + ": " + card["description"]
+    logo = config.get("logo")
+    if logo:
+        logo = "<img src='" + logo + "'/>"
+    else:
+        logo = base_path
+
+    card["description"] = logo + ": " + card["description"]
     return card
 
 

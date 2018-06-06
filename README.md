@@ -75,9 +75,24 @@ You can contribute in several ways:
 
 Any contribution shall be licensed by the same license as the project, see the [license](#license) section below.
 
+## Acknowledgements
+
+Logos:
+
+* Rust: https://www.rust-lang.org/en-US/legal.html
+* Python: https://www.python.org/community/logos/
+* Git: https://git-scm.com/downloads/logos
+
 ## License
 
 This project is licensed under the AGPL, version 3 ([LICENSE](LICENSE) or https://www.gnu.org/licenses/agpl-3.0.en.html).
 
+## Disclaimer
+
+The examples are provided WITHOUT ANY WARRANTY; 
+without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+The use of the logos of the programming languages (Python, Rust, ...)
+is for visual purposes only. It does not imply any endorsement by the respective projects.
 
 
