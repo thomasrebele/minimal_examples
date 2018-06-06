@@ -12,3 +12,5 @@ except:
     print("error opening file")
 #x }
 
+#x explanation="better: except certain error types, e.g., IOError"
+

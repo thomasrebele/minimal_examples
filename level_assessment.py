@@ -160,7 +160,7 @@ def card_pair():
     max_dist = 10
     start = cards[aidx]["example"]
     dist = distance([start], max_dist)
-    dist_weights = distance_weights(dist, 100)
+    dist_weights = distance_weights(dist, 10000)
 
     bidx = rand_card(dist_weights)
     if aidx == bidx:

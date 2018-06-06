@@ -3,7 +3,7 @@
 
 #x pre={
 add = {}
-for i in [1,2]:
+for i in [0,1,2]:
     # return a function f(n) that calculates i+n
 #x }
 
@@ -11,9 +11,11 @@ for i in [1,2]:
     add[i] = lambda n, i=i: i+n
 #x }
 
+#x post={
+print(add[2](7))
 
-print(add[1](9))
-print(add[2](8))
+# outputs 10
+#x }
 
-#x explanation="i=i is necessary, otherwise both lambdas use i=2"
+#x explanation="i=i is necessary, otherwise the lambdas use i=2"
 
