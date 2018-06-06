@@ -13,8 +13,8 @@ Currently there are examples for
 
 Screenshot of a flash card in Anki:
 
-![Screenshot](https://raw.githubusercontent.com/thomasrebele/minimal_examples/master/doc/screenshot0.png)
-![Screenshot](https://raw.githubusercontent.com/thomasrebele/minimal_examples/master/doc/screenshot1.png)
+![Screenshot](https://raw.githubusercontent.com/thomasrebele/minimal_examples/master/images/screenshot0.png)
+![Screenshot](https://raw.githubusercontent.com/thomasrebele/minimal_examples/master/images/screenshot1.png)
 
 
 ## Level assessment
