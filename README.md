@@ -12,6 +12,7 @@ Currently there are examples for
 * web development (web_dev)
 
 Screenshot of a flash card in Anki:
+
 ![Screenshot](https://raw.githubusercontent.com/thomasrebele/minimal_examples/master/doc/screenshot0.png)
 ![Screenshot](https://raw.githubusercontent.com/thomasrebele/minimal_examples/master/doc/screenshot1.png)
 
