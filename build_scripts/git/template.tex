@@ -6,7 +6,7 @@
 
 {% raw %}
 \newcommand{\branch}[1]{%
-	\smash{\tikz[baseline] \node [branch] {#1};}%
+	\smash{\tikz[baseline,above=0.55mm] \node [branch] {#1};}~%
 }
 \newcommand{\head}{%
 	\,\smash{\tikz[rounded corners=0,scale=0.25,baseline=0.2mm] \filldraw (0,0) -- (0,1) -- (0.5,0.5) -- cycle;}\,%
@@ -17,6 +17,9 @@
 \newcommand{\content}[1]{
 	\node[content] {\vphantom{l}#1};
 }
+\newcommand{\commitmessage}[1]{
+	\node[message] {\vphantom{lg}#1};
+}
 {% endraw %}
 
 \begin{document}
@@ -25,7 +28,8 @@
 	commit/.style={
 		draw,
 		rounded corners,
-		fill=brown!20
+		fill=brown!20,
+		minimum height=5mm,
 	},
 	message/.style={
 		align=left,
@@ -41,8 +45,9 @@
 		draw,
 		rounded corners,
 		fill = blue!15,
-		minimum height=4mm,
-		anchor=base
+		minimum height=5mm,
+		inner ysep=0mm,
+		anchor=mid
 	},
 	file/.style={
 		anchor=north west,

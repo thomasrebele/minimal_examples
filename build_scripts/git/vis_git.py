@@ -16,6 +16,9 @@ Options:
 
 """
 
+# TODO
+# - remotes? \node{\faGlobe}; & \node[message]{origin}; & \\
+
 from docopt import docopt
 
 import subprocess
@@ -163,12 +166,10 @@ def vis_git_folder(path, repo_name=None, show_authors=False, show_files=False, s
                 tikz += c.name + "};"
 
             tikz += " & "
-        tikz += "\\node[message] {"
+        tikz += "\\commitmessage{"
         for branch in c.branches:
             tikz += "\\branch{" + branch + "}"
-        if len(c.branches) > 0:
-            tikz += " "
-        tikz += c.message + "}; &"
+        tikz += c.message + "} &"
         if show_authors:
             tikz += "\\node[author]  {" + c.author + "}; &"
         tikz += "\\\\"
