@@ -11,7 +11,7 @@ def generate_post_field(path, annotations, fields, **keywords):
 
 
 config = {
-    "mlc" : "<!--x -->",
+    "mlc" : ["<!--x -->", "/*x */"],
     "generator": {
         "post": generate_post_field
     }

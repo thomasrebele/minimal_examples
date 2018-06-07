@@ -95,9 +95,13 @@ def read_annotations(it, slc=None, mlc=None):
         mlc: multi line comment
     """
     # multi line comment start and end
-    mlc1, mlc2 = None, None
+    mlcs = []
     if mlc:
-        mlc1, mlc2 = mlc.split(' ')
+        if not type(mlc) == list:
+            mlc = [mlc]
+        for i in mlc:
+            mlcs.append(i.split(' '))
+    print(mlcs)
 
     # helper function
     def parse_comment(line):
@@ -105,13 +109,14 @@ def read_annotations(it, slc=None, mlc=None):
         if slc and slc in line:
             comment = line[line.find(slc)+len(slc):]
             return parse(comment)
-        if mlc1 and mlc1 in line:
-            start = line.find(mlc1) + len(mlc1)
-            end = line.find(mlc2)
-            if end < 0:
-                raise RuntimeError('multiline comments spanning multiple lines currently not supported')
-            comment = line[start:end]
-            return parse(comment)
+        for mlc1, mlc2 in mlcs:
+            if mlc1 and mlc1 in line:
+                start = line.find(mlc1) + len(mlc1)
+                end = line.find(mlc2)
+                if end < 0:
+                    raise RuntimeError('multiline comments spanning multiple lines currently not supported')
+                comment = line[start:end]
+                return parse(comment)
         return p
 
     result = []
