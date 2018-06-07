@@ -126,12 +126,15 @@ def read_annotations(it, slc=None, mlc=None):
             result += [p]
         elif p["type"] == "field-start":
             content = ""
-            while True:
-                line = it.__next__()
-                tmp = parse_comment(line)
-                if tmp and tmp["type"] == "field-end":
-                    break
-                content += line
+            try:
+                 while True:
+                     line = it.__next__()
+                     tmp = parse_comment(line)
+                     if tmp and tmp["type"] == "field-end":
+                         break
+                     content += line
+            except StopIteration:
+                raise ValueError("could not find closing of field " + p["name"])
             op = p["op"]
             if p["name"] in fields:
                 p = fields[p["name"]]

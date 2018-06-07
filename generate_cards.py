@@ -74,7 +74,7 @@ def generate_cards(path, config):
         val = ""
         if field in fields:
             val = fields[field]["value"]
-            if config.get("escape_html", {}).get(field, True):
+            if val and config.get("escape_html", {}).get(field, True):
                 val = val.replace("<", "&lt;").replace(">", "&gt;")
         elif "generator" in config and field in config["generator"]:
             fn = config["generator"][field]
@@ -82,13 +82,14 @@ def generate_cards(path, config):
             if val == None:
                 continue
 
-        val = val.replace("\n", "<br/>").replace("\t", "&#9;")
-        card[field] = val
+        if val:
+            val = val.replace("\n", "<br/>").replace("\t", "&#9;")
+            card[field] = val
 
-
-    if card["description"] == "":
-        print_err("error: " + path + " has no description")
-        return None
+    for field in ["step", "description"]:
+        if not field in card or card[field] == "":
+            print_err("error: " + path + " has no " + field)
+            return None
 
     logo = config.get("logo")
     if logo:
