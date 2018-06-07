@@ -6,11 +6,16 @@ Usage:
   vis_git.py [options] <git-folder>
 
 Options:
-  -h --help       Show this screen.
-  --version       Show version.
-  --author=<val>  Show commit author [default: false].
+  -h --help         Show this screen.
+  --version         Show version.
+
+  --repo=<val>      Name of repository [default: ].
+  --author=<val>    Show commit author [default: false].
+  --files=<val>     Show files [default: false].
+  --content=<val>   Show content of files [default: false]. (not yet implemented)
 
 """
+
 from docopt import docopt
 
 import subprocess
@@ -21,6 +26,36 @@ import sys
 import distutils
 script_dir=os.path.dirname(os.path.realpath(__file__))
 
+
+# https://stackoverflow.com/a/1633483/1562506
+def iter_first_last(iterator):
+    """Iterator which marks the first and the last item.
+    Usage: for item, is_first, is_last in iter_first_last(...)
+    """
+
+    iterator = iter(iterator)
+    prev = next(iterator)
+    first = True
+    for item in iterator:
+        yield prev, first, False
+        first = False
+        prev = item
+    # Last item
+    yield prev, first, True
+
+def dirty_files(path):
+    staged = {}
+    modified = {}
+    for line in run("git status --porcelain", cwd=path):
+        if len(line) < 3: continue
+        f = line[3:]
+        if line[0] != " ":
+            staged[f] = ""
+        if line[1] != "":
+            modified[f] = ""
+    return staged, modified
+
+
 def run(cmd, cwd=None):
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=cwd)
     out = []
@@ -29,9 +64,13 @@ def run(cmd, cwd=None):
     return out
 
 class Commit:
-    pass
+    is_head = False
+    branches = []
+    parents = []
+    message = ""
+    files = {}
 
-def vis_git_folder(path, show_authors=False):
+def vis_git_folder(path, repo_name=None, show_authors=False, show_files=False, show_content=False):
     id_to_commit = {}
     commits = []
 
@@ -92,9 +131,30 @@ def vis_git_folder(path, show_authors=False):
 
     tikz = ""
 
+    staged, modified = dirty_files(path)
+    ## TODO: get staged/modified files
+    if len(staged) > 0:
+        c = Commit()
+        c.col = 0
+        c.message = "staged"
+        c.name = "s"
+        c.files = staged
+        commits = [c] + commits
+
+    if len(modified) > 0:
+        c = Commit()
+        c.col = 0
+        c.message = "modified"
+        c.name = "?"
+        c.files = modified
+        commits = [c] + commits
+
     tikz += "\\matrix[commit table] {\n"
+    if repo_name:
+        tikz += "\\node {\\faServer}; & \\node[message]{\\bf " + repo_name + "}; & \\\\\n"
     for i, c in enumerate(commits):
-        c.name = chr(64+len(commits)-i)
+        if not hasattr(c, "name"):
+            c.name = chr(64+len(commits)-i)
         for j in range(num_cols+1):
             if j == c.col:
                 tikz += "\\node[commit] (" + c.name + ")  {"
@@ -111,7 +171,19 @@ def vis_git_folder(path, show_authors=False):
         tikz += c.message + "}; &"
         if show_authors:
             tikz += "\\node[author]  {" + c.author + "}; &"
-        tikz += "\\\\\n"
+        tikz += "\\\\"
+
+        has_branches = len(c.branches) > 0
+        if show_files:
+            for (f,content), is_first, is_last in iter_first_last(c.files.items()):
+                dist = -1
+                if is_first and not has_branches: dist -= 1
+                if show_content and not content:
+                    f += " {\\tiny(empty)}"
+                tikz += "[" + str(dist) + "ex]\n & \\file{" + f + "} & \\\\"
+                if show_content and content:
+                    tikz += "[-1ex]\n & \\content{" + content + "} & \\\\"
+        tikz += "\n"
     tikz += "};\n"
 
     for c in commits:
@@ -131,6 +203,9 @@ def str_to_bool(s):
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='vis_git')
     vis_git_folder(arguments["<git-folder>"],
-        show_authors=str_to_bool(arguments["--author"])
+        repo_name=arguments["--repo"],
+        show_authors=str_to_bool(arguments["--author"]),
+        show_files=str_to_bool(arguments["--files"]),
+        show_content=str_to_bool(arguments["--content"])
     )
 
