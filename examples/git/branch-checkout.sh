@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#x description="creating a branch, and switch to it"
+#x description="create a branch, and switch to it"
 #x state="empty directory"
 
 git init

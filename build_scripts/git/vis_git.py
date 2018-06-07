@@ -130,7 +130,7 @@ def vis_git_folder(path, repo_name=None, show_authors=False, show_files=False, s
         c.col = new_col
         used_cols += [new_col]
 
-    num_cols = max(used_cols)
+    num_cols = max(used_cols) if used_cols else 1
 
     tikz = ""
 
