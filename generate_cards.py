@@ -61,7 +61,7 @@ def generate_cards(path, config):
         fn = config.get("generator", {}).get("iterator") or file_iterator
 
         with fn(path) as it:
-            annotations, fields = read_annotations(it, slc=config.get("slc", None), mlc=config.get("mlc", None))
+            annotations, fields = read_annotations(it, slc=config.get("slc", None), mlc=config.get("mlc", None), read_everything=config.get("read_everything", False))
     except Exception as err:
         print_err("problem with " + path)
         raise err
@@ -72,15 +72,16 @@ def generate_cards(path, config):
     card = {"example" : path.replace("examples/", "")}
     for field in ["description", "pre", "step", "post", "explanation"]:
         val = ""
-        if field in fields:
-            val = fields[field]["value"]
-            if val and config.get("escape_html", {}).get(field, True):
-                val = val.replace("<", "&lt;").replace(">", "&gt;")
-        elif "generator" in config and field in config["generator"]:
+
+        if "generator" in config and field in config["generator"]:
             fn = config["generator"][field]
             val = fn(path=path, annotations=annotations, fields=fields)
             if val == None:
                 continue
+        elif field in fields:
+            val = fields[field]["value"]
+            if val and config.get("escape_html", {}).get(field, True):
+                val = val.replace("<", "&lt;").replace(">", "&gt;")
 
         if val:
             val = val.replace("\n", "<br/>").replace("\t", "&#9;")

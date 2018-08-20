@@ -88,7 +88,7 @@ def parse(s):
         return result
 
 
-def read_annotations(it, slc=None, mlc=None):
+def read_annotations(it, slc=None, mlc=None, read_everything=False):
     """
         it: line iterator
         slc: single line comment
@@ -101,7 +101,6 @@ def read_annotations(it, slc=None, mlc=None):
             mlc = [mlc]
         for i in mlc:
             mlcs.append(i.split(' '))
-    print(mlcs)
 
     # helper function
     def parse_comment(line):
@@ -121,11 +120,23 @@ def read_annotations(it, slc=None, mlc=None):
 
     result = []
     fields = {}
+    other = []
     for line in it:
         line = line.replace('\n','')
         p = parse_comment(line)
 
-        if not p: continue
+        if not p:
+            if read_everything:
+                other.append(line)
+            continue
+
+        if len(other) > 0:
+            result += [{
+                "type": "other",
+                "value": "\n".join(other),
+            }]
+            other = []
+
         if p["type"] == "field":
             fields[p["name"]] = p
             result += [p]
@@ -149,6 +160,12 @@ def read_annotations(it, slc=None, mlc=None):
                 p["value"] = content
                 fields[p["name"]] = p
                 result += [p]
+
+    if len(other) > 0:
+        result += [{
+            "type": "other",
+            "value": "\n".join(other),
+        }]
 
     return result, fields
 
