@@ -16,7 +16,7 @@ fn print(slice : &str) {
 // print s with previous function
 //x }
 
-//x post={
+//x step={
 print(&s);
 //x }
 }
