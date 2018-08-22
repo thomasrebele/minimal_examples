@@ -8,7 +8,7 @@ fn main() {
 use std::collections::HashMap;
 let mut map : HashMap<String, i32> = HashMap::new();
 
-// todo: insert if absent
+// task: insert if absent
 //x }
 
 //x description="hash map: insert if absent"

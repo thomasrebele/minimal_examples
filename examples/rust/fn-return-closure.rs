@@ -9,7 +9,7 @@ fn main() {
 let inc = |x| x+1;
 inc(1);
 
-// todo: return inc with
+// task: return inc with
 // fn make_closure(...)
 //x }
 

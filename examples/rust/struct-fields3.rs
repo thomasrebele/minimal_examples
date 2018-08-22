@@ -16,7 +16,7 @@ let p1 = Point {
     name: String::from("p1"),
     x: 1.0, y: 2.0, 
 };
-// todo: point "p2" with same coordinates as p1
+// task: point "p2" with same coordinates as p1
 //x }
 
 //x step={

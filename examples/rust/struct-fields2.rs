@@ -14,7 +14,7 @@ struct Point {
 let x = 1.0;
 let y = 2.0;
 
-// todo: simplify following expression
+// task: simplify following expression
 let p = Point{x:x, y:y};
 //x }
 

@@ -9,7 +9,7 @@ use std::fmt::Debug;
 
 fn top_k<T: Ord + Debug>(t : &[T], k: usize) -> Vec<&T> {
     // ...
-    // todo: move bounds out of <...>
+    // task: move bounds out of <...>
 //x }
     let mut tmp = 
         t.iter()

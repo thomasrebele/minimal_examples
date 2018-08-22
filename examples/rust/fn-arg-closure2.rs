@@ -14,7 +14,7 @@ where F: Fn() -> () {
     f(); f();
 }
 
-// todo: rewrite twice without "where"
+// task: rewrite twice without "where"
 //x }
 }
 

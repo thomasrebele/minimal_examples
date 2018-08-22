@@ -7,7 +7,7 @@ fn main() {
 
 //x pre={
 fn  inc_v1   (x: i32) -> i32 {x+1};
-// todo: write function as closure
+// task: write function as closure
 // (with and without type annotation)
 //x }
 

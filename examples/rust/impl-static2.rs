@@ -14,7 +14,7 @@ impl Point {
         Point{x:0.0, y:0.0}
     }
 }
-// todo: call method
+// task: call method
 //x }
 
 fn main() {

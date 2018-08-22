@@ -26,7 +26,7 @@ fn init_accel(train : &Train) -> f32 {
     train.acceleration(0.)
 }
 
-// todo: take train by value
+// task: take train by value
 //x }
 
 //x step={

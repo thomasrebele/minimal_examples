@@ -9,7 +9,7 @@ use std::collections::HashMap;
 let mut map : HashMap<String, i32> = HashMap::new();
 
 
-// todo: update value for "a"
+// task: update value for "a"
 //x }
 
 //x description="hash map: insert if absent (2)"

@@ -8,7 +8,7 @@ fn main() {
 
 //x pre={
 let mut x = String::from("ab");
-// todo: append "c"
+// task: append "c"
 //x }
 
 //x step={

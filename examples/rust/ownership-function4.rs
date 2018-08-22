@@ -6,7 +6,7 @@ fn pre() {
 
 //x pre={
 fn f(arg: &String) {
-// todo: arg.push_str("xyz");
+// task: arg.push_str("xyz");
 }
 
 let s1 = String::from("abc");
