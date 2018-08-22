@@ -9,9 +9,9 @@ let n = 10;
 
 //x pre={
 match n {
-??? => println!("one"),
-??? => println!("2, 4, or 6"),
-??? => println!("everything else"),
+	??? => println!("one"),
+	??? => println!("2, 4, or 6"),
+	??? => println!("everything else"),
 }
 //x }
 
@@ -19,9 +19,9 @@ match n {
 
 //x step={
 match n {
-1 => println!("one"),
-2|4|6 => println!("2, 4, or 6"),
-_ => println!("everything else"),
+	1 => println!("one"),
+	2|4|6 => println!("2, 4, or 6"),
+	_ => println!("everything else"),
 }
 //x }
 

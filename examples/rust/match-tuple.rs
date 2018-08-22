@@ -8,9 +8,9 @@ fn main() {
 //x pre={
 let pair = (1, 2);
 match pair {
-??? => println!("first = 0"),
-??? => println!("second = 0"),
-??? => println!("everything else"),
+	??? => println!("first = 0"),
+	??? => println!("second = 0"),
+	??? => println!("everything else"),
 }
 //x }
 
@@ -19,9 +19,9 @@ match pair {
 //x step={
 let pair = (1, 2);
 match pair {
-(0,_) => println!("first = 0"),
-(_,0) => println!("second = 0"),
-_ => println!("everything else"),
+	(0,_) => println!("first = 0"),
+	(_,0) => println!("second = 0"),
+	_ => println!("everything else"),
 }
 //x }
 

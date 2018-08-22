@@ -4,7 +4,7 @@
 /*
 //x pre={
 mod example {
-    pub hello_world() {
+    fn hello_world() {
         println!("hello world");
     }
 }

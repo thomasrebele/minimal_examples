@@ -1,24 +1,16 @@
 
 //x description="modules (1)"
 
-/*
-//x pre={
-...
-    pub fn hello_world() {
-        println!("hello world");
-    }
-}
-//x }
-*/
-
 //x step={
 mod example {
-// ...
 //x }
+//x post={
+// ...
     pub fn hello_world() {
         println!("hello world");
     }
 }
+//x }
 
 
 fn main() {
