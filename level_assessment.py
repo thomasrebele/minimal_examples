@@ -46,18 +46,25 @@ def card_to_html(card):
     def code(s):
         if not s: return ""
         return "<pre class=code><code>" + str(s) + "</code></pre>"
+
     r = ""
-    r += card["example"]
-    r += "<br>"
-    r += code(card["pre"])
-    r += "<br>"
-    r += card["description"]
-    r += "<br>"
-    r += code(card["step"])
-    r += "<br>"
-    r += code(card["post"])
-    r += "<br>"
-    r += card["explanation"]
+    if "example" in card:
+        r += card["example"]
+        r += "<br>"
+    if "pre" in card:
+        r += code(card["pre"])
+        r += "<br>"
+    if "description" in card:
+        r += card["description"]
+        r += "<br>"
+    if "step" in card:
+        r += code(card["step"])
+        r += "<br>"
+    if "post" in card:
+        r += code(card["post"])
+        r += "<br>"
+    if "explanation" in card:
+        r += card["explanation"]
     return r
 
 def rand_card(weights):
