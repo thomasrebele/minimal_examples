@@ -20,9 +20,11 @@ Rank cards with the data collected by level_assessment.py
 
 Usage:
   level_estimate.py [options] <file>...
+  level_estimate.py [options] --lines=<file>
 
 Options:
   -h --help                     Show this screen.
+  --lines=<file>                Rank the lines of the file.
 
 """
 
@@ -110,12 +112,13 @@ def calculate_levels(cards):
 
 
 if __name__ == '__main__':
+    arguments = docopt(__doc__, version='read_annotations')
 
-    # arguments = docopt(__doc__, version='read_annotations')
-    # path_to_cards = generate_cards.read_cards(arguments["<file>"])
-    # cards = list(path_to_cards.values())
-
-    cards = [ "A", "B", "C" ]
+    if arguments["--lines"]:
+        cards = [line.rstrip('\n') for line in open(arguments["--lines"])]
+    else:
+        path_to_cards = generate_cards.read_cards(arguments["<file>"])
+        cards = list(path_to_cards.values())
 
     card_to_level = calculate_levels(cards)
     lst = sorted(list(card_to_level.items()), key = lambda t: t[1])

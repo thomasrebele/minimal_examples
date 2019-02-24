@@ -21,11 +21,16 @@ The actual level can calculated with level_estimate.py
 
 Usage:
   level_assessment.py [options] <file>...
+  level_assessment.py [options] --lines=<file>
 
 Options:
   --search-orphans=<prefix>     Looks for orphans in comparison-json
                                 (considering only files in <prefix>)
   -h --help                     Show this screen.
+  --lines=<file>                Rank the lines of the file.
+  --left=<text>                 Text on the left [default: left is easier]
+  --right=<text>                Text on the right [default: right is easier]
+  --middle=<text>               Text in the middle [default: equally difficult]
 
 """
 
@@ -42,6 +47,8 @@ import generate_cards
 from http_dialog import *
 from common import *
 
+import os
+script_dir = os.path.dirname(os.path.realpath(__file__))
 
 def card_to_id(card):
     if type(card) == str:
@@ -195,9 +202,12 @@ def signal_handler(signal, frame):
 
 def save(path="output/level_data.json"):
     if len(data) > 0:
-        with open(path, "w") as f:
-            f.write(to_json(data))
-            print("saved to " + path)
+        try:
+            with open(path, "w") as f:
+                f.write(to_json(data))
+                print("saved to " + path)
+        except FileNotFoundError:
+            print("Warning: couldn't create backup")
 
 def stat():
     global card_to_count
@@ -228,14 +238,13 @@ def stat():
 if __name__ == '__main__':
     # setup: signal handler
     signal.signal(signal.SIGINT, signal_handler)
-
     arguments = docopt(__doc__, version='read_annotations')
-    path_to_cards = generate_cards.read_cards(arguments["<file>"])
-    cards = list(path_to_cards.values())
 
-    print(cards[0])
-
-    cards = ["A","B", "C"]
+    if arguments["--lines"]:
+        cards = [line.rstrip('\n') for line in open(arguments["--lines"])]
+    else:
+        path_to_cards = generate_cards.read_cards(arguments["<file>"])
+        cards = list(path_to_cards.values())
 
     ### data that is changed by the dialog
     # card1 to card2 to (card1_easier, equals, card2_easier)
@@ -283,7 +292,7 @@ if __name__ == '__main__':
 
                 path = self.req_path()
                 if path.endswith(".css"):
-                    self.file(path[1:])
+                    self.file(script_dir + "/" + path[1:])
                     return
                 if path.endswith(".png"):
                     self.file("output/img/" + path[1:])
@@ -365,9 +374,9 @@ if __name__ == '__main__':
                 self.write(" dist? " + str(req_pair[2]))
                 self.write("<br>")
                 s = "<a href=\"/?id="  + str(req_id) + "&choice="
-                self.write(s + "left\" id=\"left\">left is easier (1)</a> &nbsp; ")
-                self.write(s + "equal\" id=\"equal\">equally difficult (2)</a> &nbsp; ")
-                self.write(s + "right\" id=\"right\">right is easier (3)</a> &nbsp;")
+                self.write(s + "left\" id=\"left\">" + arguments["--left"] + " (1)</a> &nbsp; ")
+                self.write(s + "equal\" id=\"equal\">" + arguments["--middle"] + " (2)</a> &nbsp; ")
+                self.write(s + "right\" id=\"right\">" + arguments["--right"] + " (3)</a> &nbsp;")
                 self.write(s + "skip\" id=\"skip\">skip (4)</a> &nbsp;")
                 self.write("<a href=\"/quit\" id=\"quit\">quit (5)</a>")
                 self.write("</div>")
