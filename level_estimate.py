@@ -35,6 +35,15 @@ from common import *
 min_level = 1.
 max_level = 100.
 
+
+def card_to_id(card):
+    if type(card) == str:
+        return card
+
+    return card["example"]
+
+
+
 def get_level(comp, c1l, c2l):
     s = sum(comp)
     if s == 0:
@@ -69,7 +78,7 @@ def calculate_levels(cards):
     data = from_json_file("output/level_data.json")
 
     card_to_level = defaultdict(lambda: (min_level + max_level)/2.)
-    card_to_index = dict([(c["example"], i) for i,c in enumerate(cards)])
+    card_to_index = dict([(card_to_id(c), i) for i,c in enumerate(cards)])
     for it in range(100):
         # initialize
         card_count = defaultdict(lambda: 1.)
@@ -86,13 +95,13 @@ def calculate_levels(cards):
                 card_count[c1] += 1
                 card_count[c2] += 1
 
-        old_levels = [card_to_level[card["example"]] for card in cards]
+        old_levels = [card_to_level[card_to_id(card)] for card in cards]
         for card, count in card_count.items():
             new_level = float(card_to_level_sum[card]) / count
             card_to_level[card] = new_level
 
         normalize(card_to_level, min_level, max_level)
-        new_levels = [card_to_level[card["example"]] for card in cards]
+        new_levels = [card_to_level[card_to_id(card)] for card in cards]
         if new_levels == old_levels:
             #print_err("converged after " + str(it) + " iterations")
             break
@@ -102,10 +111,11 @@ def calculate_levels(cards):
 
 if __name__ == '__main__':
 
-    arguments = docopt(__doc__, version='read_annotations')
-    path_to_cards = generate_cards.read_cards(arguments["<file>"])
-    cards = list(path_to_cards.values())
+    # arguments = docopt(__doc__, version='read_annotations')
+    # path_to_cards = generate_cards.read_cards(arguments["<file>"])
+    # cards = list(path_to_cards.values())
 
+    cards = [ "A", "B", "C" ]
 
     card_to_level = calculate_levels(cards)
     lst = sorted(list(card_to_level.items()), key = lambda t: t[1])

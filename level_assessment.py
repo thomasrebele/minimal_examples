@@ -42,10 +42,20 @@ import generate_cards
 from http_dialog import *
 from common import *
 
+
+def card_to_id(card):
+    if type(card) == str:
+        return card
+
+    return card["example"]
+
 def card_to_html(card):
     def code(s):
         if not s: return ""
         return "<pre class=code><code>" + str(s) + "</code></pre>"
+
+    if type(card) == str:
+        return card
 
     r = ""
     if "example" in card:
@@ -85,8 +95,9 @@ def inverse_count_weights():
     weights = []
     for c in cards:
         weight = 1
-        if c["example"] in card_to_count:
-            weight = 1./(card_to_count[c["example"]]+1)
+        card_id = card_to_id(c)
+        if card_id in card_to_count:
+            weight = 1./(card_to_count[card_id]+1)
         weights += [weight]
     return weights
 
@@ -143,11 +154,11 @@ def reachability_coefficient(start, max_dist=10):
             return 0
         else:
             return len(reach[node])/float(len(cards))
-    coefficient = [calc(card["example"]) for card in cards]
+    coefficient = [calc(card_to_id(card)) for card in cards]
     return coefficient
 
 def distance_weights(dist, max_dist):
-    weights = [dist.get(c["example"], max_dist)**4 for c in cards]
+    weights = [dist.get(card_to_id(c), max_dist)**4 for c in cards]
     return weights
 
 
@@ -165,7 +176,7 @@ def card_pair():
     aidx = rand_card(weights)
 
     max_dist = 10
-    start = cards[aidx]["example"]
+    start = card_to_id(cards[aidx])
     dist = distance([start], max_dist)
     dist_weights = distance_weights(dist, 10000)
 
@@ -173,7 +184,7 @@ def card_pair():
     if aidx == bidx:
         return card_pair()
 
-    key = cards[bidx]["example"]
+    key = card_to_id(cards[bidx])
     return (cards[aidx], cards[bidx], str(dist.get(key, "inf")))
 
 
@@ -222,6 +233,10 @@ if __name__ == '__main__':
     path_to_cards = generate_cards.read_cards(arguments["<file>"])
     cards = list(path_to_cards.values())
 
+    print(cards[0])
+
+    cards = ["A","B", "C"]
+
     ### data that is changed by the dialog
     # card1 to card2 to (card1_easier, equals, card2_easier)
     data = {}
@@ -249,7 +264,7 @@ if __name__ == '__main__':
         save("output/backup/" + i.isoformat())
 
         # index for better sampling
-        card_to_count = dict([(c["example"], 0) for c in cards])
+        card_to_count = dict([(card_to_id(c), 0) for c in cards])
         for c1,d in data.items():
             if not c1 in card_to_count: continue
             for c2, l in d.items():
@@ -286,11 +301,11 @@ if __name__ == '__main__':
                     if self.args()["id"][0] == req_id:
                         choice = self.args()["choice"][0]
                         if choice == "left":
-                            choice = req_pair[0]["example"]
+                            choice = card_to_id(req_pair[0])
                         elif choice == "right":
-                            choice = req_pair[1]["example"]
+                            choice = card_to_id(req_pair[1])
 
-                        keys = [i["example"] for i in req_pair[0:2]]
+                        keys = [card_to_id(i) for i in req_pair[0:2]]
                         keys = sorted(keys)
                         l = data.setdefault(keys[0], {}).setdefault(keys[1], [0,0,0])
                         change = True
@@ -340,7 +355,7 @@ if __name__ == '__main__':
 
                 self.write("<div class=\"footer\">")
                 self.write(stat().replace("\n", "; "))
-                keys = [i["example"] for i in req_pair[0:2]]
+                keys = [card_to_id(i) for i in req_pair[0:2]]
                 self.write(" left seen? " + str(card_to_count.get(keys[0], 0)) + "x")
                 self.write(" right seen? " + str(card_to_count.get(keys[1], 0)) + "x")
 
