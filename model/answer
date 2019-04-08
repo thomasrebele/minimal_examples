@@ -1,0 +1,23 @@
+<span id=description>{{description}}</span>
+
+{{#pre}}
+<span class=\"result\">
+<pre class=code><code>{{pre}}</code></pre>
+</span>
+{{/pre}}
+
+<hr id=answer>
+
+<pre class=code><code>{{step}}</code></pre>
+{{#explanation}}
+&#x26A0;&nbsp; {{explanation}}
+{{/explanation}}
+
+<hr id=answer>
+
+{{#post}}
+<span class=\"result\">
+<pre class=code><code>{{post}}</code></pre>
+</span>
+{{/post}}
+

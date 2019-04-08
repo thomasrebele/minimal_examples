@@ -31,7 +31,6 @@ Options:
 from docopt import docopt
 from collections import defaultdict
 
-import generate_cards
 from common import *
 
 min_level = 1.
@@ -117,7 +116,7 @@ if __name__ == '__main__':
     if arguments["--lines"]:
         cards = [line.rstrip('\n') for line in open(arguments["--lines"])]
     else:
-        path_to_cards = generate_cards.read_cards(arguments["<file>"])
+        path_to_cards = read_cards(arguments["<file>"])
         cards = list(path_to_cards.values())
 
     card_to_level = calculate_levels(cards)

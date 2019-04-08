@@ -1,0 +1,38 @@
+.card {
+ font-family: arial;
+ font-size: 20px;
+ text-align: center;
+ color: black;
+ background-color: white;
+}
+
+.code {
+ font-family: FreeMono, Courier New, monospace;
+ font-size: 15px;
+border: 1px;
+border-style: solid;
+text-align:left;
+padding: 1em;
+}
+
+.result img {
+ background-color: beige;
+ padding: 1em;
+    max-width:300px;
+}
+
+.tag {
+ color: gray;
+}
+
+#description img {
+ height: 3ex;
+ vertical-align: middle;
+}
+
+pre
+{
+    -moz-tab-size: 3;
+    -o-tab-size:   3;
+    tab-size:      3;
+}
