@@ -49,10 +49,10 @@ from common import *
 
 # TODO:
 no_hierarchy=False
+prevent_duplicate_descriptions=False
 
 
-
-def find_duplicates(path_to_cards):
+def load_cards(path_to_cards, prevent_duplicate_descriptions):
     """check for duplicate descriptions
     returns list of cards"""
     description_to_path_to_card = {}
@@ -63,7 +63,7 @@ def find_duplicates(path_to_cards):
     # find duplicates
     cards = []
     for desc, path_to_card in description_to_path_to_card.items():
-        if len(path_to_card) == 1:
+        if len(path_to_card) == 1 or not prevent_duplicate_descriptions:
             cards += list(path_to_card.values())
         elif len(path_to_card) > 1:
             print_err("duplicate description: '" + desc + "', paths ")
@@ -124,7 +124,7 @@ if __name__ == '__main__':
     arguments = docopt(__doc__, version='read_annotations')
 
     path_to_cards = read_cards(arguments["<file>"]).items()
-    cards = find_duplicates(path_to_cards)
+    cards = load_cards(path_to_cards, prevent_duplicate_descriptions)
 
     example_to_index = index_cards(cards)
     example_to_level = calculate_levels(cards)
@@ -147,8 +147,6 @@ if __name__ == '__main__':
               fields=values)
 
             minex_deck.add_note(minex_note)
-
-            print(minex_note.guid)
 
     output_file = "/tmp/output.apkg"
     if minex_deck:

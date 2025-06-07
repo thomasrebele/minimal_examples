@@ -10,10 +10,14 @@ int main() {
 //x pre={
 std::string s = "hello";
 // task: how to get the position of first a substring, e.g., "el"
+size_t pos;
 //x }
 
 //x step={
-size_t pos = s.find("el");
+pos = s.find("el");
+//x }
+
+//x post={
 assert((pos == 1));
 //x }
 

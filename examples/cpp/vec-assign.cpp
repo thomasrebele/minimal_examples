@@ -19,7 +19,8 @@ v2[0] = 10;
 
 //x step={
 assert((std::vector<int>{7,8} == v1));
-// v1 is a copy, so it is not affected by the change of v2
+// v1 is a copy, so it is
+// not affected by the change of v2
 assert((std::vector<int>{10,8} == v2));
 //x }
 

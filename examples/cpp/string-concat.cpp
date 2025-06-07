@@ -5,11 +5,11 @@
 
 int main() {
 
-//x description="searching in strings"
+//x description="modifying strings"
 
 //x pre={
 std::string s = "hello ";
-// task: append "foobar" (two ways)
+// task: append "foobar" (2 ways)
 //x }
 
 //x step={

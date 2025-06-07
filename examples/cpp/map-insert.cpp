@@ -9,7 +9,7 @@ int main() {
 
 //x pre={
 std::unordered_map<std::string, std::string> m;
-// task: map "key" to "value" (two ways)
+// task: map "key" to "value" (2 ways)
 //x }
 
 //x step={

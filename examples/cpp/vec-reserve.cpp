@@ -11,14 +11,16 @@ int main() {
 std::vector<int> v;
 
 int n = 10000;
-// task: preallocate enough space in the vector for n elements
+// task: preallocate enough space
+// in the vector for n elements
 //x }
 
 n = 10;
 
 //x step={
 v.reserve(n);
-// caveat: does NOT reduce the capacity if n < v.capacity()
+// caveat: does NOT reduce
+// the capacity if n < v.capacity()
 //x }
 
 //x post={

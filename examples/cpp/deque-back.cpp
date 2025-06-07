@@ -10,7 +10,8 @@ int main() {
 //x pre={
 std::deque<int> d {1,2};
 
-// task: access the last element of the deque (without knowing its size)
+// task: access the last element of
+// the deque (without knowing its size)
 int el;
 //x }
 

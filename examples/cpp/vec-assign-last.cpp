@@ -10,7 +10,8 @@ int main() {
 //x pre={
 std::vector<int> v {1,2};
 
-// task: change the last element to 5, assuming the length of v is unknown
+// task: change the last element to 5,
+// assuming the length of v is unknown
 //x }
 
 //x step={

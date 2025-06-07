@@ -10,7 +10,8 @@ int main() {
 //x pre={
 std::deque<int> d {1,2};
 
-// task: access the first element of the deque (2 ways)
+// task: access the first element of
+// the deque (2 ways)
 int el1, el2;
 //x }
 

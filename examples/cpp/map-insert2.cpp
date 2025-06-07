@@ -16,7 +16,8 @@ m.insert({"key", "value2"});
 
 //x step={
 assert(("value1" == m["key"]));
-// caveat: insert does not update existing entries!
+// caveat: insert does not
+// update existing entries!
 //x }
 
 
