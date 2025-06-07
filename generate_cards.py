@@ -25,6 +25,7 @@ Options:
 
 """
 
+from os import chdir
 import pathlib
 from docopt import docopt
 import traceback
@@ -32,14 +33,15 @@ import traceback
 try:
     genanki = None
     import genanki.genanki as genanki
-except:
+except Exception as e:
     clone_cmd_https = "git clone https://github.com/kerrickstaley/genanki.git"
-    clone_cmd_ssh = "git clone https://github.com/kerrickstaley/genanki.git"
+    clone_cmd_ssh = "git clone git@github.com:kerrickstaley/genanki.git"
     print("genanki not found, please execute")
     print("    " + clone_cmd_ssh)
     print("or")
     print("    " + clone_cmd_https)
     print()
+    raise e
 
 
 from level_estimate import *
@@ -150,7 +152,8 @@ if __name__ == '__main__':
 
     output_file = "/tmp/output.apkg"
     if minex_deck:
-        genanki.Package(minex_deck).write_to_file(output_file)
+        package = genanki.Package(minex_deck)
+        package.write_to_file(output_file)
         print("wrote Anki deck to " + str(output_file))
 
 
